@@ -167,6 +167,10 @@
           endif
           assign should_use_pills = true
 
+          if is_size_filter
+            assign should_use_pills = false
+          endif
+
           for value in filter.values
             if value.label.size > 3
               assign should_use_pills = false
