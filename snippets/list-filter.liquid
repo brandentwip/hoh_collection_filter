@@ -18,8 +18,10 @@
     assign is_swatch = true
   endif
 
+  assign filter_name_lower = filter.param_name | downcase
+  assign filter_label_lower = filter.label | downcase
   assign is_size_filter = false
-  if filter.param_name contains 'size' or filter.label == 'Size' or filter.label == 'size'
+  if filter_name_lower contains 'size' or filter_label_lower contains 'size'
     assign is_size_filter = true
   endif
 
