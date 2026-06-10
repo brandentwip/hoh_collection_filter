@@ -25,6 +25,17 @@
     assign is_size_filter = true
   endif
 
+  if is_size_filter == false
+    assign is_size_filter = false
+    for value in filter.values
+      assign v = value.label | downcase | strip
+      if v == 'xs' or v == 's' or v == 'm' or v == 'l' or v == 'xl' or v == 'xxl' or v == 'one size' or v == 'l-xxl'
+        assign is_size_filter = true
+        break
+      endif
+    endfor
+  endif
+
   if is_size_filter
     assign is_swatch = false
   endif
