@@ -18,6 +18,15 @@
     assign is_swatch = true
   endif
 
+  assign is_size_filter = false
+  if filter.param_name contains 'size' or filter.label == 'Size' or filter.label == 'size'
+    assign is_size_filter = true
+  endif
+
+  if is_size_filter
+    assign is_swatch = false
+  endif
+
   assign is_image = false
   if filter.presentation == 'image'
     assign is_image = true
