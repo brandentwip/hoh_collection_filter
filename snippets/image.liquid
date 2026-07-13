@@ -13,13 +13,17 @@
   {% render 'image', image: product.featured_image, height: 300, class: 'product-image' %}
 {%- enddoc -%}
 {% if image != blank %}
-  {% assign image_height = height | default: image.height %}
-  {% assign image_height_2x = height | default: image_height | times: 2 %}
-  {% assign image_height_3x = height | default: image_height | times: 3 %}
+  {% assign image_width = image.width %}
+  {% assign image_height = image.height %}
+  {% assign image_width_2x = image_width | times: 2 %}
+  {% assign image_height_2x = image_height | times: 2 %}
+  {% assign image_width_3x = image_width | times: 3 %}
+  {% assign image_height_3x = image_height | times: 3 %}
   {% assign image_alt_text = image.alt | default: alt_text_fallback | default: '' %}
+  {% assign image_loading = 'lazy' %}
 
   {% capture image_srcset -%}
-    {{ image | image_url: height: image_height }} 1x, {{ image | image_url: height: image_height_2x }} 2x, {{ image | image_url: height: image_height_3x }} 3x
+    {{ image | image_url: width: image_width, height: image_height, format: 'webp' }} 1x, {{ image | image_url: width: image_width_2x, height: image_height_2x, format: 'webp' }} 2x, {{ image | image_url: width: image_width_3x, height: image_height_3x, format: 'webp' }} 3x
   {%- endcapture %}
 
   {% assign style_value = style | default: '' %}
@@ -30,8 +34,8 @@
 
   {{
     image
-    | image_url: height: image_height
-    | image_tag: class: class, srcset: image_srcset, style: style_value, alt: image_alt_text
+    | image_url: width: image_width, height: image_height, format: 'webp'
+    | image_tag: class: class, srcset: image_srcset, style: style_value, alt: image_alt_text, loading: image_loading, width: image_width, height: image_height
   }}
 {% elsif text_fallback %}
   {{ text_fallback }}

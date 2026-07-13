@@ -114,6 +114,15 @@
   endif
 %}
 
+{% if section.index == 1 and media_1 == 'image' and section.settings.image_1 != blank %}
+  <link
+    rel="preload"
+    as="image"
+    href="{{ section.settings.image_1 | image_url: width: 1600, format: 'webp' }}"
+    fetchpriority="high"
+  >
+{% endif %}
+
 {% capture media_slot_1 %}
   {%- if media_1 == 'image' and media_1_mobile == 'image' -%}
     {%- comment -%} Both desktop and mobile are images. Assume similar images, and this is art direction: use picture element. {%- endcomment -%}
@@ -134,7 +143,7 @@
       >
       {{
         section.settings.image_1
-        | image_url: width: 3840
+        | image_url: width: 3840, format: 'webp'
         | image_tag:
           width: section.settings.image_1.width,
           widths: widths,
@@ -150,7 +159,7 @@
     <div class="{{ media_wrapper_desktop_class }}">
       {{
         section.settings.image_1
-        | image_url: width: 3840
+        | image_url: width: 3840, format: 'webp'
         | image_tag:
           width: section.settings.image_1.width,
           widths: widths,
@@ -186,7 +195,7 @@
       <div class="{{ media_wrapper_mobile_class }}">
         {{
           section.settings.image_1_mobile
-          | image_url: width: 1600
+          | image_url: width: 1600, format: 'webp'
           | image_tag:
             width: section.settings.image_1_mobile.width,
             widths: mobile_widths,
@@ -238,7 +247,7 @@
       >
       {{
         section.settings.image_2
-        | image_url: width: 3840
+        | image_url: width: 3840, format: 'webp'
         | image_tag:
           width: section.settings.image_2.width,
           widths: widths,
@@ -254,7 +263,7 @@
     <div class="{{ media_wrapper_desktop_class }}">
       {{
         section.settings.image_2
-        | image_url: width: 3840
+        | image_url: width: 3840, format: 'webp'
         | image_tag:
           width: section.settings.image_2.width,
           widths: widths,
@@ -290,7 +299,7 @@
       <div class="{{ media_wrapper_mobile_class }}">
         {{
           section.settings.image_2_mobile
-          | image_url: width: 1600
+          | image_url: width: 1600, format: 'webp'
           | image_tag:
             width: section.settings.image_2_mobile.width,
             widths: mobile_widths,
@@ -335,7 +344,7 @@
   {% if media_1 == 'image' %}
     {{
       section.settings.image_1
-      | image_url: width: 3840
+      | image_url: width: 3840, format: 'webp'
       | image_tag:
         width: section.settings.image_1.width,
         widths: widths,
@@ -348,7 +357,7 @@
   {% if media_2 == 'image' %}
     {{
       section.settings.image_2
-      | image_url: width: 3840
+      | image_url: width: 3840, format: 'webp'
       | image_tag:
         width: section.settings.image_2.width,
         widths: widths,
@@ -373,7 +382,7 @@
     {% if section.settings.custom_mobile_media == true and fallback_to_desktop == false %}
       {% if media_1_mobile == 'image' %}
         {{ section.settings.image_1_mobile
-          | image_url: width: 1600
+          | image_url: width: 1600, format: 'webp'
           | image_tag: width: section.settings.image_1_mobile.width,
             widths: mobile_widths,
             height: section.settings.image_1_mobile.height,
@@ -384,7 +393,7 @@
       {% endif %}
       {% if media_2_mobile == 'image' %}
         {{ section.settings.image_2_mobile
-          | image_url: width: 1600
+          | image_url: width: 1600, format: 'webp'
           | image_tag: width: section.settings.image_2_mobile.width,
             widths: mobile_widths,
             height: section.settings.image_2_mobile.height,
@@ -410,7 +419,7 @@
         }}
       {% elsif media_1_mobile == 'image' %}
         {{ section.settings.image_1_mobile
-          | image_url: width: 1600
+          | image_url: width: 1600, format: 'webp'
           | image_tag: width: section.settings.image_1_mobile.width,
             widths: mobile_widths,
             height: section.settings.image_1_mobile.height,
@@ -423,7 +432,7 @@
       {% if media_count > 0 %}
         {% if media_2 == 'image' %}
           {{ section.settings.image_2
-            | image_url: width: 1600
+            | image_url: width: 1600, format: 'webp'
             | image_tag: width: section.settings.image_2.width,
               widths: widths,
               height: section.settings.image_2.height,
@@ -433,7 +442,7 @@
             }}
         {% elsif media_1 == 'image' %}
           {{ section.settings.image_1
-            | image_url: width: 1600
+            | image_url: width: 1600, format: 'webp'
             | image_tag: width: section.settings.image_1.width,
               widths: widths,
               height: section.settings.image_1.height,

@@ -76,6 +76,33 @@
   </div>
 </results-list>
 
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "{{ collection.title | escape }}",
+    "description": "{{ collection.description | strip_html | truncate: 200 | escape }}",
+    "url": "{{ shop.url }}/collections/{{ collection.handle }}",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ shop.url }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ collection.title | escape }}",
+          "item": "{{ shop.url }}/collections/{{ collection.handle }}"
+        }
+      ]
+    }
+  }
+</script>
+
 {% schema %}
 {
   "name": "t:names.collection_container",
