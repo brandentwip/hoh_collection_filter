@@ -7,10 +7,11 @@
 >
   <head>
     <meta name="google-site-verification" content="hBtLWs6RrGC2g22VPqYGrGf09lAuYaNRgboicPUXKf4" />
-    {% if request.page_type == 'product' or request.page_type == 'cart' %}
-      <script>
-        window.addEventListener('load', function () {
-          window.setTimeout(function () {
+    <script>
+      window.addEventListener('load', function () {
+        window.setTimeout(function () {
+          if (!window.__hohAnalyticsLoaded) {
+            window.__hohAnalyticsLoaded = true;
             (function (w, d, s, l, i) {
               w[l] = w[l] || [];
               w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
@@ -21,10 +22,12 @@
               j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
               f.parentNode.insertBefore(j, f);
             })(window, document, 'script', 'dataLayer', 'GTM-TDK93LV3');
-          }, 1200);
-        });
-      </script>
+          }
+        }, 2500);
+      });
+    </script>
 
+    {% if request.page_type == 'product' or request.page_type == 'cart' %}
       {% render 'gokwik' %}
     {% endif %}
     {%- if settings.favicon != blank -%}
