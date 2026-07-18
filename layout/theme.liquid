@@ -7,34 +7,26 @@
 >
   <head>
     <meta name="google-site-verification" content="hBtLWs6RrGC2g22VPqYGrGf09lAuYaNRgboicPUXKf4" />
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-TDK93LV3');
-    </script>
-    <!-- End Google Tag Manager -->
+    {% if request.page_type == 'product' or request.page_type == 'cart' %}
+      <script>
+        window.addEventListener('load', function () {
+          window.setTimeout(function () {
+            (function (w, d, s, l, i) {
+              w[l] = w[l] || [];
+              w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+              var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+              j.async = true;
+              j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+              f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-TDK93LV3');
+          }, 1200);
+        });
+      </script>
 
-    <script>
-      window.addEventListener('load', function () {
-        window.setTimeout(function () {
-          {% comment %} Add Mixpanel or Microsoft Clarity snippets here if/when they are provided. {% endcomment %}
-        }, 2000);
-      });
-    </script>
-
-    <!-- Gokwik theme code start -->
-    <link rel="dns-prefetch" href="https://pdp.gokwik.co/">
-    <link rel="dns-prefetch" href="https://api.gokwik.co">
-    {% render 'gokwik' %}
-    <!-- Gokwik theme code End -->
+      {% render 'gokwik' %}
+    {% endif %}
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"

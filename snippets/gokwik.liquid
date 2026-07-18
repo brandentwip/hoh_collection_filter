@@ -34,7 +34,17 @@ display:none!important;
 .sr-brand-badge-container span.sr-powered-by{display:none!important;}
 </style>
 
-<script src="https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4" defer></script>
+<script>
+  window.addEventListener('load', function () {
+    if (window.__gokwikMerchantIntegrationLoaded) return;
+    window.__gokwikMerchantIntegrationLoaded = true;
+
+    var gokwikScript = document.createElement('script');
+    gokwikScript.src = 'https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4';
+    gokwikScript.defer = true;
+    document.head.appendChild(gokwikScript);
+  });
+</script>
 
 <script>
  window.gaTag = { ga4: "{{ settings.ga4Gokwik }}" }

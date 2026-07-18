@@ -195,7 +195,7 @@
       <div class="{{ media_wrapper_mobile_class }}">
         {{
           section.settings.image_1_mobile
-          | image_url: width: 1600, format: 'webp'
+          | image_url: width: 1200, format: 'webp'
           | image_tag:
             width: section.settings.image_1_mobile.width,
             widths: mobile_widths,
@@ -204,6 +204,8 @@
             class: 'hero__media',
             sizes: sizes_mobile,
             fetchpriority: fetch_priority,
+            loading: 'eager',
+            decoding: 'async',
             data-testid: 'hero-mobile-image-1'
         }}
       </div>
