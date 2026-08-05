@@ -6,30 +6,27 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
-    <meta name="google-site-verification" content="hBtLWs6RrGC2g22VPqYGrGf09lAuYaNRgboicPUXKf4" />
+    
+    <!-- Google Tag Manager -->
     <script>
-      window.addEventListener('load', function () {
-        window.setTimeout(function () {
-          if (!window.__hohAnalyticsLoaded) {
-            window.__hohAnalyticsLoaded = true;
-            (function (w, d, s, l, i) {
-              w[l] = w[l] || [];
-              w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-              var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-              j.async = true;
-              j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-              f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-TDK93LV3');
-          }
-        }, 2500);
-      });
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-TDK93LV3');
     </script>
+    <!-- End Google Tag Manager -->
 
-    {% if request.page_type == 'product' or request.page_type == 'cart' %}
-      {% render 'gokwik' %}
-    {% endif %}
+    <!-- Gokwik theme code start -->
+    <link rel="dns-prefetch" href="https://pdp.gokwik.co/">
+    <link rel="dns-prefetch" href="https://api.gokwik.co">
+    {% render 'gokwik' %}
+    <!-- Gokwik theme code End -->
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
@@ -37,6 +34,11 @@
         href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
       >
     {%- endif -%}
+
+    {% if article.metafields.custom.faq_schema %}
+<script type="application/ld+json">{{ article.metafields.custom.faq_schema.value }}</script>
+{% endif %}
+
 
    
 
@@ -67,64 +69,7 @@
     {{ content_for_header }}
     {% # theme-check-enable RemoteAsset %}
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "WebSite",
-            "@id": "https://www.hausofhandmade.com/#website",
-            "name": "Haus of Handmade",
-            "alternateName": ["House of Handmade", "HOH"],
-            "url": "https://www.hausofhandmade.com",
-            "description": "Handcrafted women's clothing brand founded by Mita Jindal in Noida, India.",
-            "inLanguage": "en-IN",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": "https://www.hausofhandmade.com/search?q={search_term_string}"
-              },
-              "query-input": "required name=search_term_string"
-            }
-          },
-          {
-            "@type": "Organization",
-            "@id": "https://www.hausofhandmade.com/#organization",
-            "name": "Haus of Handmade",
-            "legalName": "Mineer Styles Pvt Ltd",
-            "url": "https://www.hausofhandmade.com",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://www.hausofhandmade.com/cdn/shop/files/HOH_Logo.png"
-            },
-            "foundingDate": "2021",
-            "founder": {
-              "@type": "Person",
-              "name": "Mita Jindal"
-            },
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Rcube Monad Mall, A-267, Block A, Sector 43",
-              "addressLocality": "Noida",
-              "addressRegion": "Uttar Pradesh",
-              "postalCode": "201303",
-              "addressCountry": "IN"
-            },
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "telephone": "+91-8800103552",
-              "contactType": "customer service",
-              "availableLanguage": ["English", "Hindi"]
-            },
-            "sameAs": [
-              "https://www.instagram.com/hausofhandmade/",
-              "https://www.facebook.com/hausofhandmade/"
-            ]
-          }
-        ]
-      }
-    </script>
+
 
   </head>
 
