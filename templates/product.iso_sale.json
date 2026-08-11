@@ -241,6 +241,31 @@
               },
               "blocks": {}
             },
+            "ai_gen_block_f7229b7_BLzyYg": {
+              "type": "ai_gen_block_f7229b7",
+              "settings": {
+                "main_text": "FLAT25% OFF",
+                "code_text": "USE CODE HOHSAVE25",
+                "main_text_size": 20,
+                "main_text_weight": "700",
+                "main_text_transform": "uppercase",
+                "main_text_color": "#ffffff",
+                "code_text_size": 12,
+                "code_text_weight": "500",
+                "code_text_transform": "uppercase",
+                "code_text_color": "#ffffff",
+                "desktop_width_percent": 100,
+                "background_color": "#000000",
+                "padding_vertical": 12,
+                "padding_horizontal": 20,
+                "border_radius": 4,
+                "text_gap": 4,
+                "letter_spacing": 0.5,
+                "border_width": 0,
+                "border_color": "#000000"
+              },
+              "blocks": {}
+            },
             "buy_buttons": {
               "type": "buy-buttons",
               "settings": {
@@ -406,6 +431,7 @@
             "group",
             "kiwi_size_chart_recommender_kiwi_sizing_fBLyAG",
             "variant_picker",
+            "ai_gen_block_f7229b7_BLzyYg",
             "buy_buttons",
             "divider",
             "custom_liquid_PHNTn8",
