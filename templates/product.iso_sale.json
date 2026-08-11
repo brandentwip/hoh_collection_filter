@@ -1,0 +1,777 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "grid",
+            "media_columns": "two",
+            "image_gap": 0,
+            "large_first_image": false,
+            "icons_style": "arrows",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 44,
+            "thumbnail_radius": 0,
+            "aspect_ratio": "adapt",
+            "constrain_to_viewport": false,
+            "media_fit": "cover",
+            "media_radius": 0,
+            "extend_media": true,
+            "zoom": true,
+            "video_loop": true,
+            "hide_variants": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 24,
+            "sticky_details_desktop": true,
+            "inherit_color_scheme": true,
+            "color_scheme": "scheme-3",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 48,
+            "padding-block-end": 48,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group": {
+              "type": "group",
+              "name": "Header",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_nXdFcd": {
+                  "type": "text",
+                  "name": "t:names.title",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h4",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "group_8B3NLh": {
+                  "type": "group",
+                  "name": "Price & Rating",
+                  "settings": {
+                    "content_direction": "row",
+                    "vertical_on_mobile": true,
+                    "horizontal_alignment": "flex-start",
+                    "vertical_alignment": "center",
+                    "align_baseline": false,
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "center",
+                    "gap": 24,
+                    "width": "fill",
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 100,
+                    "height": "fit",
+                    "custom_height": 100,
+                    "inherit_color_scheme": true,
+                    "color_scheme": "",
+                    "background_media": "none",
+                    "video_position": "cover",
+                    "background_image_position": "cover",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "toggle_overlay": false,
+                    "overlay_color": "#00000026",
+                    "overlay_style": "solid",
+                    "gradient_direction": "to top",
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "placeholder": "",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "price_97GqNF": {
+                      "type": "price",
+                      "settings": {
+                        "show_sale_price_first": true,
+                        "show_installments": true,
+                        "show_tax_info": true,
+                        "type_preset": "paragraph",
+                        "width": "100%",
+                        "alignment": "left",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "color": "var(--color-foreground)",
+                        "padding-block-start": 4,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "review_QhdEwM": {
+                      "type": "review",
+                      "settings": {
+                        "stars_style": "shaded",
+                        "show_number": true,
+                        "rating_color": "primary",
+                        "type_preset": "paragraph",
+                        "width": "100%",
+                        "alignment": "left"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "price_97GqNF",
+                    "review_QhdEwM"
+                  ]
+                }
+              },
+              "block_order": [
+                "text_nXdFcd",
+                "group_8B3NLh"
+              ]
+            },
+            "kiwi_size_chart_recommender_kiwi_sizing_fBLyAG": {
+              "type": "shopify://apps/kiwi-size-chart-recommender/blocks/kiwiSizing/b7369922-bf15-44ce-a121-a22a8fcbc4b0",
+              "settings": {
+                "fallbackToBlockPosition": true,
+                "waitForElementSelector": "",
+                "waitForElementDelay": 5
+              }
+            },
+            "variant_picker": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": true,
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": false,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "divider": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1.5,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "custom_liquid_PHNTn8": {
+              "type": "custom-liquid",
+              "name": "Order on Whatsapp",
+              "settings": {
+                "custom_liquid": "{% assign whatsapp_message = \n  \"Hello, I need your assistance regarding this product:%0A%0A\" \n  | append: product.title \n  | append: \"%0A\" \n  | append: shop.url \n  | append: product.url \n%}\n\n<a \n  href=\"https://api.whatsapp.com/send?phone=918800103552&text={{ whatsapp_message }}\"\n  target=\"_blank\"\n  class=\"custom-wa-btn\"\n>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\n    <path d=\"M20.52 3.48A11.82 11.82 0 0 0 12.06 0C5.5 0 .17 5.33.17 11.89c0 2.1.55 4.15 1.59 5.96L0 24l6.34-1.66a11.86 11.86 0 0 0 5.72 1.46h.01c6.56 0 11.89-5.33 11.89-11.89 0-3.18-1.24-6.16-3.44-8.43Z\"/>\n  </svg>\n\n  <span>Buy on WhatsApp</span>\n</a>\n\n<style>\n.custom-wa-btn{\n    display:flex !important;\n    align-items:center;\n    justify-content:center;\n    gap:6px;\n\n    width:100% !important;\n    margin-top:12px !important;\n    padding:12px 16px !important;\n\n    background:#f7f7f7 !important;\n    color:#444 !important;\n\n    border:1px solid #e5e5e5 !important;\n    border-radius:4px !important;\n\n    text-decoration:none !important;\n\n    font-size:11px !important;\n    font-weight:500 !important;\n    line-height:1 !important;\n\n    box-sizing:border-box !important;\n\n    position:relative !important;\n\n    min-height:44px !important;\n}\n\n.custom-wa-btn:hover{\n    background:#f1f1f1 !important;\n    color:#000 !important;\n}\n\n.custom-wa-btn span{\n    white-space:nowrap !important;\n}\n\n.custom-wa-btn svg{\n    flex-shrink:0 !important;\n    opacity:.7;\n}\n</style>"
+              },
+              "blocks": {}
+            },
+            "accordion_9YXfE6": {
+              "type": "accordion",
+              "name": "t:names.accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": true,
+                "type_preset": "h6",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "accordion_row_b9FJna": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Details",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 38
+                  },
+                  "blocks": {
+                    "product_description_x4JB8M": {
+                      "type": "product-description",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "{{ closest.product.description }}",
+                        "width": "fit-content",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 20,
+                        "padding-block-end": 20,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "product_description_x4JB8M"
+                  ]
+                },
+                "accordion_row_6DgLq9": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Disclaimer",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 38
+                  },
+                  "blocks": {
+                    "product_description_CT6nDE": {
+                      "type": "product-description",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<ul><li>The laces used in our products are sourced locally. The designs will vary depending on the current availability. </li><li>The fabrics comes in different lots, hence there may be a colour variation time to time.</li><li>The print placement will vary piece to piece as the cutting is done randomly.</li></ul>",
+                        "width": "fit-content",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 20,
+                        "padding-block-end": 20,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "product_description_CT6nDE"
+                  ]
+                }
+              },
+              "block_order": [
+                "accordion_row_b9FJna",
+                "accordion_row_6DgLq9"
+              ]
+            }
+          },
+          "block_order": [
+            "group",
+            "kiwi_size_chart_recommender_kiwi_sizing_fBLyAG",
+            "variant_picker",
+            "buy_buttons",
+            "divider",
+            "custom_liquid_PHNTn8",
+            "accordion_9YXfE6"
+          ]
+        }
+      },
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": false,
+        "limit_details_width": true,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "blocks": {
+        "header": {
+          "type": "text",
+          "name": "t:names.header",
+          "settings": {
+            "text": "<h3>YOU MAY ALSO LIKE</h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 2,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "card-gallery": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "portrait",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "group": {
+              "type": "_product-card-group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "space-between",
+                "vertical_alignment": "flex-start",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 4,
+                "width": "fill",
+                "custom_width": 35,
+                "width_mobile": "fill",
+                "custom_width_mobile": 43,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "group_jUd9Ly": {
+                  "type": "_product-card-group",
+                  "name": "t:names.group",
+                  "settings": {
+                    "content_direction": "column",
+                    "vertical_on_mobile": true,
+                    "horizontal_alignment": "flex-start",
+                    "vertical_alignment": "center",
+                    "align_baseline": false,
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "flex-start",
+                    "gap": 4,
+                    "width": "fill",
+                    "custom_width": 40,
+                    "width_mobile": "fit-content",
+                    "custom_width_mobile": 20,
+                    "height": "fit",
+                    "custom_height": 100,
+                    "inherit_color_scheme": true,
+                    "color_scheme": "",
+                    "background_media": "none",
+                    "video_position": "cover",
+                    "background_image_position": "cover",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "toggle_overlay": false,
+                    "overlay_color": "#00000026",
+                    "overlay_style": "solid",
+                    "gradient_direction": "to top",
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "padding-block-start": 8,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "product_title_d368TL": {
+                      "type": "product-title",
+                      "name": "t:names.product_title",
+                      "settings": {
+                        "width": "fit-content",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "h5",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "price_jKmnBC": {
+                      "type": "price",
+                      "settings": {
+                        "show_sale_price_first": true,
+                        "show_installments": false,
+                        "show_tax_info": false,
+                        "type_preset": "h6",
+                        "width": "100%",
+                        "alignment": "left",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "color": "var(--color-foreground)",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "product_title_d368TL",
+                    "price_jKmnBC"
+                  ]
+                },
+                "swatches": {
+                  "type": "swatches",
+                  "settings": {
+                    "product_swatches_alignment": "flex-start",
+                    "product_swatches_alignment_mobile": "flex-start",
+                    "hide_padding": false,
+                    "product_swatches_padding_top": 4,
+                    "product_swatches_padding_bottom": 10,
+                    "product_swatches_padding_left": 0,
+                    "product_swatches_padding_right": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "group_jUd9Ly",
+                "swatches"
+              ]
+            }
+          },
+          "block_order": [
+            "card-gallery",
+            "group"
+          ]
+        }
+      },
+      "block_order": [
+        "header"
+      ],
+      "settings": {
+        "product": "{{ closest.product }}",
+        "recommendation_type": "related",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 12,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 24,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 24,
+        "padding-block-end": 24
+      }
+    },
+    "collection_links_9Pc4EL": {
+      "type": "collection-links",
+      "blocks": {
+        "link": {
+          "type": "_collection-link",
+          "static": true,
+          "settings": {
+            "show_count": true
+          },
+          "blocks": {
+            "title": {
+              "type": "_inline-collection-title",
+              "static": true,
+              "settings": {
+                "font": "var(--font-body--family)",
+                "weight": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
+              },
+              "blocks": {}
+            },
+            "image": {
+              "type": "_image",
+              "static": true,
+              "settings": {
+                "height": "medium",
+                "ratio": "square",
+                "border_radius": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": []
+        }
+      },
+      "disabled": true,
+      "name": "t:names.collection_links_text",
+      "settings": {
+        "collection_list": [
+          "capes",
+          "coordinated-sets",
+          "denim"
+        ],
+        "layout": "text",
+        "section_width": "page-width",
+        "alignment": "left",
+        "image_position": "right",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "hero_UwEeDF": {
+      "type": "hero",
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "shopify://shop_images/Aplus1.png",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": true,
+        "media_type_1_mobile": "image",
+        "image_1_mobile": "shopify://shop_images/Aplus2.png",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "full-width",
+        "section_height": "auto",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-6",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
+    },
+    "custom_liquid_yjfVMm": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>DenimPetal Poplin Shirt — A+ Section</title>\n\n  <style>\n    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }\n\n    :root {\n      --black: #0a0a0a;\n      --white: #fafafa;\n      --gray-100: #f2f2f2;\n      --gray-200: #e0e0e0;\n      --gray-400: #999;\n      --gray-600: #555;\n    }\n\n    body {\n      background: var(--white);\n      color: var(--black);\n      font-weight: 300;\n      -webkit-font-smoothing: antialiased;\n    }\n\n    /* ── DEMO CONTEXT STRIP ── */\n    .demo-bar {\n      background: var(--black);\n      color: var(--white);\n      font-size: 11px;\n      letter-spacing: 0.2em;\n      text-transform: uppercase;\n      text-align: center;\n      padding: 10px;\n      opacity: 0.5;\n    }\n\n    /* ══════════════════════════════════════\n       A+ SECTION\n    ══════════════════════════════════════ */\n    .ap {\n      max-width: 1140px;\n      margin: 0 auto;\n      padding: 80px 24px 60px;\n    }\n\n    /* ── HERO HEADER ── */\n    .ap-header {\n      display: grid;\n      grid-template-columns: 1fr 1fr;\n      gap: 0;\n      border-top: 1px solid var(--black);\n      padding-top: 48px;\n      margin-bottom: 64px;\n      align-items: end;\n    }\n\n    .ap-eyebrow {\n      font-size: 10px;\n      letter-spacing: 0.25em;\n      text-transform: uppercase;\n      color: var(--gray-600);\n      margin-bottom: 16px;\n    }\n\n    .ap-hero-title {\n      font-size: clamp(42px, 6vw, 72px);\n      font-weight: 300;\n      line-height: 1.0;\n      letter-spacing: -0.02em;\n      color: var(--black);\n    }\n\n    .ap-hero-title em {\n      font-style: italic;\n    }\n\n    .ap-header-right {\n      padding-left: 40px;\n      border-left: 1px solid var(--gray-200);\n    }\n\n    .ap-header-right p {\n      font-size: 14px;\n      font-weight: 300;\n      line-height: 1.8;\n      color: var(--gray-600);\n      margin-bottom: 20px;\n      max-width: 340px;\n    }\n\n    .ap-tag {\n      display: inline-block;\n      font-size: 10px;\n      letter-spacing: 0.15em;\n      text-transform: uppercase;\n      border: 1px solid var(--black);\n      padding: 5px 12px;\n      margin-right: 6px;\n      margin-bottom: 6px;\n    }\n\n    /* ── QUALITY GRID — 3 columns ── */\n    .ap-grid {\n      display: grid;\n      grid-template-columns: repeat(3, 1fr);\n      border-top: 1px solid var(--black);\n      border-left: 1px solid var(--black);\n      margin-bottom: 0;\n    }\n\n    .ap-card {\n      border-right: 1px solid var(--black);\n      border-bottom: 1px solid var(--black);\n      padding: 36px 28px 32px;\n      position: relative;\n      transition: background 0.25s ease;\n      cursor: default;\n    }\n\n    .ap-card:hover {\n      background: #2a555a;\n    }\n\n    .ap-card:hover .ap-card-num,\n    .ap-card:hover .ap-card-title,\n    .ap-card:hover .ap-card-desc {\n      color: var(--white);\n    }\n\n    .ap-card:hover .ap-card-icon {\n      stroke: var(--white);\n    }\n\n    .ap-card-num {\n      font-size: 11px;\n      letter-spacing: 0.2em;\n      color: var(--gray-400);\n      margin-bottom: 20px;\n      transition: color 0.25s ease;\n    }\n\n    .ap-card-icon {\n      width: 26px;\n      height: 26px;\n      margin-bottom: 16px;\n      stroke: var(--black);\n      stroke-width: 1.1;\n      fill: none;\n      transition: stroke 0.25s ease;\n      display: block;\n    }\n\n    .ap-card-title {\n      font-size: clamp(18px, 2.2vw, 22px);\n      font-weight: 400;\n      line-height: 1.2;\n      color: var(--black);\n      margin-bottom: 10px;\n      transition: color 0.25s ease;\n    }\n\n    .ap-card-desc {\n      font-size: 12.5px;\n      font-weight: 300;\n      line-height: 1.8;\n      color: var(--gray-600);\n      transition: color 0.25s ease;\n    }\n\n    /* ── STAT BAND ── */\n    .ap-stats {\n      display: grid;\n      grid-template-columns: repeat(4, 1fr);\n      border-left: 1px solid var(--black);\n      border-right: 1px solid var(--black);\n      border-bottom: 1px solid var(--black);\n    }\n\n    .ap-stat {\n      padding: 28px 20px;\n      text-align: center;\n      border-right: 1px solid var(--black);\n    }\n\n    .ap-stat:last-child {\n      border-right: none;\n    }\n\n    .ap-stat-val {\n      display: block;\n      font-size: clamp(26px, 4vw, 38px);\n      font-weight: 300;\n      line-height: 1;\n      color: var(--black);\n    }\n\n    .ap-stat-label {\n      display: block;\n      font-size: 10px;\n      letter-spacing: 0.18em;\n      text-transform: uppercase;\n      color: var(--gray-400);\n      margin-top: 6px;\n    }\n\n    /* ── FULL-WIDTH FEATURE STRIP ── */\n    .ap-strip {\n      display: grid;\n      grid-template-columns: 1fr 1fr;\n      margin-top: 48px;\n      gap: 1px;\n      background: var(--black);\n    }\n\n    .ap-strip-block {\n      background: var(--white);\n      padding: 40px 36px;\n    }\n\n    .ap-strip-block-dark {\n      background: #2A555A;\n      color: var(--white);\n      padding: 40px 36px;\n    }\n\n    .ap-strip-label {\n      font-size: 10px;\n      letter-spacing: 0.2em;\n      text-transform: uppercase;\n      color: var(--gray-400);\n      margin-bottom: 16px;\n    }\n\n    .ap-strip-block-dark .ap-strip-label {\n      color: var(--gray-400);\n    }\n\n    .ap-strip-heading {\n      font-size: clamp(22px, 3vw, 30px);\n      font-weight: 300;\n      line-height: 1.25;\n      color: var(--black);\n      margin-bottom: 12px;\n    }\n\n    .ap-strip-block-dark .ap-strip-heading {\n      color: var(--white);\n    }\n\n    .ap-strip-body {\n      font-size: 13px;\n      font-weight: 300;\n      line-height: 1.8;\n      color: var(--gray-600);\n    }\n\n    .ap-strip-block-dark .ap-strip-body {\n      color: var(--gray-400);\n    }\n\n    /* ── CARE SECTION ── */\n    .ap-care {\n      margin-top: 48px;\n      display: flex;\n      align-items: flex-start;\n      gap: 28px;\n      border-top: 1px solid var(--gray-200);\n      padding-top: 28px;\n    }\n\n    .ap-care-label {\n      font-size: 10px;\n      letter-spacing: 0.22em;\n      text-transform: uppercase;\n      color: var(--gray-400);\n      white-space: nowrap;\n      padding-top: 5px;\n    }\n\n    .ap-care-chips {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 8px;\n    }\n\n    .ap-chip {\n      font-size: 11px;\n      font-weight: 300;\n      letter-spacing: 0.06em;\n      color: var(--gray-600);\n      border: 1px solid var(--gray-200);\n      padding: 5px 12px;\n    }\n\n    /* ── FOOTER ── */\n    .ap-footer {\n      margin-top: 40px;\n      padding-top: 20px;\n      border-top: 1px solid var(--black);\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n    }\n\n    .ap-sig {\n      font-size: 15px;\n      font-style: italic;\n      font-weight: 300;\n      color: var(--black);\n    }\n\n    .ap-made-in {\n      font-size: 10px;\n      letter-spacing: 0.2em;\n      text-transform: uppercase;\n      color: var(--gray-400);\n    }\n\n    /* ══════════════════════════════════════\n       SCROLL-IN ANIMATION\n    ══════════════════════════════════════ */\n    .reveal {\n      opacity: 0;\n      transform: translateY(18px);\n      transition: opacity 0.55s ease, transform 0.55s ease;\n    }\n\n    .reveal.in {\n      opacity: 1;\n      transform: translateY(0);\n    }\n\n    /* ══════════════════════════════════════\n       RESPONSIVE — TABLET\n    ══════════════════════════════════════ */\n    @media (max-width: 860px) {\n      .ap { padding: 60px 20px 40px; }\n\n      .ap-header {\n        grid-template-columns: 1fr;\n        gap: 28px;\n        margin-bottom: 44px;\n      }\n\n      .ap-header-right {\n        padding-left: 0;\n        border-left: none;\n        border-top: 1px solid var(--gray-200);\n        padding-top: 24px;\n      }\n\n      .ap-grid {\n        grid-template-columns: repeat(2, 1fr);\n      }\n\n      .ap-stats {\n        grid-template-columns: repeat(2, 1fr);\n      }\n\n      .ap-stat:nth-child(2) {\n        border-right: none;\n      }\n\n      .ap-stat:nth-child(3) {\n        border-right: 1px solid var(--black);\n        border-top: 1px solid var(--black);\n      }\n\n      .ap-stat:nth-child(4) {\n        border-right: none;\n        border-top: 1px solid var(--black);\n      }\n\n      .ap-strip {\n        grid-template-columns: 1fr;\n      }\n    }\n\n    /* ══════════════════════════════════════\n       RESPONSIVE — MOBILE\n    ══════════════════════════════════════ */\n    @media (max-width: 540px) {\n      .ap { padding: 40px 16px 32px; }\n\n      .ap-header { margin-bottom: 32px; padding-top: 32px; }\n\n      .ap-grid {\n        grid-template-columns: 1fr;\n      }\n\n      .ap-card { padding: 28px 20px; }\n\n      .ap-stats {\n        grid-template-columns: repeat(2, 1fr);\n      }\n\n      .ap-stat {\n        padding: 20px 12px;\n      }\n\n      .ap-strip-block,\n      .ap-strip-block-dark {\n        padding: 28px 20px;\n      }\n\n      .ap-care {\n        flex-direction: column;\n        gap: 12px;\n      }\n\n      .ap-footer {\n        flex-direction: column;\n        align-items: flex-start;\n        gap: 6px;\n      }\n    }\n  </style>\n</head>\n<body>\n\n  <!-- ══════════════════════════════════════\n       A+ SECTION\n  ══════════════════════════════════════ -->\n  <section class=\"ap\" aria-label=\"Product quality highlights\">\n\n    <!-- QUALITY GRID — 3 boxes -->\n    <div class=\"ap-grid\">\n\n      <div class=\"ap-card reveal\">\n        <div class=\"ap-card-num\">01</div>\n        <svg class=\"ap-card-icon\" viewBox=\"0 0 28 28\" aria-hidden=\"true\">\n          <path d=\"M6 4h16v2l-2 2H8L6 6V4z\"/>\n          <line x1=\"9\" y1=\"8\" x2=\"9\" y2=\"24\"/>\n          <line x1=\"19\" y1=\"8\" x2=\"19\" y2=\"24\"/>\n          <path d=\"M9 16h10\"/>\n          <path d=\"M6 4v20M22 4v20\"/>\n        </svg>\n        <div class=\"ap-card-title\">Designed in-house</div>\n        <div class=\"ap-card-desc\">Every silhouette starts as a sketch. We design for real women, for how a sleeve falls, how a hem sits when you're actually wearing it.</div>\n      </div>\n\n      <div class=\"ap-card reveal\">\n        <div class=\"ap-card-num\">02</div>\n        <svg class=\"ap-card-icon\" viewBox=\"0 0 28 28\" aria-hidden=\"true\">\n          <rect x=\"4\" y=\"12\" width=\"8\" height=\"12\" rx=\"1\"/>\n          <rect x=\"16\" y=\"7\" width=\"8\" height=\"17\" rx=\"1\"/>\n          <line x1=\"4\" y1=\"24\" x2=\"24\" y2=\"24\"/>\n        </svg>\n        <div class=\"ap-card-title\">Small-batch production</div>\n        <div class=\"ap-card-desc\">We produce in limited quantities so every piece receives full attention. When a batch is gone, it's gone — we don't restock at the cost of quality.</div>\n      </div>\n\n      <div class=\"ap-card reveal\">\n        <div class=\"ap-card-num\">03</div>\n        <svg class=\"ap-card-icon\" viewBox=\"0 0 28 28\" aria-hidden=\"true\">\n          <polyline points=\"4,14 10,20 24,8\"/>\n          <circle cx=\"14\" cy=\"14\" r=\"11\"/>\n        </svg>\n        <div class=\"ap-card-title\">Hand-checked before it ships</div>\n        <div class=\"ap-card-desc\">Every piece is inspected before it leaves the atelier. If it doesn't meet our standard, it doesn't go out — simple as that.</div>\n      </div>\n\n    </div>\n\n    <!-- STAT BAND -->\n   <div class=\"ap-stats reveal\">\n  <div class=\"ap-stat\">\n    <span class=\"ap-stat-val\">Handcrafted</span>\n    <span class=\"ap-stat-label\">Detail Work, Every Piece</span>\n  </div>\n  <div class=\"ap-stat\">\n    <span class=\"ap-stat-val\">Small</span>\n    <span class=\"ap-stat-label\">Batch Every Time</span>\n  </div>\n  <div class=\"ap-stat\">\n    <span class=\"ap-stat-val\">Limited</span>\n    <span class=\"ap-stat-label\">Once It's Gone, It's Gone</span>\n  </div>\n  <div class=\"ap-stat\">\n    <span class=\"ap-stat-val\">Yours</span>\n    <span class=\"ap-stat-label\">Inspected Before It Reaches You</span>\n  </div>\n</div>\n\n    <!-- FEATURE STRIP -->\n    <div class=\"ap-strip reveal\">\n      <div class=\"ap-strip-block\">\n        <div class=\"ap-strip-label\">Fit Philosophy</div>\n        <div class=\"ap-strip-heading\">Designed for how<br>a piece feels.</div>\n        <div class=\"ap-strip-body\">\n          We design for how a piece feels on a real body, not just how it photographs. Every silhouette is tested for ease of movement, drape, and proportion across our full size range.<br><br>\n          Sizes run S to XXL. If you're unsure about fit, write to us before you order. We're happy to help.\n        </div>\n      </div>\n      <div class=\"ap-strip-block-dark\">\n        <div class=\"ap-strip-label\">A Note on Variation</div>\n        <div class=\"ap-strip-heading\">Never a copy.<br>Always yours.</div>\n        <div class=\"ap-strip-body\">\n          Because we work with natural fabrics and human hands, slight variation in colour, texture, and finish is expected and intentional. Your piece will look close to the product photos, but it will never be a copy of them.<br><br>\n          That's the point.\n        </div>\n      </div>\n    </div>\n\n    <!-- CARE -->\n    <div class=\"ap-care reveal\">\n      <div class=\"ap-care-label\">Care</div>\n      <div class=\"ap-care-chips\">\n        <span class=\"ap-chip\">Dry clean only</span>\n        <span class=\"ap-chip\">Wash separately</span>\n        <span class=\"ap-chip\">Do not bleach</span>\n        <span class=\"ap-chip\">Do not tumble dry</span>\n        <span class=\"ap-chip\">Handle with love</span>\n      </div>\n    </div>\n\n  </section>\n\n  <script>\n    const els = document.querySelectorAll('.reveal');\n    const io = new IntersectionObserver((entries) => {\n      entries.forEach((e, i) => {\n        if (e.isIntersecting) {\n          const idx = Array.from(els).indexOf(e.target);\n          setTimeout(() => e.target.classList.add('in'), idx * 80);\n          io.unobserve(e.target);\n        }\n      });\n    }, { threshold: 0.12 });\n    els.forEach(el => io.observe(el));\n  </script>\n\n</body>\n</html>",
+        "color_scheme": "",
+        "section_width": "full-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product-recommendations",
+    "collection_links_9Pc4EL",
+    "hero_UwEeDF",
+    "custom_liquid_yjfVMm"
+  ]
+}
