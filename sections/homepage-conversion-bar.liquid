@@ -1,0 +1,214 @@
+{% liquid
+  assign featured_collection = section.settings.collection
+  assign max_products = section.settings.max_products
+%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<section
+  class="homepage-conversion-bar section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+  style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
+>
+  <div class="homepage-conversion-bar__inner">
+    <div class="homepage-conversion-bar__trust" aria-label="Store benefits">
+      <span>Handmade in India</span>
+      <span>Free shipping above Rs 999</span>
+      <span>Easy returns</span>
+    </div>
+
+    <div class="homepage-conversion-bar__header">
+      <h2>{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.button_link != blank %}
+        <a class="button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+      {% endif %}
+    </div>
+
+    {% if featured_collection != blank and featured_collection.products_count > 0 %}
+      <div class="homepage-conversion-bar__products">
+        {% for product in featured_collection.products limit: max_products %}
+          <a class="homepage-conversion-bar__product" href="{{ product.url }}">
+            {% if product.featured_image %}
+              {% assign product_image_alt = product.featured_image.alt | default: product.title %}
+              {{
+                product.featured_image
+                | image_url: width: 600, format: 'webp'
+                | image_tag:
+                  loading: 'eager',
+                  widths: '240, 352, 600',
+                  sizes: '(min-width: 750px) 16vw, 42vw',
+                  class: 'homepage-conversion-bar__image',
+                  alt: product_image_alt
+              }}
+            {% endif %}
+            <span class="homepage-conversion-bar__title">{{ product.title | escape }}</span>
+            <span class="homepage-conversion-bar__price">{{ product.price | money }}</span>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .homepage-conversion-bar {
+    padding-block: var(--padding-block-start) var(--padding-block-end);
+  }
+
+  .homepage-conversion-bar__inner {
+    display: grid;
+    gap: var(--gap-md);
+    width: 100%;
+  }
+
+  .homepage-conversion-bar__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-xs) var(--gap-lg);
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding-block: var(--padding-xs);
+    border-block: 1px solid var(--color-border);
+    font-size: var(--font-size--xs);
+    text-transform: uppercase;
+  }
+
+  .homepage-conversion-bar__header {
+    display: flex;
+    gap: var(--gap-md);
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .homepage-conversion-bar__header h2 {
+    margin: 0;
+    font-size: var(--font-size--lg);
+  }
+
+  .homepage-conversion-bar__products {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--gap-sm);
+  }
+
+  .homepage-conversion-bar__product {
+    display: grid;
+    gap: var(--gap-2xs);
+    color: currentcolor;
+    text-decoration: none;
+  }
+
+  .homepage-conversion-bar__image {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .homepage-conversion-bar__title,
+  .homepage-conversion-bar__price {
+    font-size: var(--font-size--xs);
+    line-height: 1.35;
+  }
+
+  .homepage-conversion-bar__price {
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 749px) {
+    .homepage-conversion-bar__header {
+      align-items: stretch;
+    }
+
+    .homepage-conversion-bar__header .button {
+      flex-shrink: 0;
+    }
+
+    .homepage-conversion-bar__products {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homepage conversion bar",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bestsellers"
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Products",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "Page"
+        },
+        {
+          "value": "full-width",
+          "label": "Full"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage conversion bar"
+    }
+  ]
+}
+{% endschema %}
