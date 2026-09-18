@@ -6,8 +6,9 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
-    
+    {% # theme-check-disable RemoteAsset %}
     <!-- Google Tag Manager -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -23,6 +24,7 @@
     <!-- End Google Tag Manager -->
 
     <!-- Gokwik theme code start -->
+    <link rel="preconnect" href="https://pdp.gokwik.co">
     <link rel="dns-prefetch" href="https://pdp.gokwik.co/">
     <link rel="dns-prefetch" href="https://api.gokwik.co">
     {% render 'gokwik' %}
@@ -42,7 +44,6 @@
 
    
 
-    {% # theme-check-disable RemoteAsset %}
     {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
     {% if settings.transition_to_main_product or settings.page_transition_enabled %}
       <link
