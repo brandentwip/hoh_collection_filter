@@ -82,9 +82,40 @@
         "enable_transparent_header_collection": false,
         "collection_color_scheme": "default"
       }
+    },
+    "header_announcements_6wnTMA": {
+      "type": "header-announcements",
+      "blocks": {
+        "announcement_6wFAJB": {
+          "type": "_announcement",
+          "settings": {
+            "text": "Handmade in India | Free shipping above Rs 999 | Easy returns | <a href=\"https://www.hausofhandmade.com/collections/shirts-new\" title=\"https://www.hausofhandmade.com/collections/shirts-new\">ShopNow</a>",
+            "link": "",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "announcement_6wFAJB"
+      ],
+      "name": "t:names.announcement_bar",
+      "settings": {
+        "speed": 5,
+        "section_width": "page-width",
+        "color_scheme": "scheme-5",
+        "divider_width": 0,
+        "padding-block-start": 10,
+        "padding-block-end": 10
+      }
     }
   },
   "order": [
-    "header_section"
+    "header_section",
+    "header_announcements_6wnTMA"
   ]
 }
