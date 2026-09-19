@@ -75,6 +75,25 @@
     "variant_button_border_width": 1,
     "variant_button_radius": 0,
     "variant_button_width": "equal-width-buttons",
+    "mid": "19g6ilm5xt8f9",
+    "envType": "production",
+    "ga4Gokwik": "G-S0MXN5BG8G",
+    "fbpixel": "2301759926666319",
+    "goEnable": true,
+    "checkoutSubText": "",
+    "checkoutEnableLogo": false,
+    "checkoutEnableBanner": false,
+    "goBuynowEnable": true,
+    "buyNowText": "Buy It Now",
+    "buyNowSubText": "",
+    "buyNowEnableLogo": false,
+    "buyNowEnableBanner": false,
+    "enableIntlFlow": false,
+    "priClr": "#000000",
+    "secClr": "#ffffff",
+    "main-titile": "Checkout",
+    "btnBClr": "#000000",
+    "btnTextClr": "#ffffff",
     "content_for_index": [],
     "blocks": {
       "6089946381803635929": {
@@ -87,6 +106,11 @@
           "gkc_text_color": "#ffffff",
           "gk_image": true
         }
+      },
+      "17270581071990108477": {
+        "type": "shopify://apps/hoppy-popups/blocks/Email_collection_Bar/0403c282-cb2c-4202-b054-d6c540cb0df9",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
@@ -402,26 +426,7 @@
           "selected_variant_hover_border_color": "#232323"
         }
       }
-    },
-    "mid": "19g6ilm5xt8f9",
-    "envType": "production",
-    "ga4Gokwik": "G-S0MXN5BG8G",
-    "fbpixel": "2301759926666319",
-    "goEnable": true,
-    "priClr": "#000000",
-    "secClr": "#ffffff",
-    "main-titile": "Checkout",
-    "goBuynowEnable": true,
-    "btnBClr": "#000000",
-    "btnTextClr": "#ffffff",
-    "buyNowText": "Buy It Now",
-    "checkoutSubText": "",
-    "checkoutEnableBanner": false,
-    "checkoutEnableLogo": false,
-    "buyNowSubText": "",
-    "buyNowEnableBanner": false,
-    "buyNowEnableLogo": false,
-    "enableIntlFlow": false
+    }
   },
   "presets": {
     "Ritual": {
