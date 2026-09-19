@@ -1,6 +1,116 @@
+{% doc %}
+  @prompt
+    Handmade in India | Free shipping above Rs 999 | Easy returns | ShopNow "create a sticky bar with this text" , it should be fixed with the header
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-sticky-bar-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    width: 100%;
+    max-width: 100%;
+    background: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    border-bottom: 1px solid {{ block.settings.border_color }};
+  }
+  .ai-sticky-bar-{{ ai_gen_id }}__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    min-height: {{ block.settings.bar_height }}px;
+    padding: 8px 24px;
+    text-align: center;
+  }
+  .ai-sticky-bar-{{ ai_gen_id }}__message {
+    margin: 0;
+    font-family: {{ block.settings.message_font.family }}, {{ block.settings.message_font.fallback_families }};
+    font-size: {{ block.settings.message_size }}px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: .02em;
+  }
+  .ai-sticky-bar-{{ ai_gen_id }}__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-height: 34px;
+    padding: 6px 16px;
+    border: 1px solid {{ block.settings.button_border_color }};
+    background: {{ block.settings.button_background_color }};
+    color: {{ block.settings.button_text_color }};
+    font-family: {{ block.settings.message_font.family }}, {{ block.settings.message_font.fallback_families }};
+    font-size: {{ block.settings.button_size }}px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+  .ai-sticky-bar-{{ ai_gen_id }}__link:hover,
+  .ai-sticky-bar-{{ ai_gen_id }}__link:focus-visible {
+    background: {{ block.settings.button_hover_background_color }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+  .ai-sticky-bar-{{ ai_gen_id }}__link:focus-visible {
+    outline: 2px solid {{ block.settings.focus_color }};
+    outline-offset: 3px;
+  }
+  @media screen and (max-width: 749px) {
+    .ai-sticky-bar-{{ ai_gen_id }}__inner { gap: 10px; min-height: auto; padding: 9px 14px; }
+    .ai-sticky-bar-{{ ai_gen_id }}__message { font-size: {{ block.settings.mobile_message_size }}px; }
+    .ai-sticky-bar-{{ ai_gen_id }}__link { min-height: 30px; padding: 5px 10px; font-size: {{ block.settings.mobile_button_size }}px; }
+  }
+{% endstyle %}
+
+<sticky-bar-{{ ai_gen_id }} class="ai-sticky-bar-{{ ai_gen_id }}" role="region" aria-label="{{ block.settings.accessibility_label | escape }}" {{ block.shopify_attributes }}>
+  <div class="ai-sticky-bar-{{ ai_gen_id }}__inner">
+    <p class="ai-sticky-bar-{{ ai_gen_id }}__message">{{ block.settings.message | escape }}</p>
+    {% if block.settings.button_label != blank %}
+      <a class="ai-sticky-bar-{{ ai_gen_id }}__link" href="{{ block.settings.button_link | default: routes.all_products_collection_url }}">{{ block.settings.button_label | escape }}</a>
+    {% endif %}
+  </div>
+</sticky-bar-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class StickyBar{{ ai_gen_id }} extends HTMLElement {}
+    if (!customElements.get('sticky-bar-{{ ai_gen_id }}')) customElements.define('sticky-bar-{{ ai_gen_id }}', StickyBar{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Sticky announcement bar",
+  "settings": [
+    {"type":"text","id":"message","label":"Message","default":"Handmade in India | Free shipping above Rs 999 | Easy returns"},
+    {"type":"text","id":"button_label","label":"Button label","default":"ShopNow"},
+    {"type":"url","id":"button_link","label":"Button link"},
+    {"type":"text","id":"accessibility_label","label":"Accessibility label","default":"Store benefits and shopping link"},
+    {"type":"range","id":"desktop_width_percent","label":"Desktop width","min":50,"max":100,"step":5,"unit":"%","default":100},
+    {"type":"range","id":"bar_height","label":"Bar height","min":32,"max":80,"step":4,"unit":"px","default":48},
+    {"type":"font_picker","id":"message_font","label":"Font","default":"inter_n4"},
+    {"type":"range","id":"message_size","label":"Message size","min":10,"max":20,"step":1,"unit":"px","default":12},
+    {"type":"range","id":"mobile_message_size","label":"Mobile message size","min":9,"max":16,"step":1,"unit":"px","default":10},
+    {"type":"range","id":"button_size","label":"Button size","min":10,"max":18,"step":1,"unit":"px","default":12},
+    {"type":"range","id":"mobile_button_size","label":"Mobile button size","min":9,"max":16,"step":1,"unit":"px","default":10},
+    {"type":"color","id":"background_color","label":"Background","default":"#202020"},
+    {"type":"color","id":"text_color","label":"Text","default":"#FFFFFF"},
+    {"type":"color","id":"border_color","label":"Border","default":"#666666"},
+    {"type":"color","id":"button_background_color","label":"Button background","default":"#FFFFFF"},
+    {"type":"color","id":"button_text_color","label":"Button text","default":"#000000"},
+    {"type":"color","id":"button_border_color","label":"Button border","default":"#FFFFFF"},
+    {"type":"color","id":"button_hover_background_color","label":"Button hover background","default":"#DEDEDE"},
+    {"type":"color","id":"button_hover_text_color","label":"Button hover text","default":"#000000"},
+    {"type":"color","id":"focus_color","label":"Focus outline","default":"#FFFFFF"}
+  ],
+  "presets":[{"name":"Sticky announcement bar"}],
+  "tag":null,
+  "class":"sticky-announcement-block"
+}
 {% endschema %}
