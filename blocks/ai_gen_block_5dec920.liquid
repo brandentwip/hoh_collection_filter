@@ -1,0 +1,189 @@
+{% doc %}
+  @prompt
+    Generate a breadcrum section for the collection page
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-breadcrumb-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.vertical_padding }}px 0;
+    color: {{ block.settings.text_color }};
+    font-family: {{ block.settings.font.family }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.4;
+  }
+
+  .ai-breadcrumb-{{ ai_gen_id }}__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ai-breadcrumb-{{ ai_gen_id }}__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ai-breadcrumb-{{ ai_gen_id }}__link {
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+  }
+
+  .ai-breadcrumb-{{ ai_gen_id }}__link:hover,
+  .ai-breadcrumb-{{ ai_gen_id }}__link:focus-visible {
+    color: {{ block.settings.link_hover_color }};
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .ai-breadcrumb-{{ ai_gen_id }}__separator {
+    color: {{ block.settings.separator_color }};
+    user-select: none;
+  }
+
+  .ai-breadcrumb-{{ ai_gen_id }}__current {
+    color: {{ block.settings.text_color }};
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-breadcrumb-{{ ai_gen_id }} {
+      font-size: {{ block.settings.mobile_text_size }}px;
+    }
+  }
+{% endstyle %}
+
+<nav
+  class="ai-breadcrumb-{{ ai_gen_id }}"
+  style="width: {{ block.settings.desktop_width_percent }}%;"
+  aria-label="Breadcrumb"
+  {{ block.shopify_attributes }}
+>
+  <ol class="ai-breadcrumb-{{ ai_gen_id }}__list">
+    <li class="ai-breadcrumb-{{ ai_gen_id }}__item">
+      <a class="ai-breadcrumb-{{ ai_gen_id }}__link" href="{{ routes.root_url }}">{{ block.settings.home_label | escape }}</a>
+      <span class="ai-breadcrumb-{{ ai_gen_id }}__separator" aria-hidden="true">{{ block.settings.separator }}</span>
+    </li>
+
+    {% if collection %}
+      <li class="ai-breadcrumb-{{ ai_gen_id }}__item" aria-current="page">
+        <span class="ai-breadcrumb-{{ ai_gen_id }}__current">{{ collection.title | escape }}</span>
+      </li>
+    {% else %}
+      <li class="ai-breadcrumb-{{ ai_gen_id }}__item" aria-current="page">
+        <span class="ai-breadcrumb-{{ ai_gen_id }}__current">{{ block.settings.collection_fallback | escape }}</span>
+      </li>
+    {% endif %}
+  </ol>
+</nav>
+
+{% schema %}
+{
+  "name": "Collection breadcrumb",
+  "settings": [
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "Home label",
+      "default": "Home"
+    },
+    {
+      "type": "text",
+      "id": "collection_fallback",
+      "label": "Fallback label",
+      "default": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "separator",
+      "label": "Separator",
+      "default": "/"
+    },
+    {
+      "type": "font_picker",
+      "id": "font",
+      "label": "Font",
+      "default": "inter_n4"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "label": "Mobile text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Links",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover",
+      "default": "#2A555A"
+    },
+    {
+      "type": "color",
+      "id": "separator_color",
+      "label": "Separator color",
+      "default": "#666666"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection breadcrumb"
+    }
+  ],
+  "tag": null,
+  "class": "collection-breadcrumb-block"
+}
+{% endschema %}
