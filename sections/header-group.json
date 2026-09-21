@@ -120,7 +120,7 @@
         "ai_gen_block_0a70e10_NKUrdT": {
           "type": "ai_gen_block_0a70e10",
           "settings": {
-            "message": "Free shipping above Rs 999 | Easy returns",
+            "message": "Free shipping Sitewide | Easy returns",
             "button_label": "ShopNow",
             "button_link": "https://www.hausofhandmade.com/collections/shirts-new",
             "accessibility_label": "Store benefits and shopping link",
@@ -132,14 +132,14 @@
             "button_size": 10,
             "mobile_button_size": 10,
             "background_color": "#202020",
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "border_color": "#666666",
-            "button_background_color": "#FFFFFF",
+            "button_background_color": "#ffffff",
             "button_text_color": "#000000",
-            "button_border_color": "#FFFFFF",
-            "button_hover_background_color": "#DEDEDE",
+            "button_border_color": "#ffffff",
+            "button_hover_background_color": "#dedede",
             "button_hover_text_color": "#000000",
-            "focus_color": "#FFFFFF"
+            "focus_color": "#ffffff"
           },
           "blocks": {}
         }
