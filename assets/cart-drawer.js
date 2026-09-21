@@ -1,5 +1,10 @@
 import { DialogComponent, DialogOpenEvent, DialogCloseEvent } from '@theme/dialog';
-import { CartAddEvent } from '@theme/events';
+import {
+  CartAddEvent,
+  CartDrawerCheckoutClickedEvent,
+  CartDrawerDismissedEvent,
+  CartDrawerOpenedEvent,
+} from '@theme/events';
 import { isMobileBreakpoint } from '@theme/utilities';
 
 /**
@@ -24,6 +29,9 @@ class CartDrawerComponent extends DialogComponent {
     this.addEventListener(DialogOpenEvent.eventName, this.#updateStickyState);
     this.addEventListener(DialogOpenEvent.eventName, this.#handleHistoryOpen);
     this.addEventListener(DialogCloseEvent.eventName, this.#handleHistoryClose);
+    this.addEventListener(DialogOpenEvent.eventName, this.#handleDrawerOpened);
+    this.refs.dialog.addEventListener('close', this.#handleDrawerDismissed);
+    this.addEventListener('click', this.#handleCheckoutClick);
 
     if (history.state?.cartDrawerOpen) {
       history.replaceState(null, '');
@@ -36,8 +44,25 @@ class CartDrawerComponent extends DialogComponent {
     this.removeEventListener(DialogOpenEvent.eventName, this.#updateStickyState);
     this.removeEventListener(DialogOpenEvent.eventName, this.#handleHistoryOpen);
     this.removeEventListener(DialogCloseEvent.eventName, this.#handleHistoryClose);
+    this.removeEventListener(DialogOpenEvent.eventName, this.#handleDrawerOpened);
+    this.refs.dialog.removeEventListener('close', this.#handleDrawerDismissed);
+    this.removeEventListener('click', this.#handleCheckoutClick);
     this.#historyAbortController?.abort();
   }
+
+  #handleDrawerOpened = () => {
+    this.dispatchEvent(new CartDrawerOpenedEvent());
+  };
+
+  #handleDrawerDismissed = () => {
+    this.dispatchEvent(new CartDrawerDismissedEvent());
+  };
+
+  #handleCheckoutClick = (event) => {
+    if (!(event.target instanceof Element) || !event.target.closest('button[name="checkout"]')) return;
+
+    this.dispatchEvent(new CartDrawerCheckoutClickedEvent());
+  };
 
   #handleHistoryOpen = () => {
     if (!isMobileBreakpoint()) return;

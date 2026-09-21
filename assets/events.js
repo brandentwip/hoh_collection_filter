@@ -26,6 +26,12 @@ export class ThemeEvents {
   static discountUpdate = 'discount:update';
   /** @static @constant {string} Event triggered when changing collection filters */
   static FilterUpdate = 'filter:update';
+  /** @static @constant {string} Event triggered when the cart drawer opens */
+  static cartDrawerOpened = 'cart_drawer_opened';
+  /** @static @constant {string} Event triggered when the cart drawer is dismissed */
+  static cartDrawerDismissed = 'cart_drawer_dismissed';
+  /** @static @constant {string} Event triggered when checkout is clicked in the cart drawer */
+  static cartDrawerCheckoutClicked = 'cart_drawer_checkout_clicked';
 }
 
 /**
@@ -286,5 +292,23 @@ export class FilterUpdateEvent extends Event {
 
   shouldShowClearAll() {
     return [...this.detail.queryParams.entries()].filter(([key]) => key.startsWith('filter.')).length > 0;
+  }
+}
+
+export class CartDrawerOpenedEvent extends Event {
+  constructor() {
+    super(ThemeEvents.cartDrawerOpened, { bubbles: true });
+  }
+}
+
+export class CartDrawerDismissedEvent extends Event {
+  constructor() {
+    super(ThemeEvents.cartDrawerDismissed, { bubbles: true });
+  }
+}
+
+export class CartDrawerCheckoutClickedEvent extends Event {
+  constructor() {
+    super(ThemeEvents.cartDrawerCheckoutClicked, { bubbles: true });
   }
 }
