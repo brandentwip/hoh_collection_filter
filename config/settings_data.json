@@ -44,6 +44,7 @@
     "type_case_h6": "none",
     "page_width": "wide",
     "transition_to_main_product": true,
+    "add_to_cart_animation": false,
     "card_hover_effect": "subtle-zoom",
     "badge_position": "top-right",
     "badge_corner_radius": 0,
