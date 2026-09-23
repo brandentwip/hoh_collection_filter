@@ -25,7 +25,7 @@
             "vertical_padding": 12,
             "text_color": "#000000",
             "link_color": "#000000",
-            "link_hover_color": "#2A555A",
+            "link_hover_color": "#2a555a",
             "separator_color": "#666666"
           },
           "blocks": {}
@@ -382,7 +382,7 @@
         }
       },
       "custom_css": [
-        ".product-badges__badge {font-size: 8px;}"
+        ".product-badges__badge {font-size: 8px; display: none;}"
       ],
       "settings": {
         "layout_type": "grid",
