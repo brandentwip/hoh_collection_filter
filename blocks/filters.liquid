@@ -318,6 +318,16 @@
       </div>
     {% endif %}
 
+    <div class="products-count-wrapper products-count-wrapper--mobile" data-testid="products-count">
+      <span role="status">
+        {% if products_count > 25000 %}
+          {{- 'content.item_count_cutoff' | t: count: 25000 -}}
+        {% else %}
+          {{- 'content.item_count' | t: count: products_count -}}
+        {% endif %}
+      </span>
+    </div>
+
     {% liquid
       assign child_count = 0
       if block_settings.enable_filtering == false and block_settings.enable_sorting
@@ -1146,6 +1156,14 @@
   /* Products count */
   .products-count-wrapper {
     display: none;
+  }
+
+  .products-count-wrapper--mobile {
+    @media screen and (max-width: 749px) {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
   }
 
   .facets--horizontal .products-count-wrapper {
