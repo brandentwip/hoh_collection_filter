@@ -647,6 +647,9 @@
       "block_order": [
         "header"
       ],
+      "custom_css": [
+        ".product-badges__badge.product-badges__badge--rectangle.color-scheme-5 {display: none;}"
+      ],
       "settings": {
         "product": "{{ closest.product }}",
         "recommendation_type": "related",
