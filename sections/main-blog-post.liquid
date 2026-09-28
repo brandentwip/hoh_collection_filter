@@ -1,5 +1,3 @@
-
-
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div class="section color-{{ section.settings.color_scheme }}">
   <div
@@ -60,9 +58,18 @@
 </div>
 
 <script type="application/ld+json">
-  {{ article | structured_data }}
+  { "@context": "https://schema.org", "@type": "BlogPosting", "headline":
+  {{ article.title | json }}, "description": {{ article.excerpt_or_content | strip_html | truncate: 160 | json }},
+  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}, "dateModified":
+  {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}, "author": { "@type": "Person", "name":
+  {{ article.author | json }}
+  }, "publisher": { "@type": "Organization", "name": "Haus of Handmade", "url": "https://hausofhandmade.com", "sameAs": [ "https://www.instagram.com/hausofhandmade", "https://www.facebook.com/hausofhandmade" ] }, "mainEntityOfPage": { "@type": "WebPage", "@id": {{ request.origin | append: article.url | json }} } }
 </script>
-
+{% if article.metafields.custom.faq != blank %}
+  <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": {{ article.metafields.custom.faq.value }} }
+  </script>
+{% endif %}
 {% stylesheet %}
   .blog-post-comments-container {
     width: 100%;
