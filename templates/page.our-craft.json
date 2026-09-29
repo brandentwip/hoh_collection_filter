@@ -65,27 +65,27 @@
           "type": "row",
           "settings": {
             "image_position": "left",
-            "number": "01 — The Stitch",
+            "number": "01 The Stitch",
             "heading": "Stitched like it\nneeds to last.",
-            "body": "<p>Machine-made clothes are sewn fast. Ours are sewn right. Every seam is finished by hand, every stitch checked before a piece leaves the workshop. You'll feel the difference the first time you wear it — and still feel it three years later.</p>"
+            "body": "<p>Machine-made clothes are sewn fast. Ours are sewn right. Every seam is finished by hand, every stitch checked before a piece leaves the workshop. You'll feel the difference the first time you wear it and still feel it three years later.</p>"
           }
         },
         "row_TDzyJ6": {
           "type": "row",
           "settings": {
             "image_position": "right",
-            "number": "02 — The Fabric",
+            "number": "02 The Fabric",
             "heading": "Handloom cotton.\nNothing else.",
-            "body": "<p>We source directly from small handloom clusters — fabrics that breathe, that soften with every wash, that hold their colour without compromise. The kind of cloth that mass production simply cannot replicate.</p>"
+            "body": "<p>We source directly from small handloom clusters &nbsp;fabrics that breathe, that soften with every wash, that hold their colour without compromise. The kind of cloth that mass production simply cannot replicate.</p>"
           }
         },
         "row_arz7AT": {
           "type": "row",
           "settings": {
             "image_position": "left",
-            "number": "03 — The Batch",
+            "number": "03  The Batch",
             "heading": "Small batches.\nOn purpose.",
-            "body": "<p>We make limited runs — not because we can't scale, but because we won't. Smaller batches mean more attention per piece, less waste, and something that not everyone else will be wearing.</p>"
+            "body": "<p>We make limited runs not because we can't scale, but because we won't. Smaller batches mean more attention per piece, less waste, and something that not everyone else will be wearing.</p>"
           }
         },
         "step_ATUqBR": {
@@ -99,21 +99,21 @@
           "type": "step",
           "settings": {
             "title": "We cut with intention",
-            "text": "Cutting is done by hand, piece by piece — no bulk cutting, no waste. Each pattern is measured for the size it will become."
+            "text": "Cutting is done by hand, piece by piece no bulk cutting, no waste. Each pattern is measured for the size it will become."
           }
         },
         "step_pbTxcx": {
           "type": "step",
           "settings": {
             "title": "We stitch with care",
-            "text": "Our craftswomen stitch at their own pace — not against a clock. Every seam is flat-finished, every hem hand-turned before the next step begins."
+            "text": "Our craftswomen stitch at their own page  not against a clock. Every seam is flat-finished, every hem hand-turned before the next step begins."
           }
         },
         "step_wbiw3B": {
           "type": "step",
           "settings": {
             "title": "We check before we ship",
-            "text": "A final quality check happens on every single piece — stitching, sizing, finish, and feel — before it's folded and packed for you."
+            "text": "A final quality check happens on every single piece stitching, sizing, finish, and feel before it's folded and packed for you."
           }
         },
         "trust_7wC7eM": {
@@ -166,7 +166,7 @@
         "hero_heading": "Four hours of someone's day,\nin every shirt.",
         "hero_sub": "Every piece we make carries the hands, the time, and the care of the craftswomen behind it.",
         "divider": "❋",
-        "intro": "<p>We don't make clothes on a conveyor belt. Every shirt, every co-ord, every kurta begins with a woman who knows her craft — and ends with a piece that shows it.</p>",
+        "intro": "<p>We don't make clothes on a conveyor belt. Every shirt, every co-ord, every kurt begins with a woman who knows her craft &nbsp;and ends with a piece that shows it.</p>",
         "quote_opacity": 30,
         "quote": "When something is made well, you don't have to explain it. You just wear it.",
         "process_label": "How we make it",
