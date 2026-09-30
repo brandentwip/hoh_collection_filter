@@ -75,8 +75,8 @@
           "settings": {
             "image_position": "right",
             "number": "02 The Fabric",
-            "heading": "Handloom cotton.\nNothing else.",
-            "body": "<p>We source directly from small handloom clusters &nbsp;fabrics that breathe, that soften with every wash, that hold their colour without compromise. The kind of cloth that mass production simply cannot replicate.</p>"
+            "heading": "Lightweight cottons.\nquality fabrics",
+            "body": "<p>We source directly from manufacturers , fabrics that breathe, that soften with every wash, that hold their colour without compromise. The kind of cloth that mass production simply cannot replicate.</p>"
           }
         },
         "row_arz7AT": {
@@ -120,7 +120,7 @@
           "type": "trust",
           "settings": {
             "icon": "returns",
-            "text": "Easy Returns"
+            "text": "Easy Size Exchange"
           }
         },
         "trust_VFWCNw": {
@@ -163,7 +163,7 @@
         "hero_opacity": 72,
         "hero_height": 90,
         "hero_eyebrow": "Our Craft",
-        "hero_heading": "Four hours of someone's day,\nin every shirt.",
+        "hero_heading": "Six hours of someone's day,\nin every shirt.",
         "hero_sub": "Every piece we make carries the hands, the time, and the care of the craftswomen behind it.",
         "divider": "❋",
         "intro": "<p>We don't make clothes on a conveyor belt. Every shirt, every co-ord, every dress begins with a woman who knows her craft &nbsp;and ends with a piece that shows it.</p>",
