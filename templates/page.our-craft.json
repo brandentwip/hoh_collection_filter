@@ -160,6 +160,7 @@
       ],
       "name": "Our Craft",
       "settings": {
+        "hero_video": "shopify://files/videos/HOH Banner.mp4",
         "hero_opacity": 72,
         "hero_height": 90,
         "hero_eyebrow": "Our Craft",
