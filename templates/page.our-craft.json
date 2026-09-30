@@ -64,6 +64,7 @@
         "row_bFYj8i": {
           "type": "row",
           "settings": {
+            "image": "shopify://shop_images/1_jpg.jpg",
             "image_position": "left",
             "number": "01 The Stitch",
             "heading": "Stitched like it\nneeds to last.",
@@ -73,6 +74,7 @@
         "row_TDzyJ6": {
           "type": "row",
           "settings": {
+            "image": "shopify://shop_images/22_jpg.jpg",
             "image_position": "right",
             "number": "02 The Fabric",
             "heading": "Lightweight cottons.\nquality fabrics",
@@ -162,7 +164,7 @@
       "settings": {
         "hero_video": "shopify://files/videos/HOH Banner.mp4",
         "hero_video_mobile": "shopify://files/videos/HOH BAnner Mobile.mp4",
-        "hero_opacity": 72,
+        "hero_opacity": 100,
         "hero_height": 90,
         "hero_eyebrow": "Our Craft",
         "hero_heading": "Six hours of someone's day,\nin every shirt.",
