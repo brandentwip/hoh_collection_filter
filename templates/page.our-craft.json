@@ -84,6 +84,7 @@
         "row_arz7AT": {
           "type": "row",
           "settings": {
+            "image": "shopify://shop_images/Untitled_design.png",
             "image_position": "left",
             "number": "03  The Batch",
             "heading": "Small batches.\nOn purpose.",
