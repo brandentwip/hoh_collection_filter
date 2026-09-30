@@ -16,8 +16,11 @@
   {%- comment -%} HERO {%- endcomment -%}
   <section class="oc-hero">
     <div class="oc-hero__media">
-      {%- if section.settings.hero_video != blank -%}
-        {{ section.settings.hero_video | video_tag:
+      {%- assign hv_desktop = section.settings.hero_video | default: section.settings.hero_video_mobile -%}
+      {%- assign hv_mobile = section.settings.hero_video_mobile | default: section.settings.hero_video -%}
+      {%- if hv_desktop != blank and hv_desktop.id == hv_mobile.id -%}
+        {%- comment -%} Only one video uploaded: use it on all screens {%- endcomment -%}
+        {{ hv_desktop | video_tag:
           image_size: '2000x',
           autoplay: true,
           loop: true,
@@ -26,6 +29,45 @@
           playsinline: true,
           preload: 'auto',
           class: 'oc-hero__video' }}
+      {%- elsif hv_desktop != blank -%}
+        {%- comment -%} Separate desktop + mobile videos; the script below plays only the one that fits the screen {%- endcomment -%}
+        {{ hv_desktop | video_tag:
+          image_size: '2000x',
+          autoplay: false,
+          loop: true,
+          muted: true,
+          controls: false,
+          playsinline: true,
+          preload: 'none',
+          class: 'oc-hero__video oc-hero__video--desktop' }}
+        {{ hv_mobile | video_tag:
+          image_size: '1080x',
+          autoplay: false,
+          loop: true,
+          muted: true,
+          controls: false,
+          playsinline: true,
+          preload: 'none',
+          class: 'oc-hero__video oc-hero__video--mobile' }}
+        <script>
+          (function () {
+            var wrap = document.currentScript.parentElement;
+            var d = wrap.querySelector('.oc-hero__video--desktop');
+            var m = wrap.querySelector('.oc-hero__video--mobile');
+            if (!d || !m) return;
+            var mq = window.matchMedia('(max-width: 768px)');
+            function pick() {
+              var use = mq.matches ? m : d;
+              var other = mq.matches ? d : m;
+              other.pause();
+              var p = use.play();
+              if (p && p.catch) p.catch(function () {});
+            }
+            pick();
+            if (mq.addEventListener) mq.addEventListener('change', pick);
+            else if (mq.addListener) mq.addListener(pick);
+          })();
+        </script>
       {%- elsif section.settings.hero_image != blank -%}
         {{ section.settings.hero_image | image_url: width: 2400 | image_tag:
           widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high',
@@ -172,6 +214,7 @@
   .oc-hero { position: relative; width: 100%; height: calc(var(--oc-hero-h, 92) * 1vh); min-height: 560px; overflow: hidden; background: #2a2520; }
   .oc-hero__media, .oc-hero__media img, .oc-hero__media svg, .oc-hero__media video { width: 100%; height: 100%; object-fit: cover; }
   .oc-hero__media video { display: block; }
+  .oc-hero__media .oc-hero__video--mobile { display: none; }
   .oc-hero__media { opacity: var(--oc-hero-opacity, 0.72); }
   .oc-hero__overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0 24px 80px; text-align: center; }
   .oc-hero__eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
@@ -229,6 +272,8 @@
 
   @media (max-width: 768px) {
     .oc-hero { height: 85vh; }
+    .oc-hero__media .oc-hero__video--desktop { display: none; }
+    .oc-hero__media .oc-hero__video--mobile { display: block; }
     .oc-editorial { grid-template-columns: 1fr; }
     .oc-editorial--right .oc-editorial__image { order: 0; }
     .oc-editorial__image { min-height: 360px; }
@@ -248,7 +293,8 @@
   "name": "Our Craft",
   "settings": [
     { "type": "header", "content": "Hero" },
-    { "type": "video", "id": "hero_video", "label": "Background video", "info": "Upload an .mp4 (Shopify-hosted, max 1 min / 20 MB). Plays muted and looping. If empty, the image below is used." },
+    { "type": "video", "id": "hero_video", "label": "Background video (desktop)", "info": "Landscape .mp4, ideally 1920×1080 (16:9). Shopify-hosted (up to 1 GB / 10 min). Plays muted and looping. Smaller files load faster." },
+    { "type": "video", "id": "hero_video_mobile", "label": "Background video (mobile)", "info": "Portrait .mp4, ideally 1080×1920 (9:16), shown on screens 768px and narrower. Smaller files load faster. If empty, the desktop video is used on mobile too." },
     { "type": "image_picker", "id": "hero_image", "label": "Background image (fallback)" },
     { "type": "range", "id": "hero_opacity", "label": "Media opacity", "min": 20, "max": 100, "step": 4, "unit": "%", "default": 72 },
     { "type": "range", "id": "hero_height", "label": "Height", "min": 50, "max": 100, "step": 5, "unit": "vh", "default": 90 },
