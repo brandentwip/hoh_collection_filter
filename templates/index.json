@@ -124,14 +124,14 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/HOH_Web_Banners_1.jpg",
+        "image_1": "shopify://shop_images/festive_banner_2.jpg",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/4_jpg.jpg",
+        "image_1_mobile": "shopify://shop_images/mobile_banners_1.jpg",
         "media_type_2_mobile": "image",
-        "link": "shopify://collections/tops",
+        "link": "shopify://collections/festive-wedding-guest",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -160,14 +160,14 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/HOH_Web_Banners_2_cc68c55a-bbd3-4828-a889-1e0a282e3787.jpg",
+        "image_1": "shopify://shop_images/denim_banner.jpg",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/3_21259bba-e48f-44c2-ab1a-8d1078eaccf5.jpg",
+        "image_1_mobile": "shopify://shop_images/mobile_banners_3.jpg",
         "media_type_2_mobile": "image",
-        "link": "shopify://collections/best-sellers",
+        "link": "shopify://collections/denim",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -193,6 +193,7 @@
     },
     "hero_RpFJUw": {
       "type": "hero",
+      "disabled": true,
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
@@ -223,6 +224,47 @@
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "1791193164828cce4e": {
+      "type": "_blocks",
+      "blocks": {
+        "gsc_instagram_feed_instafeed_4QBtJY": {
+          "type": "shopify://apps/gsc-instagram-feed/blocks/instafeed/96970b1b-b770-454f-b16b-51f47e1aa4ed",
+          "settings": {
+            "widget_id": "GSC-fySmgcWzeuaKUgR"
+          }
+        }
+      },
+      "block_order": [
+        "gsc_instagram_feed_instafeed_4QBtJY"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -630,47 +672,6 @@
         "padding-block-end": 50
       }
     },
-    "1791193164828cce4e": {
-      "type": "_blocks",
-      "blocks": {
-        "gsc_instagram_feed_instafeed_4QBtJY": {
-          "type": "shopify://apps/gsc-instagram-feed/blocks/instafeed/96970b1b-b770-454f-b16b-51f47e1aa4ed",
-          "settings": {
-            "widget_id": "GSC-fySmgcWzeuaKUgR"
-          }
-        }
-      },
-      "block_order": [
-        "gsc_instagram_feed_instafeed_4QBtJY"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
     "product_list_RwdQT3": {
       "type": "product-list",
       "blocks": {
@@ -872,13 +873,13 @@
     "hero_teN9pW",
     "hero_E7PnYJ",
     "hero_RpFJUw",
+    "1791193164828cce4e",
     "hero_44jQaH",
     "1781006978110da99c",
     "hero_rHXD66",
     "section_cNH79X",
     "hero_Lz6xiF",
     "collection_list_FFV7jq",
-    "1791193164828cce4e",
     "product_list_RwdQT3"
   ]
 }
