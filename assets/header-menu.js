@@ -322,10 +322,15 @@ class HeaderMenu extends Component {
    */
   deactivate(event) {
     if (!(event.target instanceof Element)) return;
+    const isPointerLeaving = event.type === 'pointerleave';
+    if (isPointerLeaving && this.#pinnedItem === this.#state.activeItem) {
+      this.#pinnedItem = null;
+    }
     if (this.#pinnedItem === this.#state.activeItem) return;
 
     const menu = findSubmenu(this.#state.activeItem);
-    const isMovingWithinMenu = event.relatedTarget instanceof Node && menu?.contains(document.activeElement);
+    const isMovingWithinMenu =
+      !isPointerLeaving && event.relatedTarget instanceof Node && menu?.contains(document.activeElement);
     const isMovingToSubmenu =
       event.relatedTarget instanceof Node && event.type === 'blur' && menu?.contains(event.relatedTarget);
     const isMovingToOverflowMenu =
