@@ -201,9 +201,13 @@ class HeaderMenu extends Component {
     const item = link?.closest('.menu-list__list-item');
     if (!link || !item) return;
 
-    if (this.#pinnedItem === item) return;
-
     event.preventDefault();
+    if (this.#pinnedItem === item) {
+      this.#pinnedItem = null;
+      this.#deactivate(item, true);
+      return;
+    }
+
     this.activate({ target: item });
     this.#pinnedItem = item;
   };
