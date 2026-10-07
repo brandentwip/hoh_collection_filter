@@ -110,11 +110,24 @@
                 <ul class="menu-list__submenu-list list-unstyled" role="list">
                   {% for child_link in link.links %}
                     <li>
-                      <a class="menu-list__submenu-link" href="{{ child_link.url }}">
+                      {% assign nested_menu_id = 'NestedMenu-' | append: forloop.parentloop.index | append: '-' | append: forloop.index %}
+                      <a
+                        class="menu-list__submenu-link"
+                        href="{{ child_link.url }}"
+                        {% if child_link.links != blank %}
+                          aria-controls="{{ nested_menu_id }}"
+                          aria-expanded="false"
+                        {% endif %}
+                      >
                         {{- child_link.title -}}
                       </a>
                       {% if child_link.links != blank %}
-                        <ul class="menu-list__submenu-list menu-list__submenu-list--nested list-unstyled" role="list">
+                        <ul
+                          id="{{ nested_menu_id }}"
+                          class="menu-list__submenu-list menu-list__submenu-list--nested list-unstyled"
+                          role="list"
+                          hidden
+                        >
                           {% for grandchild_link in child_link.links %}
                             <li>
                               <a class="menu-list__submenu-link" href="{{ grandchild_link.url }}">
@@ -518,6 +531,10 @@
     gap: var(--padding-2xs);
   }
 
+  .menu-list__submenu-list[hidden] {
+    display: none;
+  }
+
   .menu-list__submenu-list--nested {
     margin-inline-start: var(--padding-md);
     padding-inline-start: var(--padding-sm);
@@ -525,7 +542,10 @@
   }
 
   .menu-list__submenu-link {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--padding-sm);
     padding-block: var(--padding-2xs);
     color: var(--menu-child-font-color);
     font-family: var(--menu-child-font-family);
@@ -536,6 +556,21 @@
     text-decoration: none;
     text-transform: var(--menu-child-font-case);
     white-space: normal;
+  }
+
+  .menu-list__submenu-link[aria-controls]::after {
+    content: '';
+    width: 0.45em;
+    height: 0.45em;
+    flex: 0 0 auto;
+    border-inline-end: 1px solid currentColor;
+    border-block-end: 1px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform var(--animation-speed) var(--animation-easing);
+  }
+
+  .menu-list__submenu-link[aria-expanded='true']::after {
+    transform: rotate(225deg);
   }
 
   .menu-list__submenu-link:hover,

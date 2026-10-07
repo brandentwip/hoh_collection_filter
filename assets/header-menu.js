@@ -175,6 +175,28 @@ class HeaderMenu extends Component {
   #onMenuClick = (event) => {
     if (!(event.target instanceof Element)) return;
 
+    const nestedLink = event.target.closest('.menu-list__submenu-link[aria-controls]');
+    if (nestedLink?.getAttribute('aria-expanded') !== 'true') {
+      if (!nestedLink) return;
+
+      const submenuId = nestedLink.getAttribute('aria-controls');
+      const submenu = submenuId ? this.querySelector(`#${CSS.escape(submenuId)}`) : null;
+      if (!submenu) return;
+
+      event.preventDefault();
+      const dropdown = nestedLink.closest('.menu-list__submenu');
+      dropdown?.querySelectorAll('.menu-list__submenu-link[aria-controls][aria-expanded="true"]').forEach((openLink) => {
+        const openSubmenuId = openLink.getAttribute('aria-controls');
+        const openSubmenu = openSubmenuId ? this.querySelector(`#${CSS.escape(openSubmenuId)}`) : null;
+        if (openSubmenu) openSubmenu.hidden = true;
+        openLink.setAttribute('aria-expanded', 'false');
+      });
+
+      submenu.hidden = false;
+      nestedLink.setAttribute('aria-expanded', 'true');
+      return;
+    }
+
     const link = event.target.closest('.menu-list__link[aria-haspopup="true"]');
     const item = link?.closest('.menu-list__list-item');
     if (!link || !item) return;
@@ -208,6 +230,11 @@ class HeaderMenu extends Component {
    * @param {PointerEvent | FocusEvent} event
    */
   activate = (event) => {
+    if (event.type === 'pointerenter' && event.target instanceof Element) {
+      const hoveredItem = findMenuItem(event.target);
+      if (findSubmenu(hoveredItem)?.classList.contains('menu-list__submenu--dropdown')) return;
+    }
+
     this.dispatchEvent(new MegaMenuHoverEvent());
 
     if (!(event.target instanceof Element) || !this.headerComponent) return;
