@@ -230,11 +230,6 @@ class HeaderMenu extends Component {
    * @param {PointerEvent | FocusEvent} event
    */
   activate = (event) => {
-    if (event.type === 'pointerenter' && event.target instanceof Element) {
-      const hoveredItem = findMenuItem(event.target);
-      if (findSubmenu(hoveredItem)?.classList.contains('menu-list__submenu--dropdown')) return;
-    }
-
     this.dispatchEvent(new MegaMenuHoverEvent());
 
     if (!(event.target instanceof Element) || !this.headerComponent) return;
