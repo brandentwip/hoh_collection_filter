@@ -298,6 +298,20 @@
               },
               "blocks": {}
             },
+            "ai_gen_block_51cdc20_azRYci": {
+              "type": "ai_gen_block_51cdc20",
+              "settings": {
+                "heading": "Delivery estimate",
+                "estimate": "Delivery timing varies by product and location.",
+                "note": "Exact timing depends on your delivery location.",
+                "desktop_width_percent": 100,
+                "background_color": "#FFFFFF",
+                "text_color": "#000000",
+                "icon_color": "#000000",
+                "border_color": "#E6E6E6"
+              },
+              "blocks": {}
+            },
             "divider": {
               "type": "_divider",
               "name": "t:names.divider",
@@ -431,6 +445,7 @@
             "variant_picker",
             "buy_buttons",
             "ai_gen_block_66ab0cf_CByfRj",
+            "ai_gen_block_51cdc20_azRYci",
             "divider",
             "custom_liquid_PHNTn8",
             "accordion_9YXfE6"
