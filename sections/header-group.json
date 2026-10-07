@@ -123,7 +123,7 @@
             "menu": "header-menu-rwmp",
             "color_scheme": "scheme-39baa54a-f600-4c68-b03a-40993d3511af",
             "type_font_primary_size": "0.75rem",
-            "menu_font_style": "inverse",
+            "menu_font_style": "regular",
             "type_font_primary_link": "accent",
             "type_case_primary_link": "uppercase",
             "menu_style": "featured_products",
@@ -132,7 +132,7 @@
             "image_border_radius": 0,
             "navigation_bar": false,
             "color_scheme_navigation_bar": "",
-            "drawer_accordion": false,
+            "drawer_accordion": true,
             "drawer_accordion_expand_first": false,
             "drawer_dividers": false
           },
