@@ -292,23 +292,26 @@
                 "shipping_text": "Free shipping",
                 "exchange_text": "Size exchange available",
                 "cod_text": "Cash on delivery",
-                "text_color": "#1F1F1F",
-                "icon_color": "#2A555A",
-                "border_color": "#D9D9D9"
+                "text_color": "#1f1f1f",
+                "icon_color": "#2a555a",
+                "border_color": "#d9d9d9"
               },
               "blocks": {}
             },
-            "ai_gen_block_51cdc20_azRYci": {
-              "type": "ai_gen_block_51cdc20",
+            "ai_gen_block_1a1f22e_XWCCGJ": {
+              "type": "ai_gen_block_1a1f22e",
               "settings": {
                 "heading": "Delivery estimate",
-                "estimate": "Delivery timing varies by product and location.",
-                "note": "Exact timing depends on your delivery location.",
+                "message": "Made with care and shipped to your door. Delivery timing may vary by location.",
+                "show_dates": true,
+                "date_prefix": "Estimated arrival:",
+                "delivery_start": "7",
+                "delivery_end": "15 days",
+                "date_fallback": "Enter an estimated arrival date in the block settings.",
                 "desktop_width_percent": 100,
-                "background_color": "#FFFFFF",
+                "background_color": "#F5F5F5",
                 "text_color": "#000000",
-                "icon_color": "#000000",
-                "border_color": "#E6E6E6"
+                "border_color": "#D2D2D2"
               },
               "blocks": {}
             },
@@ -445,7 +448,7 @@
             "variant_picker",
             "buy_buttons",
             "ai_gen_block_66ab0cf_CByfRj",
-            "ai_gen_block_51cdc20_azRYci",
+            "ai_gen_block_1a1f22e_XWCCGJ",
             "divider",
             "custom_liquid_PHNTn8",
             "accordion_9YXfE6"
