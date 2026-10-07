@@ -285,6 +285,19 @@
               },
               "block_order": []
             },
+            "ai_gen_block_66ab0cf_CByfRj": {
+              "type": "ai_gen_block_66ab0cf",
+              "settings": {
+                "desktop_width_percent": 100,
+                "shipping_text": "Free shipping",
+                "exchange_text": "Size exchange available",
+                "cod_text": "Cash on delivery",
+                "text_color": "#1F1F1F",
+                "icon_color": "#2A555A",
+                "border_color": "#D9D9D9"
+              },
+              "blocks": {}
+            },
             "divider": {
               "type": "_divider",
               "name": "t:names.divider",
@@ -417,6 +430,7 @@
             "kiwi_size_chart_recommender_kiwi_sizing_fBLyAG",
             "variant_picker",
             "buy_buttons",
+            "ai_gen_block_66ab0cf_CByfRj",
             "divider",
             "custom_liquid_PHNTn8",
             "accordion_9YXfE6"
