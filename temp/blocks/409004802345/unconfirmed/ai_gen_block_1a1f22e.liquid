@@ -1,0 +1,159 @@
+{% doc %}
+  @prompt
+    Add delivery estimate
+    No “ships in X days” or arrival date anywhere. Uncertainty blocks at this price. "can this app be created"
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-delivery-estimate-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 16px 18px;
+    border: 1px solid {{ block.settings.border_color }};
+    background: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    font-family: inherit;
+  }
+
+  .ai-delivery-estimate-{{ ai_gen_id }}__heading {
+    margin: 0 0 6px;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .ai-delivery-estimate-{{ ai_gen_id }}__copy {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .ai-delivery-estimate-{{ ai_gen_id }}__dates {
+    display: block;
+    margin-top: 5px;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-delivery-estimate-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-delivery-estimate-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.heading != blank %}
+    <p class="ai-delivery-estimate-{{ ai_gen_id }}__heading">{{ block.settings.heading | escape }}</p>
+  {% endif %}
+  {% if block.settings.message != blank %}
+    <p class="ai-delivery-estimate-{{ ai_gen_id }}__copy">{{ block.settings.message | escape }}</p>
+  {% endif %}
+  {% if block.settings.show_dates %}
+    <span class="ai-delivery-estimate-{{ ai_gen_id }}__dates">
+      {% if block.settings.delivery_start != blank and block.settings.delivery_end != blank %}
+        {{ block.settings.date_prefix | escape }} {{ block.settings.delivery_start | escape }} – {{ block.settings.delivery_end | escape }}
+      {% elsif block.settings.delivery_start != blank %}
+        {{ block.settings.date_prefix | escape }} {{ block.settings.delivery_start | escape }}
+      {% else %}
+        {{ block.settings.date_fallback | escape }}
+      {% endif %}
+    </span>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Delivery estimate",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Delivery details"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Delivery estimate"
+    },
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Message",
+      "default": "Made with care and shipped to your door. Delivery timing may vary by location."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dates",
+      "label": "Show estimated dates",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "date_prefix",
+      "label": "Date label",
+      "default": "Estimated arrival:"
+    },
+    {
+      "type": "text",
+      "id": "delivery_start",
+      "label": "Start date",
+      "info": "Enter a date or date range as text; update it when your estimate changes."
+    },
+    {
+      "type": "text",
+      "id": "delivery_end",
+      "label": "End date"
+    },
+    {
+      "type": "text",
+      "id": "date_fallback",
+      "label": "When no dates are entered",
+      "default": "Enter an estimated arrival date in the block settings."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#D2D2D2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Delivery estimate"
+    }
+  ],
+  "tag": null,
+  "class": "delivery-estimate-block"
+}
+{% endschema %}
