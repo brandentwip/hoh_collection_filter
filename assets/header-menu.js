@@ -27,12 +27,18 @@ class HeaderMenu extends Component {
 
     onDocumentLoaded(this.#preloadImages);
     window.addEventListener('resize', this.#resizeListener);
+    document.addEventListener('pointerdown', this.#onDocumentPointerDown);
+    document.addEventListener('keydown', this.#onDocumentKeydown);
+    this.addEventListener('click', this.#onMenuClick);
     this.overflowMenu?.addEventListener('pointerleave', this.#overflowSubmenuListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('resize', this.#resizeListener);
+    document.removeEventListener('pointerdown', this.#onDocumentPointerDown);
+    document.removeEventListener('keydown', this.#onDocumentKeydown);
+    this.removeEventListener('click', this.#onMenuClick);
     document.body.removeEventListener('pointermove', this.#onPointerMove);
     if (this.#state.activeItem) {
       this.#stopPointerTracking(this.#state.activeItem);
@@ -58,6 +64,11 @@ class HeaderMenu extends Component {
   #state = {
     activeItem: null,
   };
+
+  /**
+   * @type {HTMLElement | null}
+   */
+  #pinnedItem = null;
 
   /**
    * @type {ReturnType<typeof setTimeout> | undefined}
@@ -161,6 +172,37 @@ class HeaderMenu extends Component {
     return /** @type {HTMLElement | null} */ (this.closest('header-component'));
   }
 
+  #onMenuClick = (event) => {
+    if (!(event.target instanceof Element)) return;
+
+    const link = event.target.closest('.menu-list__link[aria-haspopup="true"]');
+    const item = link?.closest('.menu-list__list-item');
+    if (!link || !item) return;
+
+    if (this.#pinnedItem === item) return;
+
+    event.preventDefault();
+    this.activate({ target: item });
+    this.#pinnedItem = item;
+  };
+
+  #onDocumentPointerDown = (event) => {
+    if (!this.#pinnedItem || !(event.target instanceof Node) || this.contains(event.target)) return;
+
+    this.#pinnedItem = null;
+    this.#deactivate(this.#state.activeItem, true);
+  };
+
+  #onDocumentKeydown = (event) => {
+    if (event.key !== 'Escape' || !this.#state.activeItem) return;
+
+    event.preventDefault();
+    const activeItem = this.#state.activeItem;
+    this.#pinnedItem = null;
+    this.#deactivate(activeItem, true);
+    activeItem.querySelector('[ref="menuitem"]')?.focus();
+  };
+
   /**
    * Activate the selected menu item immediately
    * @param {PointerEvent | FocusEvent} event
@@ -182,6 +224,9 @@ class HeaderMenu extends Component {
 
     if (previouslyActiveItem) {
       previouslyActiveItem.ariaExpanded = 'false';
+      if (previouslyActiveItem !== item) {
+        this.#pinnedItem = null;
+      }
     }
 
     this.#state.activeItem = item;
@@ -255,6 +300,7 @@ class HeaderMenu extends Component {
    */
   deactivate(event) {
     if (!(event.target instanceof Element)) return;
+    if (this.#pinnedItem === this.#state.activeItem) return;
 
     const menu = findSubmenu(this.#state.activeItem);
     const isMovingWithinMenu = event.relatedTarget instanceof Node && menu?.contains(document.activeElement);
@@ -277,11 +323,12 @@ class HeaderMenu extends Component {
    * Deactivate the active item immediately
    * @param {HTMLElement | null} [item]
    */
-  #deactivate = (item = this.#state.activeItem) => {
+  #deactivate = (item = this.#state.activeItem, force = false) => {
     if (!item || item != this.#state.activeItem) return;
+    if (this.#pinnedItem === item) return;
 
     // Don't deactivate if the overflow menu or overflow list is still being hovered
-    if (this.overflowListHovered || this.overflowMenu?.matches(':hover')) return;
+    if (!force && (this.overflowListHovered || this.overflowMenu?.matches(':hover'))) return;
 
     this.headerComponent?.style.setProperty('--submenu-height', '0px');
     this.#setFullOpenHeaderHeight(0);
