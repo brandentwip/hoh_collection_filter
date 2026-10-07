@@ -58,9 +58,6 @@
     {% endif %}
   {% else %}
     {% liquid
-      assign block_settings = block.settings
-      assign menu_content_type = block_settings.menu_style | default: 'text'
-      assign image_border_radius = block_settings.image_border_radius
       assign color_scheme_classes = ''
       assign color_scheme_setting_id = 'color_scheme_' | append: section.settings.menu_row
       assign current_color_scheme = block_settings.color_scheme
@@ -75,11 +72,6 @@
         assign color_scheme_classes = color_scheme_classes | append: ' color-scheme-matches-parent'
       endif
 
-      if block_settings.menu_style == 'featured_collections'
-        assign ratio = block_settings.featured_collections_aspect_ratio
-      elsif block_settings.menu_style == 'featured_products'
-        assign ratio = block_settings.featured_products_aspect_ratio
-      endif
     %}
 
     {% capture children %}
@@ -109,31 +101,32 @@
             <span class="menu-list__link-title">{{- link.title -}}</span>
           </a>
           {%- if link.links != blank -%}
-            <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
+            <div class="menu-list__submenu menu-list__submenu--dropdown{{ color_scheme_classes }}" ref="submenu[]">
               <div
                 id="submenu-{{ forloop.index }}"
                 class="menu-list__submenu-inner"
                 style="{% render 'submenu-font-styles', settings: block_settings %}"
               >
-                {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
-                <div class="mega-menu section section--full-width-margin section--{{ section.settings.section_width }}">
-                  <div
-                    class="mega-menu__grid"
-                    data-menu-grid-id="{{ list_id }}"
-                  >
-                    {% render 'mega-menu-list',
-                      parent_link: link,
-                      id: list_id,
-                      section: section,
-                      grid_columns_count: 6,
-                      grid_columns_count_tablet: 4,
-                      grid_columns_count_collection_images: 8,
-                      menu_content_type: menu_content_type,
-                      content_aspect_ratio: ratio,
-                      image_border_radius: image_border_radius
-                    %}
-                  </div>
-                </div>
+                <ul class="menu-list__submenu-list list-unstyled" role="list">
+                  {% for child_link in link.links %}
+                    <li>
+                      <a class="menu-list__submenu-link" href="{{ child_link.url }}">
+                        {{- child_link.title -}}
+                      </a>
+                      {% if child_link.links != blank %}
+                        <ul class="menu-list__submenu-list menu-list__submenu-list--nested list-unstyled" role="list">
+                          {% for grandchild_link in child_link.links %}
+                            <li>
+                              <a class="menu-list__submenu-link" href="{{ grandchild_link.url }}">
+                                {{- grandchild_link.title -}}
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
               </div>
             </div>
           {%- endif -%}
@@ -325,6 +318,7 @@
 
   .menu-list__list-item:not([slot='overflow']) {
     flex-direction: column;
+    position: relative;
   }
   .menu-list__list-item:not([slot='overflow'])::after {
     content: '';
@@ -499,6 +493,54 @@
     overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: rgb(var(--color-foreground-rgb) / var(--opacity-40)) transparent;
+  }
+
+  .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__submenu--dropdown {
+    top: 100%;
+    left: 0;
+    width: max-content;
+    min-width: 220px;
+    max-width: min(320px, calc(100vw - var(--padding-inline) - var(--padding-inline)));
+    padding-inline: 0;
+    clip-path: none;
+    transition: none;
+    background-color: var(--color-background);
+    box-shadow: var(--shadow-popover);
+  }
+
+  .menu-list__submenu--dropdown .menu-list__submenu-inner {
+    padding: var(--padding-sm) var(--padding-md);
+    transform: none;
+  }
+
+  .menu-list__submenu-list {
+    display: grid;
+    gap: var(--padding-2xs);
+  }
+
+  .menu-list__submenu-list--nested {
+    margin-inline-start: var(--padding-md);
+    padding-inline-start: var(--padding-sm);
+    border-inline-start: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-20));
+  }
+
+  .menu-list__submenu-link {
+    display: block;
+    padding-block: var(--padding-2xs);
+    color: var(--menu-child-font-color);
+    font-family: var(--menu-child-font-family);
+    font-size: var(--menu-child-font-size);
+    font-style: var(--menu-child-font-style);
+    font-weight: var(--menu-child-font-weight);
+    line-height: var(--menu-child-font-line-height);
+    text-decoration: none;
+    text-transform: var(--menu-child-font-case);
+    white-space: normal;
+  }
+
+  .menu-list__submenu-link:hover,
+  .menu-list__submenu-link:focus-visible {
+    color: var(--menu-child-active-font-color);
   }
 
   .mega-menu__link {
@@ -795,88 +837,6 @@
         }
       ],
       "default": "none"
-    },
-    {
-      "type": "header",
-      "content": "t:content.submenu_feature"
-    },
-    {
-      "type": "select",
-      "id": "menu_style",
-      "label": "t:settings.media_type",
-      "info": "t:info.media_type_info",
-      "options": [
-        {
-          "value": "text",
-          "label": "t:options.none"
-        },
-        {
-          "value": "collection_images",
-          "label": "t:options.collection_images"
-        },
-        {
-          "value": "featured_products",
-          "label": "t:options.featured_products"
-        },
-        {
-          "value": "featured_collections",
-          "label": "t:options.featured_collections"
-        }
-      ],
-      "default": "collection_images"
-    },
-    {
-      "type": "select",
-      "id": "featured_products_aspect_ratio",
-      "label": "t:settings.image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:options.auto"
-        },
-        {
-          "value": "4 / 5",
-          "label": "t:options.portrait"
-        },
-        {
-          "value": "1 / 1",
-          "label": "t:options.square"
-        }
-      ],
-      "default": "4 / 5",
-      "visible_if": "{{ block.settings.menu_style == 'featured_products' }}"
-    },
-    {
-      "type": "select",
-      "id": "featured_collections_aspect_ratio",
-      "label": "t:settings.image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:options.auto"
-        },
-        {
-          "value": "16 / 9",
-          "label": "t:options.landscape"
-        },
-        {
-          "value": "1 / 1",
-          "label": "t:options.square"
-        }
-      ],
-      "default": "16 / 9",
-      "visible_if": "{{ block.settings.menu_style == 'featured_collections' }}"
-    },
-    {
-      "type": "range",
-      "id": "image_border_radius",
-      "label": "t:settings.image_border_radius",
-      "min": 0,
-      "max": 32,
-      "step": 1,
-      "unit": "px",
-      "default": 0,
-      "visible_if": "{{ block.settings.menu_style != 'text' }}"
     },
     {
       "type": "header",

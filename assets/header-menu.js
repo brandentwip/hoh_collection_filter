@@ -242,8 +242,9 @@ class HeaderMenu extends Component {
       finalHeight = 0;
     }
 
-    this.headerComponent.style.setProperty('--submenu-height', `${finalHeight}px`);
-    this.#setFullOpenHeaderHeight(finalHeight);
+    const isDropdown = isDefaultSlot && submenu?.classList.contains('menu-list__submenu--dropdown');
+    this.headerComponent.style.setProperty('--submenu-height', isDropdown ? '0px' : `${finalHeight}px`);
+    this.#setFullOpenHeaderHeight(isDropdown ? 0 : finalHeight);
     this.style.setProperty('--submenu-opacity', '1');
     this.#startPointerTracking(item, previouslyActiveItem);
   };
