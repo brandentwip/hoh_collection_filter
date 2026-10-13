@@ -302,7 +302,7 @@
               "type": "ai_gen_block_1a1f22e",
               "settings": {
                 "heading": "Delivery estimate",
-                "message": "Each piece is cut, embroidered and finished by hand after you order — that time is already included.",
+                "message": "Each piece is cut, embroidered and finished by hand after you order  that time is already included.",
                 "show_dates": true,
                 "date_prefix": "Estimated arrival:",
                 "delivery_start": "5",
