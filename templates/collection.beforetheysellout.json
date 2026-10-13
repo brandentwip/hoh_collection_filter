@@ -173,6 +173,7 @@
         "text_Cd8f9A",
         "group_R9PV3V"
       ],
+      "disabled": true,
       "name": "Collection heading",
       "settings": {
         "content_direction": "row",
