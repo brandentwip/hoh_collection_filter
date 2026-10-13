@@ -291,7 +291,7 @@
                 "desktop_width_percent": 100,
                 "shipping_text": "Free shipping",
                 "exchange_text": "Size exchange available",
-                "cod_text": "Cash on delivery",
+                "cod_text": "Cash on delivery in most pincodes",
                 "text_color": "#1f1f1f",
                 "icon_color": "#2a555a",
                 "border_color": "#d9d9d9"
@@ -302,16 +302,16 @@
               "type": "ai_gen_block_1a1f22e",
               "settings": {
                 "heading": "Delivery estimate",
-                "message": "Made with care and shipped to your door. Delivery timing may vary by location.",
+                "message": "Each piece is cut, embroidered and finished by hand after you order — that time is already included.",
                 "show_dates": true,
                 "date_prefix": "Estimated arrival:",
-                "delivery_start": "3",
-                "delivery_end": "7 days",
+                "delivery_start": "5",
+                "delivery_end": "8 days",
                 "date_fallback": "Enter an estimated arrival date in the block settings.",
                 "desktop_width_percent": 100,
-                "background_color": "#F5F5F5",
+                "background_color": "#f5f5f5",
                 "text_color": "#000000",
-                "border_color": "#D2D2D2"
+                "border_color": "#d2d2d2"
               },
               "blocks": {}
             },
