@@ -237,6 +237,19 @@
                 "waitForElementDelay": 5
               }
             },
+            "ai_gen_block_a418b58_mfeVdz": {
+              "type": "ai_gen_block_a418b58",
+              "settings": {
+                "clearance_collection": "clear",
+                "heading": "Clearance item",
+                "message": "No returns, exchanges, or customisation apply to clearance items.",
+                "desktop_width_percent": 100,
+                "background_color": "#F2E9E4",
+                "text_color": "#3D2922",
+                "border_color": "#8A6253"
+              },
+              "blocks": {}
+            },
             "variant_picker": {
               "type": "variant-picker",
               "settings": {
@@ -312,19 +325,6 @@
                 "background_color": "#f5f5f5",
                 "text_color": "#000000",
                 "border_color": "#d2d2d2"
-              },
-              "blocks": {}
-            },
-            "ai_gen_block_a418b58_mfeVdz": {
-              "type": "ai_gen_block_a418b58",
-              "settings": {
-                "clearance_collection": "clear",
-                "heading": "Clearance item",
-                "message": "No returns, exchanges, or customisation apply to clearance items.",
-                "desktop_width_percent": 100,
-                "background_color": "#F2E9E4",
-                "text_color": "#3D2922",
-                "border_color": "#8A6253"
               },
               "blocks": {}
             },
@@ -458,11 +458,11 @@
           "block_order": [
             "group",
             "kiwi_size_chart_recommender_kiwi_sizing_fBLyAG",
+            "ai_gen_block_a418b58_mfeVdz",
             "variant_picker",
             "buy_buttons",
             "ai_gen_block_66ab0cf_CByfRj",
             "ai_gen_block_1a1f22e_XWCCGJ",
-            "ai_gen_block_a418b58_mfeVdz",
             "divider",
             "custom_liquid_PHNTn8",
             "accordion_9YXfE6"
