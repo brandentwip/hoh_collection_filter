@@ -77,6 +77,19 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "ai_gen_block_a418b58_p4MA4j": {
+              "type": "ai_gen_block_a418b58",
+              "settings": {
+                "clearance_collection": "clear",
+                "heading": "Clearance item",
+                "message": "No returns, exchanges, or customisation apply to clearance items.",
+                "desktop_width_percent": 100,
+                "background_color": "#F2E9E4",
+                "text_color": "#3D2922",
+                "border_color": "#8A6253"
+              },
+              "blocks": {}
+            },
             "group": {
               "type": "group",
               "name": "Header",
@@ -443,6 +456,7 @@
             }
           },
           "block_order": [
+            "ai_gen_block_a418b58_p4MA4j",
             "group",
             "kiwi_size_chart_recommender_kiwi_sizing_fBLyAG",
             "variant_picker",
