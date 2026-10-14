@@ -71,9 +71,9 @@
             "heading": "Clearance sale notice",
             "message": "No returns, exchanges, or customisation apply to clearance items.",
             "desktop_width_percent": 100,
-            "background_color": "#FCFAF6",
-            "text_color": "#FF0000",
-            "border_color": "#C8B99F"
+            "background_color": "#fcfaf6",
+            "text_color": "#ff0000",
+            "border_color": "#c8b99f"
           },
           "blocks": {}
         }
@@ -430,7 +430,8 @@
         }
       },
       "custom_css": [
-        ".product-badges__badge {font-size: 8px; display: none;}"
+        ".product-badges__badge {font-size: 8px; display: none;}",
+        "swatches-variant-picker-component {display: none;}"
       ],
       "settings": {
         "layout_type": "grid",
