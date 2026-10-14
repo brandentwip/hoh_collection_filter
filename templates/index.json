@@ -845,6 +845,9 @@
           ]
         }
       },
+      "custom_css": [
+        ".product-badges__badge {font-size: 8px; display: none;}"
+      ],
       "name": "t:names.products_carousel",
       "settings": {
         "collection": "best-sellers",
