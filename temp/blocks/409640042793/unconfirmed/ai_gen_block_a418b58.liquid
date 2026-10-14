@@ -1,0 +1,108 @@
+{% doc %}
+  @prompt
+    "ADD A BADGE OR HIGHLIGHT - SAYING NO RETURN / EXCHANGE / CUSTOMISATION APPLY ON CLEARANCE"  This badge should be visible if the product is from clearance sale	"https://www.hausofhandmade.com/collections/clear"					
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% assign clearance_collection = collections[block.settings.clearance_collection] %}
+{% assign is_clearance_product = false %}
+{% if product and clearance_collection %}
+  {% for clearance_product in clearance_collection.products %}
+    {% if clearance_product.id == product.id %}
+      {% assign is_clearance_product = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% style %}
+  .ai-clearance-notice-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    border: 1px solid {{ block.settings.border_color }};
+    background: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .ai-clearance-notice-{{ ai_gen_id }}__title {
+    display: block;
+    margin: 0 0 3px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .ai-clearance-notice-{{ ai_gen_id }}__message { margin: 0; }
+{% endstyle %}
+
+{% if is_clearance_product %}
+  <div class="ai-clearance-notice-{{ ai_gen_id }}" role="note" {{ block.shopify_attributes }}>
+    <strong class="ai-clearance-notice-{{ ai_gen_id }}__title">{{ block.settings.heading | escape }}</strong>
+    <p class="ai-clearance-notice-{{ ai_gen_id }}__message">{{ block.settings.message | escape }}</p>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Clearance policy notice",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "clearance_collection",
+      "label": "Clearance collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Clearance item"
+    },
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "Policy message",
+      "default": "No returns, exchanges, or customisation apply to clearance items."
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#F2E9E4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#3D2922"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#8A6253"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Clearance policy notice"
+    }
+  ],
+  "tag": null,
+  "class": "clearance-policy-notice"
+}
+{% endschema %}
