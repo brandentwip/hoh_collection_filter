@@ -12,6 +12,10 @@ import { debounce, isClickedOutside, onAnimationEnd } from '@theme/utilities';
 export class DialogComponent extends Component {
   requiredRefs = ['dialog'];
 
+  get dialogElement() {
+    return this.refs.dialog;
+  }
+
   connectedCallback() {
     super.connectedCallback();
 
@@ -44,7 +48,7 @@ export class DialogComponent extends Component {
    * Shows the dialog.
    */
   showDialog() {
-    const { dialog } = this.refs;
+    const dialog = this.dialogElement;
 
     if (dialog.open) return;
 
@@ -69,7 +73,7 @@ export class DialogComponent extends Component {
    * Closes the dialog.
    */
   closeDialog = async () => {
-    const { dialog } = this.refs;
+    const dialog = this.dialogElement;
 
     if (!dialog.open) return;
 
@@ -106,7 +110,7 @@ export class DialogComponent extends Component {
    * Toggles the dialog.
    */
   toggleDialog = () => {
-    if (this.refs.dialog.open) {
+    if (this.dialogElement.open) {
       this.closeDialog();
     } else {
       this.showDialog();
@@ -119,7 +123,7 @@ export class DialogComponent extends Component {
    * @param {MouseEvent} event - The mouse event.
    */
   #handleClick(event) {
-    const { dialog } = this.refs;
+    const dialog = this.dialogElement;
 
     if (isClickedOutside(event, dialog)) {
       this.closeDialog();

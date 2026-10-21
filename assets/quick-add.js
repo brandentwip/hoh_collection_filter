@@ -149,14 +149,13 @@ export class QuickAddComponent extends Component {
     const dialogComponent = document.getElementById('quick-add-dialog');
     if (!(dialogComponent instanceof QuickAddDialog)) return;
 
-    dialogComponent.refs.dialog.classList.remove('quick-add-modal--force-hidden');
     this.#stayVisibleUntilDialogCloses(dialogComponent);
 
     dialogComponent.showDialog();
 
     // is nondeterministic when the open attribute is set on the dialog element after .showDialog() is called.
     // Waiting until the open animation starts seemed to be the most reliable metric here.
-    const dialog = dialogComponent.refs?.dialog;
+    const dialog = dialogComponent.dialogElement;
     if (!dialog) return;
     dialog.addEventListener('animationstart', this.#resetScroll.bind(this), { once: true });
   };
@@ -281,7 +280,13 @@ if (!customElements.get('quick-add-component')) {
 }
 
 class QuickAddDialog extends DialogComponent {
+  requiredRefs = ['quickAddDialog'];
+
   #abortController = new AbortController();
+
+  get dialogElement() {
+    return this.refs.quickAddDialog;
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -358,7 +363,6 @@ class QuickAddDialog extends DialogComponent {
 
     event.preventDefault();
     event.stopPropagation();
-    this.refs.dialog.classList.add('quick-add-modal--force-hidden');
     this.closeDialog().catch((error) => console.error('Failed to close quick view:', error));
   };
 }
