@@ -294,7 +294,7 @@ class QuickAddDialog extends DialogComponent {
     this.addEventListener(ThemeEvents.cartUpdate, this.handleCartUpdate, { signal: this.#abortController.signal });
     this.addEventListener(ThemeEvents.variantUpdate, this.#updateProductTitleLink);
     this.addEventListener(DialogCloseEvent.eventName, this.#handleDialogClose);
-    this.refs.closeButton.addEventListener('click', this.#handleCloseButtonClick);
+    this.addEventListener('click', this.#handleCloseButtonClick, true);
   }
 
   disconnectedCallback() {
@@ -303,7 +303,7 @@ class QuickAddDialog extends DialogComponent {
     mediaQueryLarge.removeEventListener('change', this.#closeQuickAddModal);
     this.#abortController.abort();
     this.removeEventListener(DialogCloseEvent.eventName, this.#handleDialogClose);
-    this.refs.closeButton.removeEventListener('click', this.#handleCloseButtonClick);
+    this.removeEventListener('click', this.#handleCloseButtonClick, true);
   }
 
   /**
@@ -354,9 +354,12 @@ class QuickAddDialog extends DialogComponent {
   };
 
   #handleCloseButtonClick = (event) => {
+    if (!(event.target instanceof Element) || !event.target.closest('.quick-add-modal__close')) return;
+
     event.preventDefault();
+    event.stopPropagation();
     this.refs.dialog.classList.add('quick-add-modal--force-hidden');
-    this.closeDialog();
+    this.closeDialog().catch((error) => console.error('Failed to close quick view:', error));
   };
 }
 
