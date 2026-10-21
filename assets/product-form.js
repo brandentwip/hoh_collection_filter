@@ -271,6 +271,9 @@ class ProductFormComponent extends Component {
     // Skip if this event came from this component
     if (event.detail?.sourceId === this.id || event.detail?.data?.source === 'product-form-component') return;
 
+    // Product-card quick-add forms have no quantity selector to synchronize.
+    if (!this.refs.quantitySelector) return;
+
     const cart = /** @type {Cart} */ (event.detail?.resource);
     if (cart?.items) {
       this.#updateCartQuantityFromData(cart);
@@ -466,8 +469,8 @@ class ProductFormComponent extends Component {
             }, SUCCESS_MESSAGE_DISPLAY_DURATION);
           }
 
-          // Fetch the updated cart to get the actual total quantity for this variant
-          const cart = await this.#fetchAndUpdateCartQuantity();
+          // Card quick-add forms have no quantity selector that needs the full cart state.
+          const cart = this.refs.quantitySelector ? await this.#fetchAndUpdateCartQuantity() : null;
 
           this.dispatchEvent(
             new CartAddEvent(cart ?? undefined, id.toString(), {
