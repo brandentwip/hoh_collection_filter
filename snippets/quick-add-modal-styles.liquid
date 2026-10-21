@@ -20,6 +20,7 @@
 
   .quick-add-modal {
     padding: 0;
+    background-color: var(--color-background);
     border: var(--style-border-popover);
     overflow: hidden;
     box-shadow: 0 5px 30px rgb(0 0 0 / var(--opacity-15));
@@ -32,6 +33,21 @@
       border-radius: 0;
       overflow: clip;
       height: fit-content;
+    }
+  }
+
+  .quick-add-modal::backdrop {
+    background-color: rgb(12 16 20 / 0.38);
+  }
+
+  @supports (backdrop-filter: blur(1px)) {
+    .quick-add-modal {
+      background-color: color-mix(in srgb, var(--color-background) 88%, transparent);
+      backdrop-filter: blur(18px) saturate(140%);
+    }
+
+    .quick-add-modal::backdrop {
+      backdrop-filter: blur(5px);
     }
   }
 
@@ -63,13 +79,29 @@
   }
 
   .quick-add-modal__close {
+    display: grid;
+    place-items: center;
     position: absolute;
-    top: var(--margin-2xs);
-    right: var(--margin-2xs);
+    top: var(--padding-sm);
+    right: var(--padding-sm);
+    width: 44px;
+    height: 44px;
     transition: transform 0.15s var(--animation-timing-bounce);
-    z-index: var(--layer-raised);
+    z-index: var(--layer-window-overlay);
     overflow: visible;
     transform-origin: center;
+    border: 1px solid rgb(255 255 255 / 0.28);
+    border-radius: 50%;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    box-shadow: 0 2px 12px rgb(0 0 0 / 0.12);
+  }
+
+  @supports (backdrop-filter: blur(1px)) {
+    .quick-add-modal__close {
+      background-color: color-mix(in srgb, var(--color-background) 72%, transparent);
+      backdrop-filter: blur(12px) saturate(145%);
+    }
   }
 
   .quick-add-modal__close:active {
@@ -85,7 +117,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: calc(var(--style-border-radius-popover) - var(--margin-2xs));
+      border-radius: 50%;
       outline: var(--focus-outline-width) solid currentColor;
     }
   }
