@@ -293,6 +293,7 @@ class QuickAddDialog extends DialogComponent {
     this.addEventListener(ThemeEvents.cartUpdate, this.handleCartUpdate, { signal: this.#abortController.signal });
     this.addEventListener(ThemeEvents.variantUpdate, this.#updateProductTitleLink);
     this.addEventListener(DialogCloseEvent.eventName, this.#handleDialogClose);
+    this.addEventListener('click', this.#handleCloseButtonClick);
   }
 
   disconnectedCallback() {
@@ -301,6 +302,7 @@ class QuickAddDialog extends DialogComponent {
     mediaQueryLarge.removeEventListener('change', this.#closeQuickAddModal);
     this.#abortController.abort();
     this.removeEventListener(DialogCloseEvent.eventName, this.#handleDialogClose);
+    this.removeEventListener('click', this.#handleCloseButtonClick);
   }
 
   /**
@@ -347,6 +349,13 @@ class QuickAddDialog extends DialogComponent {
   };
 
   #closeQuickAddModal = () => {
+    this.closeDialog();
+  };
+
+  #handleCloseButtonClick = (event) => {
+    if (!(event.target instanceof Element) || !event.target.closest('.quick-add-modal__close')) return;
+
+    event.preventDefault();
     this.closeDialog();
   };
 }

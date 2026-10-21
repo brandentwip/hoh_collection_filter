@@ -67,7 +67,7 @@
     top: var(--margin-2xs);
     right: var(--margin-2xs);
     transition: transform 0.15s var(--animation-timing-bounce);
-    z-index: var(--layer-raised);
+    z-index: calc(infinity);
     overflow: visible;
     transform-origin: center;
   }
@@ -293,6 +293,7 @@
   .quick-add-modal__content .product-details :is(.view-product-title, .buy-buttons-block) {
     flex: 0 0 auto;
   }
+
   .quick-add-modal__content .product-details :is(.buy-buttons-block) {
     margin-top: auto;
     position: sticky;
