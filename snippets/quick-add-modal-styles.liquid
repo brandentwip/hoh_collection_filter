@@ -35,6 +35,10 @@
     }
   }
 
+  .quick-add-modal.quick-add-modal--force-hidden {
+    display: none !important;
+  }
+
   .quick-add-modal[open] {
     @media screen and (max-width: 750px) {
       border-top-left-radius: var(--style-border-radius-popover);
@@ -67,7 +71,7 @@
     top: var(--margin-2xs);
     right: var(--margin-2xs);
     transition: transform 0.15s var(--animation-timing-bounce);
-    z-index: calc(infinity);
+    z-index: 2147483647;
     overflow: visible;
     transform-origin: center;
   }
