@@ -966,7 +966,7 @@
     "mobile_height": "Mobile height",
     "mobile_logo_image": "Mobile logo",
     "mobile_pagination": "Mobile pagination",
-    "mobile_quick_add": "Mobile quick add",
+    "mobile_quick_add": "Quick view on mobile",
     "motion": "Motion",
     "motion_direction": "Motion direction",
     "movement_direction": "Movement direction",
@@ -1044,10 +1044,11 @@
       "input_preset": "Input",
       "checkbox_preset": "Checkbox label"
     },
-    // Checkbox setting to enable quick add to cart from product cards
-    "quick_add": "Quick add",
-    // Color scheme for quick add buttons on product cards
-    "quick_add_colors": "Quick add colors",
+    // Checkbox setting to enable quick view from product cards
+    "quick_add": "Quick view on desktop",
+    // Color scheme for quick view buttons on product cards
+    "quick_add_colors": "Quick view button colors",
+    "quick_add_modal_colors": "Quick view modal colors",
     "ratio": "Ratio",
     "read_only": "Read only",
     "reflection_opacity": "Reflection opacity",

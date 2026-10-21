@@ -113,6 +113,35 @@
     }
   }
 
+  .quick-add-modal__content[aria-busy='true'] {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    min-height: 12rem;
+  }
+
+  .quick-add-modal__loading {
+    width: 2rem;
+    height: 2rem;
+    place-self: center;
+    border: 2px solid currentColor;
+    border-inline-end-color: transparent;
+    border-radius: 50%;
+    animation: quick-view-loading 0.75s linear infinite;
+  }
+
+  @keyframes quick-view-loading {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quick-add-modal__loading {
+      animation: none;
+      border-inline-end-color: currentColor;
+    }
+  }
+
   .quick-add-modal__content .media-gallery--grid .media-gallery__grid {
     grid-template-columns: 1fr;
   }

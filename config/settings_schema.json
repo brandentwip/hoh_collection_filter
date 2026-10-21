@@ -2078,15 +2078,21 @@
         "type": "checkbox",
         "id": "mobile_quick_add",
         "label": "t:settings.mobile_quick_add",
-        "default": false,
-        "visible_if": "{{ settings.quick_add == true }}"
+        "default": false
       },
       {
         "type": "color_scheme",
         "id": "quick_add_color_scheme",
         "label": "t:settings.quick_add_colors",
         "default": "scheme-1",
-        "visible_if": "{{ settings.quick_add == true }}"
+        "visible_if": "{{ settings.quick_add == true or settings.mobile_quick_add == true }}"
+      },
+      {
+        "type": "color_scheme",
+        "id": "quick_add_modal_color_scheme",
+        "label": "t:settings.quick_add_modal_colors",
+        "default": "scheme-1",
+        "visible_if": "{{ settings.quick_add == true or settings.mobile_quick_add == true }}"
       },
       {
         "type": "header",

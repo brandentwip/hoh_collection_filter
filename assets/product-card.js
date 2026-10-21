@@ -1,7 +1,7 @@
 import { OverflowList } from '@theme/overflow-list';
 import VariantPicker from '@theme/variant-picker';
 import { Component } from '@theme/component';
-import { debounce, isDesktopBreakpoint, mediaQueryLarge, yieldToMainThread } from '@theme/utilities';
+import { debounce, yieldToMainThread } from '@theme/utilities';
 import { ThemeEvents, VariantSelectedEvent, VariantUpdateEvent, SlideshowSelectEvent } from '@theme/events';
 import { morph } from '@theme/morph';
 
@@ -97,17 +97,12 @@ if (!customElements.get('product-card-link')) {
  * @typedef {object} ProductCardRefs
  * @property {HTMLAnchorElement} productCardLink - The product card link element.
  * @property {import('slideshow').Slideshow} [slideshow] - The slideshow component.
- * @property {import('quick-add').QuickAddComponent} [quickAdd] - The quick add component.
  * @property {HTMLElement} [cardGallery] - The card gallery component.
  * @property {HTMLImageElement[]} [imagesToTransition] - The images to transition.
  * @extends {ProductCardLink<ProductCardRefs>}
  */
 export class ProductCard extends ProductCardLink {
   requiredRefs = ['productCardLink'];
-
-  get productPageUrl() {
-    return this.refs.productCardLink.href;
-  }
 
   /**
    * Gets the currently selected variant ID from the product card
@@ -128,10 +123,6 @@ export class ProductCard extends ProductCardLink {
   getProductCardLink() {
     return this.refs.productCardLink || null;
   }
-
-  #fetchProductPageHandler = () => {
-    this.refs.quickAdd?.fetchProductPage(this.productPageUrl);
-  };
 
   /**
    * Navigates to a URL link. Respects modifier keys for opening in new tab/window.
@@ -157,12 +148,9 @@ export class ProductCard extends ProductCardLink {
 
     const link = this.refs.productCardLink;
     if (!(link instanceof HTMLAnchorElement)) throw new Error('Product card link not found');
-    this.#handleQuickAdd();
-
     this.addEventListener(ThemeEvents.variantUpdate, this.#handleVariantUpdate);
     this.addEventListener(ThemeEvents.variantSelected, this.#handleVariantSelected);
     this.addEventListener(SlideshowSelectEvent.eventName, this.#handleSlideshowSelect);
-    mediaQueryLarge.addEventListener('change', this.#handleQuickAdd);
 
     this.addEventListener('click', this.navigateToProduct);
 
@@ -183,19 +171,6 @@ export class ProductCard extends ProductCardLink {
     const currentSlide = this.refs.slideshow?.slides?.[this.refs.slideshow?.current];
     currentSlide?.nextElementSibling?.querySelector('img[loading="lazy"]')?.removeAttribute('loading');
   }
-
-  /**
-   * Handles the quick add event.
-   */
-  #handleQuickAdd = () => {
-    this.removeEventListener('pointerenter', this.#fetchProductPageHandler);
-    this.removeEventListener('focusin', this.#fetchProductPageHandler);
-
-    if (isDesktopBreakpoint()) {
-      this.addEventListener('pointerenter', this.#fetchProductPageHandler);
-      this.addEventListener('focusin', this.#fetchProductPageHandler);
-    }
-  };
 
   /**
    * Handles the variant selected event.
@@ -220,8 +195,6 @@ export class ProductCard extends ProductCardLink {
     this.updatePrice(event);
     this.#isUnavailableVariantSelected(event);
     this.#updateProductUrl(event);
-    this.refs.quickAdd?.fetchProductPage(this.productPageUrl);
-
     if (event.target !== this.variantPicker) {
       this.variantPicker?.updateVariantPicker(event.detail.data.html);
     }

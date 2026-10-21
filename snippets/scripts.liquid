@@ -136,11 +136,13 @@
 ></script>
 
 {% if template.name == 'index' or template.name == 'collection' or template.name == 'search' or template == 'product' or template.name == 'product' or request.page_type == 'product' %}
-  <script
-    src="{{ 'quick-add.js' | asset_url }}"
-    type="module"
-    defer
-  ></script>
+  {% if settings.quick_add or settings.mobile_quick_add %}
+    <script
+      src="{{ 'quick-add.js' | asset_url }}"
+      type="module"
+      defer
+    ></script>
+  {% endif %}
   <script
     src="{{ 'product-card.js' | asset_url }}"
     type="module"

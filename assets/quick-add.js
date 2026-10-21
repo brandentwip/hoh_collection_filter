@@ -1,17 +1,22 @@
 import { morph } from '@theme/morph';
 import { Component } from '@theme/component';
-import { CartUpdateEvent, ThemeEvents, VariantSelectedEvent } from '@theme/events';
+import { CartUpdateEvent, ThemeEvents } from '@theme/events';
 import { DialogComponent, DialogCloseEvent } from '@theme/dialog';
-import { mediaQueryLarge, isMobileBreakpoint, getIOSVersion } from '@theme/utilities';
+import { isMobileBreakpoint, getIOSVersion, mediaQueryLarge } from '@theme/utilities';
 import VariantPicker from '@theme/variant-picker';
+
+const QUICK_VIEW_CACHE_LIMIT = 4;
+/** @type {Map<string, string>} */
+const quickViewCache = new Map();
+/** @type {AbortController | null} */
+let activeQuickViewController = null;
+let activeQuickViewRequestId = 0;
+
+document.addEventListener(ThemeEvents.cartUpdate, () => quickViewCache.clear());
 
 export class QuickAddComponent extends Component {
   /** @type {AbortController | null} */
   #abortController = null;
-  /** @type {Map<string, Element>} */
-  #cachedContent = new Map();
-  /** @type {AbortController} */
-  #cartUpdateAbortController = new AbortController();
 
   get productPageUrl() {
     const productCard = /** @type {import('./product-card').ProductCard | null} */ (this.closest('product-card'));
@@ -45,31 +50,11 @@ export class QuickAddComponent extends Component {
     return productCard?.getSelectedVariantId() || null;
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-
-    mediaQueryLarge.addEventListener('change', this.#closeQuickAddModal);
-    document.addEventListener(ThemeEvents.cartUpdate, this.#handleCartUpdate, {
-      signal: this.#cartUpdateAbortController.signal,
-    });
-    document.addEventListener(ThemeEvents.variantSelected, this.#updateQuickAddButtonState.bind(this));
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    mediaQueryLarge.removeEventListener('change', this.#closeQuickAddModal);
     this.#abortController?.abort();
-    this.#cartUpdateAbortController.abort();
-    document.removeEventListener(ThemeEvents.variantSelected, this.#updateQuickAddButtonState.bind(this));
   }
-
-  /**
-   * Clears the cached content when cart is updated
-   */
-  #handleCartUpdate = () => {
-    this.#cachedContent.clear();
-  };
 
   /**
    * Re-renders the variant picker in the quick-add modal.
@@ -84,38 +69,61 @@ export class QuickAddComponent extends Component {
   }
 
   /**
-   * Handles quick add button click
+   * Handles quick view button click
    * @param {Event} event - The click event
    */
   handleClick = async (event) => {
     event.preventDefault();
 
     const currentUrl = this.productPageUrl;
+    if (!currentUrl) return;
 
-    // Check if we have cached content for this URL
-    let productGrid = this.#cachedContent.get(currentUrl);
+    const modalContent = document.getElementById('quick-add-modal-content');
+    const dialogComponent = document.getElementById('quick-add-dialog');
+    if (!modalContent || !(dialogComponent instanceof QuickAddDialog)) return;
 
-    if (!productGrid) {
-      // Fetch and cache the content
-      const html = await this.fetchProductPage(currentUrl);
-      if (html) {
-        const gridElement = html.querySelector('[data-product-grid-content]');
-        if (gridElement) {
-          // Cache the cloned element to avoid modifying the original
-          productGrid = /** @type {Element} */ (gridElement.cloneNode(true));
-          this.#cachedContent.set(currentUrl, productGrid);
+    modalContent.replaceChildren();
+    modalContent.setAttribute('aria-busy', 'true');
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.className = 'quick-add-modal__loading';
+    loadingIndicator.setAttribute('aria-hidden', 'true');
+    modalContent.append(loadingIndicator);
+    this.#openQuickAddModal();
+
+    activeQuickViewController?.abort();
+    const controller = new AbortController();
+    this.#abortController = controller;
+    activeQuickViewController = controller;
+    const requestId = ++activeQuickViewRequestId;
+
+    try {
+      const productGrid = await this.fetchProductPage(currentUrl, controller.signal);
+      if (requestId !== activeQuickViewRequestId) return;
+      if (!productGrid) {
+        modalContent?.removeAttribute('aria-busy');
+        dialogComponent.closeDialog();
+        return;
+      }
+
+      modalContent?.removeAttribute('aria-busy');
+      await this.updateQuickAddModal(productGrid.cloneNode(true));
+      this.#updateVariantPicker(productGrid);
+    } catch (error) {
+      if (!(error instanceof DOMException && error.name === 'AbortError')) {
+        console.error('Failed to load quick view:', error);
+        if (requestId === activeQuickViewRequestId) {
+          modalContent?.removeAttribute('aria-busy');
+          dialogComponent.closeDialog();
         }
       }
+    } finally {
+      if (activeQuickViewController === controller) {
+        activeQuickViewController = null;
+      }
+      if (this.#abortController === controller) {
+        this.#abortController = null;
+      }
     }
-
-    if (productGrid) {
-      // Use a fresh clone from the cache
-      const freshContent = /** @type {Element} */ (productGrid.cloneNode(true));
-      await this.updateQuickAddModal(freshContent);
-      this.#updateVariantPicker(productGrid);
-    }
-
-    this.#openQuickAddModal();
   };
 
   #resetScroll() {
@@ -152,28 +160,27 @@ export class QuickAddComponent extends Component {
     dialog.addEventListener('animationstart', this.#resetScroll.bind(this), { once: true });
   };
 
-  #closeQuickAddModal = () => {
-    const dialogComponent = document.getElementById('quick-add-dialog');
-    if (!(dialogComponent instanceof QuickAddDialog)) return;
-
-    dialogComponent.closeDialog();
-  };
-
   /**
    * Fetches the product page content
    * @param {string} productPageUrl - The URL of the product page to fetch
-   * @returns {Promise<Document | null>}
+   * @param {AbortSignal} signal - The current quick-view request signal
+   * @returns {Promise<Element | null>}
    */
-  async fetchProductPage(productPageUrl) {
+  async fetchProductPage(productPageUrl, signal) {
     if (!productPageUrl) return null;
 
-    // We use this to abort the previous fetch request if it's still pending.
-    this.#abortController?.abort();
-    this.#abortController = new AbortController();
+    const cachedMarkup = quickViewCache.get(productPageUrl);
+    if (cachedMarkup) {
+      quickViewCache.delete(productPageUrl);
+      quickViewCache.set(productPageUrl, cachedMarkup);
+      return new DOMParser()
+        .parseFromString(cachedMarkup, 'text/html')
+        .querySelector('[data-product-grid-content]');
+    }
 
     try {
       const response = await fetch(productPageUrl, {
-        signal: this.#abortController.signal,
+        signal,
       });
 
       if (!response.ok) {
@@ -182,16 +189,25 @@ export class QuickAddComponent extends Component {
 
       const responseText = await response.text();
       const html = new DOMParser().parseFromString(responseText, 'text/html');
+      const productGrid = html.querySelector('[data-product-grid-content]');
 
-      return html;
+      if (!productGrid) {
+        throw new Error('Product page did not contain quick-view content');
+      }
+
+      quickViewCache.set(productPageUrl, productGrid.outerHTML);
+      if (quickViewCache.size > QUICK_VIEW_CACHE_LIMIT) {
+        const oldestKey = quickViewCache.keys().next().value;
+        if (oldestKey) quickViewCache.delete(oldestKey);
+      }
+
+      return productGrid;
     } catch (error) {
-      if (error.name === 'AbortError') {
+      if (error instanceof DOMException && error.name === 'AbortError') {
         return null;
       } else {
         throw error;
       }
-    } finally {
-      this.#abortController = null;
     }
   }
 
@@ -240,18 +256,6 @@ export class QuickAddComponent extends Component {
   }
 
   /**
-   * Updates the quick-add button state based on whether a swatch is selected
-   * @param {VariantSelectedEvent} event - The variant selected event
-   */
-  #updateQuickAddButtonState(event) {
-    if (!(event.target instanceof HTMLElement)) return;
-    if (event.target.closest('product-card') !== this.closest('product-card')) return;
-    const productOptionsCount = this.dataset.productOptionsCount;
-    const quickAddButton = productOptionsCount === '1' ? 'add' : 'choose';
-    this.setAttribute('data-quick-add-button', quickAddButton);
-  }
-
-  /**
    * Syncs the variant selection from the product card to the modal
    * @param {Element} modalContent - The modal content element
    */
@@ -281,6 +285,11 @@ class QuickAddDialog extends DialogComponent {
   connectedCallback() {
     super.connectedCallback();
 
+    if (this.#abortController.signal.aborted) {
+      this.#abortController = new AbortController();
+    }
+
+    mediaQueryLarge.addEventListener('change', this.#closeQuickAddModal);
     this.addEventListener(ThemeEvents.cartUpdate, this.handleCartUpdate, { signal: this.#abortController.signal });
     this.addEventListener(ThemeEvents.variantUpdate, this.#updateProductTitleLink);
 
@@ -290,6 +299,7 @@ class QuickAddDialog extends DialogComponent {
   disconnectedCallback() {
     super.disconnectedCallback();
 
+    mediaQueryLarge.removeEventListener('change', this.#closeQuickAddModal);
     this.#abortController.abort();
     this.removeEventListener(DialogCloseEvent.eventName, this.#handleDialogClose);
   }
@@ -335,6 +345,10 @@ class QuickAddDialog extends DialogComponent {
         });
       }
     });
+  };
+
+  #closeQuickAddModal = () => {
+    this.closeDialog();
   };
 }
 

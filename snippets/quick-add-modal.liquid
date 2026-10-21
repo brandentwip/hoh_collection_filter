@@ -5,7 +5,7 @@
 ></script>
 <quick-add-dialog id="quick-add-dialog">
   <dialog
-    class="quick-add-modal dialog-modal color-{{ settings.popover_color_scheme }}"
+    class="quick-add-modal dialog-modal color-{{ settings.quick_add_modal_color_scheme | default: settings.popover_color_scheme }}"
     ref="dialog"
     scroll-lock
   >
@@ -21,6 +21,7 @@
     <div
       id="quick-add-modal-content"
       class="quick-add-modal__content"
+      aria-live="polite"
     ></div>
   </dialog>
 </quick-add-dialog>

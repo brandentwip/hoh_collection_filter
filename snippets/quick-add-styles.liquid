@@ -1,5 +1,5 @@
 {%- doc -%}
-  Quick-add styles consolidated into a single snippet.
+  Quick-view button styles consolidated into a single snippet.
 
   @example
   {% render 'quick-add-styles' %}
@@ -50,8 +50,6 @@
     position: absolute;
     right: max(var(--quick-add-right), calc((var(--border-radius) + var(--quick-add-right)) * (1 - cos(45deg))));
     bottom: max(var(--quick-add-bottom), calc((var(--border-radius) + var(--quick-add-bottom)) * (1 - cos(45deg))));
-    backdrop-filter: blur(20px) saturate(180%);
-
     &:hover {
       scale: 1.03;
 
@@ -76,10 +74,6 @@
       display: var(--quick-add-display, flex);
       opacity: 0;
     }
-  }
-
-  .quick-add__button.add-to-cart-button {
-    height: var(--button-size-md);
   }
 
   .quick-add__button .add-to-cart-text {
@@ -116,27 +110,6 @@
         translate: 0.5ch 0;
       }
     }
-  }
-
-  .quick-add__button[data-added='true'] .add-to-cart-text {
-    animation-name: atc-fade-out;
-  }
-
-  .quick-add__button[data-added='true'] .add-to-cart-text--added {
-    translate: 0 0;
-    animation-name: atc-fade-in;
-  }
-
-  .quick-add__product-form-component {
-    height: 100%;
-  }
-
-  .quick-add__product-form-component .shopify-product-form {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    container-type: inline-size;
-    height: 100%;
   }
 
   .quick-add-modal .product-media {
