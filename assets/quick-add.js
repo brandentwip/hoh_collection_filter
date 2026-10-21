@@ -280,8 +280,6 @@ if (!customElements.get('quick-add-component')) {
 }
 
 class QuickAddDialog extends DialogComponent {
-  requiredRefs = ['dialog', 'closeButton'];
-
   #abortController = new AbortController();
 
   connectedCallback() {
@@ -295,8 +293,6 @@ class QuickAddDialog extends DialogComponent {
     this.addEventListener(ThemeEvents.cartUpdate, this.handleCartUpdate, { signal: this.#abortController.signal });
     this.addEventListener(ThemeEvents.variantUpdate, this.#updateProductTitleLink);
     this.addEventListener(DialogCloseEvent.eventName, this.#handleDialogClose);
-
-    this.refs.closeButton.addEventListener('click', this.#handleCloseButtonClick);
   }
 
   disconnectedCallback() {
@@ -305,7 +301,6 @@ class QuickAddDialog extends DialogComponent {
     mediaQueryLarge.removeEventListener('change', this.#closeQuickAddModal);
     this.#abortController.abort();
     this.removeEventListener(DialogCloseEvent.eventName, this.#handleDialogClose);
-    this.refs.closeButton.removeEventListener('click', this.#handleCloseButtonClick);
   }
 
   /**
@@ -352,11 +347,6 @@ class QuickAddDialog extends DialogComponent {
   };
 
   #closeQuickAddModal = () => {
-    this.closeDialog();
-  };
-
-  #handleCloseButtonClick = (event) => {
-    event.preventDefault();
     this.closeDialog();
   };
 }
