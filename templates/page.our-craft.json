@@ -333,7 +333,9 @@
           "tops",
           "capes",
           "coordinated-sets",
-          "denim"
+          "denim",
+          "dresses",
+          "one-size"
         ],
         "layout_type": "carousel",
         "carousel_on_mobile": false,
