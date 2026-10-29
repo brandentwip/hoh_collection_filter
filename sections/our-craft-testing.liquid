@@ -1,7 +1,7 @@
 {%- comment -%}
   ourcrafttest — single-file section for Haus of Handmade.
   Upload to: sections/ourcrafttest.liquid
-  Includes: Hero banner, Ethos, Details you feel, Why it matters, One piece every hour (3 times of day).
+  Includes: Ethos, Details you feel, Why it matters, One piece every hour (3 times of day).
 {%- endcomment -%}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,75 +14,7 @@
 {%- assign hour_items = section.blocks | where: 'type', 'hour' -%}
 {%- assign hour_alt_items = section.blocks | where: 'type', 'hour_alt' -%}
 
-<div class="oc" style="--oc-hero-h: {{ section.settings.hero_height }}; --oc-hero-opacity: {{ section.settings.hero_opacity | divided_by: 100.0 }}; --oc-accent: {{ section.settings.accent_color | default: '#A8553A' }};">
-
-  {%- comment -%} HERO / TOP BANNER {%- endcomment -%}
-  <section class="oc-hero">
-    <div class="oc-hero__media">
-      {%- assign hv_desktop = section.settings.hero_video | default: section.settings.hero_video_mobile -%}
-      {%- assign hv_mobile = section.settings.hero_video_mobile | default: section.settings.hero_video -%}
-      {%- if hv_desktop != blank and hv_desktop.id == hv_mobile.id -%}
-        {{ hv_desktop | video_tag:
-          image_size: '2000x',
-          autoplay: true,
-          loop: true,
-          muted: true,
-          controls: false,
-          playsinline: true,
-          preload: 'auto',
-          class: 'oc-hero__video' }}
-      {%- elsif hv_desktop != blank -%}
-        {{ hv_desktop | video_tag:
-          image_size: '2000x',
-          autoplay: false,
-          loop: true,
-          muted: true,
-          controls: false,
-          playsinline: true,
-          preload: 'none',
-          class: 'oc-hero__video oc-hero__video--desktop' }}
-        {{ hv_mobile | video_tag:
-          image_size: '1080x',
-          autoplay: false,
-          loop: true,
-          muted: true,
-          controls: false,
-          playsinline: true,
-          preload: 'none',
-          class: 'oc-hero__video oc-hero__video--mobile' }}
-        <script>
-          (function () {
-            var wrap = document.currentScript.parentElement;
-            var d = wrap.querySelector('.oc-hero__video--desktop');
-            var m = wrap.querySelector('.oc-hero__video--mobile');
-            if (!d || !m) return;
-            var mq = window.matchMedia('(max-width: 768px)');
-            function pick() {
-              var use = mq.matches ? m : d;
-              var other = mq.matches ? d : m;
-              other.pause();
-              var p = use.play();
-              if (p && p.catch) p.catch(function () {});
-            }
-            pick();
-            if (mq.addEventListener) mq.addEventListener('change', pick);
-            else if (mq.addListener) mq.addListener(pick);
-          })();
-        </script>
-      {%- elsif section.settings.hero_image != blank -%}
-        {{ section.settings.hero_image | image_url: width: 2400 | image_tag:
-          widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high',
-          alt: section.settings.hero_image.alt | default: section.settings.hero_heading | strip_newlines }}
-      {%- else -%}
-        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder' }}
-      {%- endif -%}
-    </div>
-    <div class="oc-hero__overlay">
-      {%- if section.settings.hero_eyebrow != blank -%}<p class="oc-hero__eyebrow">{{ section.settings.hero_eyebrow | escape }}</p>{%- endif -%}
-      {%- if section.settings.hero_heading != blank -%}<h1 class="oc-hero__heading">{{ section.settings.hero_heading | escape | newline_to_br }}</h1>{%- endif -%}
-      {%- if section.settings.hero_sub != blank -%}<p class="oc-hero__sub">{{ section.settings.hero_sub | escape }}</p>{%- endif -%}
-    </div>
-  </section>
+<div class="oc" style="--oc-accent: {{ section.settings.accent_color | default: '#A8553A' }};">
 
   {%- comment -%} OUR ETHOS {%- endcomment -%}
   {%- if ethos_items.size > 0 -%}
@@ -266,18 +198,8 @@
   .oc img, .oc svg.placeholder { display: block; width: 100%; }
   .oc h2, .oc h3, .oc p { margin: 0; }
 
-  .oc h1 { margin: 0; }
-  .oc-hero { position: relative; width: 100%; height: calc(var(--oc-hero-h, 90) * 1vh); min-height: 560px; overflow: hidden; background: #2a2520; }
-  .oc-hero__media, .oc-hero__media img, .oc-hero__media svg, .oc-hero__media video { width: 100%; height: 100%; object-fit: cover; }
-  .oc-hero__media video { display: block; }
-  .oc-hero__media .oc-hero__video--mobile { display: none; }
-  .oc-hero__media { opacity: var(--oc-hero-opacity, 0.72); }
-  .oc-hero__overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0 24px 80px; text-align: center; }
-  .oc-hero__eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
-  .oc-hero__heading { font-family: var(--oc-serif); font-size: clamp(42px, 7vw, 88px); font-weight: 300; font-style: italic; color: #fff; line-height: 1.1; letter-spacing: -0.02em; max-width: 820px; }
-  .oc-hero__sub { margin-top: 24px; font-size: 13px; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); max-width: 400px; line-height: 1.8; }
-
   .oc-white { background: #fff; padding: 96px 24px; border-top: 1px solid var(--oc-line); }
+  .oc-white:first-child { border-top: none; }
   .oc-wrap { max-width: 760px; margin: 0 auto; }
   .oc-wrap--wide { max-width: 1040px; }
   .oc-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oc-accent); margin-bottom: 18px; }
@@ -344,9 +266,6 @@
   .oc-hours--side .oc-tinfo { flex: 1; }
 
   @media (max-width: 768px) {
-    .oc-hero { height: 85vh; }
-    .oc-hero__media .oc-hero__video--desktop { display: none; }
-    .oc-hero__media .oc-hero__video--mobile { display: block; }
     .oc-white { padding: 64px 20px; }
     .oc-ethos__grid { grid-template-columns: 1fr; }
     .oc-details__gallery { grid-template-columns: 1fr; }
@@ -362,16 +281,6 @@
 {
   "name": "ourcrafttest",
   "settings": [
-    { "type": "header", "content": "Hero (top banner)" },
-    { "type": "video", "id": "hero_video", "label": "Background video (desktop)", "info": "Landscape .mp4, ideally 1920×1080 (16:9). Plays muted and looping. Smaller files load faster." },
-    { "type": "video", "id": "hero_video_mobile", "label": "Background video (mobile)", "info": "Portrait .mp4, ideally 1080×1920 (9:16), shown on screens 768px and narrower. If empty, the desktop video is used." },
-    { "type": "image_picker", "id": "hero_image", "label": "Background image (fallback)" },
-    { "type": "range", "id": "hero_opacity", "label": "Media opacity", "min": 20, "max": 100, "step": 4, "unit": "%", "default": 72 },
-    { "type": "range", "id": "hero_height", "label": "Height", "min": 50, "max": 100, "step": 5, "unit": "vh", "default": 90 },
-    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Our Craft" },
-    { "type": "textarea", "id": "hero_heading", "label": "Heading", "info": "Line breaks are preserved.", "default": "Four hours of someone's day,\nin every shirt." },
-    { "type": "textarea", "id": "hero_sub", "label": "Subheading", "default": "Every piece we make carries the hands, the time, and the care of the craftswomen behind it." },
-
     { "type": "header", "content": "Accent colour" },
     { "type": "color", "id": "accent_color", "label": "Accent colour", "default": "#A8553A" },
 
