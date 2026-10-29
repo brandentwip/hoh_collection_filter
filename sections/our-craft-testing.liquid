@@ -1,7 +1,7 @@
 {%- comment -%}
   ourcrafttest — single-file section for Haus of Handmade.
   Upload to: sections/ourcrafttest.liquid
-  Includes: Ethos, Details you feel, Why it matters, One piece every hour (3 times of day).
+  Includes: Hero banner, Ethos, Details you feel, Why it matters, One piece every hour (3 times of day).
 {%- endcomment -%}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,8 +12,77 @@
 {%- assign detail_items = section.blocks | where: 'type', 'detail' -%}
 {%- assign benefit_items = section.blocks | where: 'type', 'benefit' -%}
 {%- assign hour_items = section.blocks | where: 'type', 'hour' -%}
+{%- assign hour_alt_items = section.blocks | where: 'type', 'hour_alt' -%}
 
-<div class="oc" style="--oc-accent: {{ section.settings.accent_color | default: '#A8553A' }};">
+<div class="oc" style="--oc-hero-h: {{ section.settings.hero_height }}; --oc-hero-opacity: {{ section.settings.hero_opacity | divided_by: 100.0 }}; --oc-accent: {{ section.settings.accent_color | default: '#A8553A' }};">
+
+  {%- comment -%} HERO / TOP BANNER {%- endcomment -%}
+  <section class="oc-hero">
+    <div class="oc-hero__media">
+      {%- assign hv_desktop = section.settings.hero_video | default: section.settings.hero_video_mobile -%}
+      {%- assign hv_mobile = section.settings.hero_video_mobile | default: section.settings.hero_video -%}
+      {%- if hv_desktop != blank and hv_desktop.id == hv_mobile.id -%}
+        {{ hv_desktop | video_tag:
+          image_size: '2000x',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          controls: false,
+          playsinline: true,
+          preload: 'auto',
+          class: 'oc-hero__video' }}
+      {%- elsif hv_desktop != blank -%}
+        {{ hv_desktop | video_tag:
+          image_size: '2000x',
+          autoplay: false,
+          loop: true,
+          muted: true,
+          controls: false,
+          playsinline: true,
+          preload: 'none',
+          class: 'oc-hero__video oc-hero__video--desktop' }}
+        {{ hv_mobile | video_tag:
+          image_size: '1080x',
+          autoplay: false,
+          loop: true,
+          muted: true,
+          controls: false,
+          playsinline: true,
+          preload: 'none',
+          class: 'oc-hero__video oc-hero__video--mobile' }}
+        <script>
+          (function () {
+            var wrap = document.currentScript.parentElement;
+            var d = wrap.querySelector('.oc-hero__video--desktop');
+            var m = wrap.querySelector('.oc-hero__video--mobile');
+            if (!d || !m) return;
+            var mq = window.matchMedia('(max-width: 768px)');
+            function pick() {
+              var use = mq.matches ? m : d;
+              var other = mq.matches ? d : m;
+              other.pause();
+              var p = use.play();
+              if (p && p.catch) p.catch(function () {});
+            }
+            pick();
+            if (mq.addEventListener) mq.addEventListener('change', pick);
+            else if (mq.addListener) mq.addListener(pick);
+          })();
+        </script>
+      {%- elsif section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 2400 | image_tag:
+          widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high',
+          alt: section.settings.hero_image.alt | default: section.settings.hero_heading | strip_newlines }}
+      {%- else -%}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder' }}
+      {%- endif -%}
+    </div>
+    <div class="oc-hero__overlay">
+      {%- if section.settings.hero_eyebrow != blank -%}<p class="oc-hero__eyebrow">{{ section.settings.hero_eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.hero_heading != blank -%}<h1 class="oc-hero__heading">{{ section.settings.hero_heading | escape | newline_to_br }}</h1>{%- endif -%}
+      {%- if section.settings.hero_sub != blank -%}<p class="oc-hero__sub">{{ section.settings.hero_sub | escape }}</p>{%- endif -%}
+    </div>
+  </section>
 
   {%- comment -%} OUR ETHOS {%- endcomment -%}
   {%- if ethos_items.size > 0 -%}
@@ -101,78 +170,93 @@
     </section>
   {%- endif -%}
 
-  {%- comment -%} ONE PIECE, EVERY HOUR — scene left, buttons + info right {%- endcomment -%}
-  {%- if hour_items.size > 0 -%}
-    {%- assign first_hour = hour_items | first -%}
-    <section class="oc-white oc-hours" id="oc-hours-{{ section.id }}">
-      <div class="oc-wrap oc-wrap--wide">
-        <p class="oc-eyebrow">{{ section.settings.hours_eyebrow | escape }}</p>
-        <h2 class="oc-h2">{{ section.settings.hours_heading | escape }} <em>{{ section.settings.hours_heading_em | escape }}</em></h2>
-        {%- if section.settings.hours_sub != blank -%}<p class="oc-hours__sub">{{ section.settings.hours_sub | escape }}</p>{%- endif -%}
+  {%- comment -%} ONE PIECE, EVERY HOUR — two versions. A: buttons below the scene. B: buttons on the right. {%- endcomment -%}
+  {%- for variant in (1..2) -%}
+    {%- if variant == 1 -%}
+      {%- assign items = hour_items -%}
+      {%- assign p = 'hours' -%}
+      {%- assign layout = 'oc-hours--stack' -%}
+    {%- else -%}
+      {%- assign items = hour_alt_items -%}
+      {%- assign p = 'hours2' -%}
+      {%- assign layout = 'oc-hours--side' -%}
+    {%- endif -%}
+    {%- assign k_eyebrow = p | append: '_eyebrow' -%}
+    {%- assign k_heading = p | append: '_heading' -%}
+    {%- assign k_heading_em = p | append: '_heading_em' -%}
+    {%- assign k_sub = p | append: '_sub' -%}
+    {%- if items.size > 0 -%}
+      {%- assign first_hour = items | first -%}
+      <section class="oc-white oc-hours {{ layout }}" id="oc-hours-{{ section.id }}-{{ variant }}">
+        <div class="oc-wrap oc-wrap--wide">
+          <p class="oc-eyebrow">{{ section.settings[k_eyebrow] | escape }}</p>
+          <h2 class="oc-h2">{{ section.settings[k_heading] | escape }} <em>{{ section.settings[k_heading_em] | escape }}</em></h2>
+          {%- if section.settings[k_sub] != blank -%}<p class="oc-hours__sub">{{ section.settings[k_sub] | escape }}</p>{%- endif -%}
 
-        <div class="oc-hours__layout">
-          <div class="oc-scene {{ first_hour.settings.time }}" data-scene>
-            <div class="oc-sky morning{% if first_hour.settings.time == 'morning' %} on{% endif %}"></div>
-            <div class="oc-sky midday{% if first_hour.settings.time == 'midday' %} on{% endif %}"></div>
-            <div class="oc-sky evening{% if first_hour.settings.time == 'evening' %} on{% endif %}"></div>
-            <div class="oc-orb"></div>
-            <div class="oc-ground"></div>
-            <svg viewBox="0 0 200 240" role="img" aria-label="The same garment shown through the day">
-              <path class="g oc-fill" d="M70 30 Q100 50 130 30 L172 52 L156 88 L138 76 L138 200 L62 200 L62 76 L44 88 L28 52 Z" stroke-width="1.5" stroke-linejoin="round"/>
-              <path class="g" d="M70 30 Q100 56 130 30" fill="none" stroke-width="1.5"/>
-              <path d="M62 190H138" fill="none" stroke="#fff" stroke-width="1.8" stroke-dasharray="5 5"/>
-            </svg>
+          <div class="oc-hours__layout">
+            <div class="oc-scene {{ first_hour.settings.time }}" data-scene>
+              <div class="oc-sky morning{% if first_hour.settings.time == 'morning' %} on{% endif %}"></div>
+              <div class="oc-sky midday{% if first_hour.settings.time == 'midday' %} on{% endif %}"></div>
+              <div class="oc-sky evening{% if first_hour.settings.time == 'evening' %} on{% endif %}"></div>
+              <div class="oc-orb"></div>
+              <div class="oc-ground"></div>
+              <svg viewBox="0 0 200 240" role="img" aria-label="The same garment shown through the day">
+                <path class="g oc-fill" d="M70 30 Q100 50 130 30 L172 52 L156 88 L138 76 L138 200 L62 200 L62 76 L44 88 L28 52 Z" stroke-width="1.5" stroke-linejoin="round"/>
+                <path class="g" d="M70 30 Q100 56 130 30" fill="none" stroke-width="1.5"/>
+                <path d="M62 190H138" fill="none" stroke="#fff" stroke-width="1.8" stroke-dasharray="5 5"/>
+              </svg>
+            </div>
+
+            <div class="oc-hours__side">
+              <div class="oc-times" data-times>
+                {%- for block in items -%}
+                  <button type="button" class="oc-opt" data-t="{{ block.settings.time }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</button>
+                {%- endfor -%}
+              </div>
+
+              <div class="oc-tinfo" data-info aria-live="polite">
+                <h3>{{ first_hour.settings.title | escape }}</h3>
+                <p><b>Wear it to:</b> {{ first_hour.settings.wear | escape }}</p>
+                <p><b>Style it with:</b> {{ first_hour.settings.style | escape }}</p>
+              </div>
+            </div>
           </div>
 
-          <div class="oc-hours__side">
-            <div class="oc-times" data-times>
-              {%- for block in hour_items -%}
-                <button type="button" class="oc-opt" data-t="{{ block.settings.time }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</button>
+          <script type="application/json" data-hours>
+            {
+              {%- for block in items -%}
+                {{ block.settings.time | json }}: [{{ block.settings.title | json }}, {{ block.settings.wear | json }}, {{ block.settings.style | json }}]{% unless forloop.last %},{% endunless %}
               {%- endfor -%}
-            </div>
-
-            <div class="oc-tinfo" data-info aria-live="polite">
-              <h3>{{ first_hour.settings.title | escape }}</h3>
-              <p><b>Wear it to:</b> {{ first_hour.settings.wear | escape }}</p>
-              <p><b>Style it with:</b> {{ first_hour.settings.style | escape }}</p>
-            </div>
-          </div>
+            }
+          </script>
+          <script>
+            (function () {
+              var root = document.getElementById('oc-hours-{{ section.id }}-{{ variant }}');
+              if (!root) return;
+              var scene = root.querySelector('[data-scene]');
+              var box = root.querySelector('[data-times]');
+              var info = root.querySelector('[data-info]');
+              var skies = scene.querySelectorAll('.oc-sky');
+              var data = {};
+              try { data = JSON.parse(root.querySelector('[data-hours]').textContent); } catch (e) {}
+              function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+              box.addEventListener('click', function (e) {
+                var b = e.target.closest('button');
+                if (!b || !data[b.dataset.t]) return;
+                var t = b.dataset.t;
+                [].forEach.call(box.children, function (x) { x.setAttribute('aria-pressed', 'false'); });
+                b.setAttribute('aria-pressed', 'true');
+                scene.className = 'oc-scene ' + t;
+                [].forEach.call(skies, function (x) { x.classList.toggle('on', x.classList.contains(t)); });
+                var d = data[t];
+                info.innerHTML = '<h3>' + esc(d[0]) + '</h3><p><b>Wear it to:</b> ' + esc(d[1]) + '</p><p><b>Style it with:</b> ' + esc(d[2]) + '</p>';
+              });
+            })();
+          </script>
         </div>
-
-        <script type="application/json" data-hours>
-          {
-            {%- for block in hour_items -%}
-              {{ block.settings.time | json }}: [{{ block.settings.title | json }}, {{ block.settings.wear | json }}, {{ block.settings.style | json }}]{% unless forloop.last %},{% endunless %}
-            {%- endfor -%}
-          }
-        </script>
-        <script>
-          (function () {
-            var root = document.getElementById('oc-hours-{{ section.id }}');
-            if (!root) return;
-            var scene = root.querySelector('[data-scene]');
-            var box = root.querySelector('[data-times]');
-            var info = root.querySelector('[data-info]');
-            var skies = scene.querySelectorAll('.oc-sky');
-            var data = {};
-            try { data = JSON.parse(root.querySelector('[data-hours]').textContent); } catch (e) {}
-            function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-            box.addEventListener('click', function (e) {
-              var b = e.target.closest('button');
-              if (!b || !data[b.dataset.t]) return;
-              var t = b.dataset.t;
-              [].forEach.call(box.children, function (x) { x.setAttribute('aria-pressed', 'false'); });
-              b.setAttribute('aria-pressed', 'true');
-              scene.className = 'oc-scene ' + t;
-              [].forEach.call(skies, function (s) { s.classList.toggle('on', s.classList.contains(t)); });
-              var d = data[t];
-              info.innerHTML = '<h3>' + esc(d[0]) + '</h3><p><b>Wear it to:</b> ' + esc(d[1]) + '</p><p><b>Style it with:</b> ' + esc(d[2]) + '</p>';
-            });
-          })();
-        </script>
-      </div>
-    </section>
-  {%- endif -%}
+      </section>
+    {%- endif -%}
+  {%- endfor -%}
 </div>
 
 {% stylesheet %}
@@ -182,8 +266,18 @@
   .oc img, .oc svg.placeholder { display: block; width: 100%; }
   .oc h2, .oc h3, .oc p { margin: 0; }
 
+  .oc h1 { margin: 0; }
+  .oc-hero { position: relative; width: 100%; height: calc(var(--oc-hero-h, 90) * 1vh); min-height: 560px; overflow: hidden; background: #2a2520; }
+  .oc-hero__media, .oc-hero__media img, .oc-hero__media svg, .oc-hero__media video { width: 100%; height: 100%; object-fit: cover; }
+  .oc-hero__media video { display: block; }
+  .oc-hero__media .oc-hero__video--mobile { display: none; }
+  .oc-hero__media { opacity: var(--oc-hero-opacity, 0.72); }
+  .oc-hero__overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0 24px 80px; text-align: center; }
+  .oc-hero__eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
+  .oc-hero__heading { font-family: var(--oc-serif); font-size: clamp(42px, 7vw, 88px); font-weight: 300; font-style: italic; color: #fff; line-height: 1.1; letter-spacing: -0.02em; max-width: 820px; }
+  .oc-hero__sub { margin-top: 24px; font-size: 13px; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); max-width: 400px; line-height: 1.8; }
+
   .oc-white { background: #fff; padding: 96px 24px; border-top: 1px solid var(--oc-line); }
-  .oc-white:first-child { border-top: none; }
   .oc-wrap { max-width: 760px; margin: 0 auto; }
   .oc-wrap--wide { max-width: 1040px; }
   .oc-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oc-accent); margin-bottom: 18px; }
@@ -213,10 +307,10 @@
   .oc-benefits b { display: block; font-family: var(--oc-serif); font-weight: 500; font-size: 20px; line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 4px; }
   .oc-benefits li > div > span { color: var(--oc-mid); font-size: 14px; line-height: 1.75; display: block; }
 
-  /* One piece, every hour: scene on the left, buttons + info on the right */
+  /* One piece, every hour */
   .oc-hours__sub { color: var(--oc-mid); max-width: 560px; font-size: 14px; line-height: 1.8; }
-  .oc-hours__layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: stretch; margin-top: 30px; }
-  .oc-scene { position: relative; min-height: 380px; border-radius: 4px; overflow: hidden; border: 1px solid var(--oc-line); --gs: #1A1A18; }
+  .oc-hours__layout { margin-top: 30px; }
+  .oc-scene { position: relative; height: 320px; border-radius: 4px; overflow: hidden; border: 1px solid var(--oc-line); --gs: #1A1A18; }
   .oc-sky { position: absolute; inset: 0; opacity: 0; transition: opacity .9s ease; }
   .oc-sky.on { opacity: 1; }
   .oc-sky.morning { background: linear-gradient(#f6d9b8, #fbeee0); }
@@ -226,27 +320,41 @@
   .oc-scene.midday .oc-orb { left: 46%; top: 6%; background: #fffbe0; }
   .oc-scene.evening .oc-orb { left: 76%; top: 52%; background: #ffb27a; box-shadow: 0 0 50px 16px rgba(255,160,100,.55); }
   .oc-ground { position: absolute; left: 0; right: 0; bottom: 0; height: 34px; background: rgba(0,0,0,.14); }
-  .oc-scene svg { position: absolute; left: 50%; bottom: 22px; width: 190px; height: auto; transform: translateX(-50%); }
+  .oc-scene svg { position: absolute; left: 50%; bottom: 22px; width: 170px; height: auto; transform: translateX(-50%); }
   .oc-scene svg path.g { stroke: var(--gs); }
-
-  .oc-hours__side { display: flex; flex-direction: column; gap: 16px; }
-  .oc-times { display: flex; flex-direction: column; gap: 10px; }
-  .oc-opt { font: inherit; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; text-align: left; padding: 16px 22px; border: 1px solid var(--oc-line); background: #fff; color: var(--oc-dark); border-radius: 2px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
-  .oc-opt:hover { border-color: var(--oc-accent); }
-  .oc-opt[aria-pressed="true"] { background: var(--oc-accent); border-color: var(--oc-accent); color: #fff; }
-  .oc-tinfo { flex: 1; background: var(--oc-bg); border: 1px solid var(--oc-line); border-radius: 4px; padding: 24px 24px 20px; }
-  .oc-tinfo h3 { font-family: var(--oc-serif); font-weight: 500; font-size: 22px; letter-spacing: -0.01em; margin-bottom: 10px; }
+  .oc-tinfo { background: var(--oc-bg); border: 1px solid var(--oc-line); border-radius: 4px; padding: 24px 24px 20px; }
+  .oc-tinfo h3 { font-family: var(--oc-serif); font-weight: 500; font-size: 24px; letter-spacing: -0.01em; margin-bottom: 8px; }
   .oc-tinfo p { margin: 0 0 8px; color: var(--oc-mid); font-size: 14px; line-height: 1.75; }
   .oc-tinfo p b { color: var(--oc-dark); font-weight: 500; }
 
+  /* Version A: original layout, buttons in a row below the scene */
+  .oc-hours--stack .oc-times { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 18px; }
+  .oc-hours--stack .oc-opt { font: inherit; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 20px; border: 1px solid var(--oc-line); background: #fff; color: var(--oc-dark); border-radius: 2px; cursor: pointer; }
+  .oc-hours--stack .oc-opt[aria-pressed="true"] { outline: 2px solid var(--oc-accent); outline-offset: 2px; }
+
+  /* Version B: scene left, buttons + info on the right */
+  .oc-hours--side .oc-hours__layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: stretch; }
+  .oc-hours--side .oc-scene { height: auto; min-height: 380px; }
+  .oc-hours--side .oc-scene svg { width: 190px; }
+  .oc-hours--side .oc-hours__side { display: flex; flex-direction: column; gap: 16px; }
+  .oc-hours--side .oc-times { display: flex; flex-direction: column; gap: 10px; }
+  .oc-hours--side .oc-opt { font: inherit; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; text-align: left; padding: 16px 22px; border: 1px solid var(--oc-line); background: #fff; color: var(--oc-dark); border-radius: 2px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+  .oc-hours--side .oc-opt:hover { border-color: var(--oc-accent); }
+  .oc-hours--side .oc-opt[aria-pressed="true"] { background: var(--oc-accent); border-color: var(--oc-accent); color: #fff; }
+  .oc-hours--side .oc-tinfo { flex: 1; }
+
   @media (max-width: 768px) {
+    .oc-hero { height: 85vh; }
+    .oc-hero__media .oc-hero__video--desktop { display: none; }
+    .oc-hero__media .oc-hero__video--mobile { display: block; }
     .oc-white { padding: 64px 20px; }
     .oc-ethos__grid { grid-template-columns: 1fr; }
     .oc-details__gallery { grid-template-columns: 1fr; }
-    .oc-hours__layout { grid-template-columns: 1fr; }
-    .oc-scene { min-height: 320px; }
-    .oc-times { flex-direction: row; flex-wrap: wrap; }
-    .oc-opt { flex: 1 1 auto; text-align: center; padding: 14px 16px; }
+    .oc-hours--side .oc-hours__layout { grid-template-columns: 1fr; }
+    .oc-hours--side .oc-scene { min-height: 320px; }
+    .oc-hours--side .oc-hours__side { margin-top: 0; }
+    .oc-hours--side .oc-times { flex-direction: row; flex-wrap: wrap; }
+    .oc-hours--side .oc-opt { flex: 1 1 auto; text-align: center; padding: 14px 16px; }
   }
 {% endstylesheet %}
 
@@ -254,6 +362,16 @@
 {
   "name": "ourcrafttest",
   "settings": [
+    { "type": "header", "content": "Hero (top banner)" },
+    { "type": "video", "id": "hero_video", "label": "Background video (desktop)", "info": "Landscape .mp4, ideally 1920×1080 (16:9). Plays muted and looping. Smaller files load faster." },
+    { "type": "video", "id": "hero_video_mobile", "label": "Background video (mobile)", "info": "Portrait .mp4, ideally 1080×1920 (9:16), shown on screens 768px and narrower. If empty, the desktop video is used." },
+    { "type": "image_picker", "id": "hero_image", "label": "Background image (fallback)" },
+    { "type": "range", "id": "hero_opacity", "label": "Media opacity", "min": 20, "max": 100, "step": 4, "unit": "%", "default": 72 },
+    { "type": "range", "id": "hero_height", "label": "Height", "min": 50, "max": 100, "step": 5, "unit": "vh", "default": 90 },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Our Craft" },
+    { "type": "textarea", "id": "hero_heading", "label": "Heading", "info": "Line breaks are preserved.", "default": "Four hours of someone's day,\nin every shirt." },
+    { "type": "textarea", "id": "hero_sub", "label": "Subheading", "default": "Every piece we make carries the hands, the time, and the care of the craftswomen behind it." },
+
     { "type": "header", "content": "Accent colour" },
     { "type": "color", "id": "accent_color", "label": "Accent colour", "default": "#A8553A" },
 
@@ -272,11 +390,17 @@
     { "type": "text", "id": "why_heading", "label": "Heading", "default": "What this means" },
     { "type": "text", "id": "why_heading_em", "label": "Heading (accent word)", "default": "for you" },
 
-    { "type": "header", "content": "One piece, every hour" },
+    { "type": "header", "content": "One piece, every hour (1st)" },
     { "type": "text", "id": "hours_eyebrow", "label": "Eyebrow", "default": "Versatility" },
     { "type": "text", "id": "hours_heading", "label": "Heading", "default": "One piece," },
     { "type": "text", "id": "hours_heading_em", "label": "Heading (accent word)", "default": "every hour" },
-    { "type": "textarea", "id": "hours_sub", "label": "Subtext", "default": "The same garment, from the first coffee to the last light. Choose a time of day and see how it moves with you." }
+    { "type": "textarea", "id": "hours_sub", "label": "Subtext", "default": "The same garment, from the first coffee to the last light. Choose a time of day and see how it moves with you." },
+
+    { "type": "header", "content": "One piece, every hour (2nd)" },
+    { "type": "text", "id": "hours2_eyebrow", "label": "Eyebrow", "default": "Versatility" },
+    { "type": "text", "id": "hours2_heading", "label": "Heading", "default": "One piece," },
+    { "type": "text", "id": "hours2_heading_em", "label": "Heading (accent word)", "default": "every hour" },
+    { "type": "textarea", "id": "hours2_sub", "label": "Subtext", "default": "The same garment, from the first coffee to the last light. Choose a time of day and see how it moves with you." }
   ],
   "blocks": [
     {
@@ -320,7 +444,24 @@
     },
     {
       "type": "hour",
-      "name": "Time of day",
+      "name": "Time of day (1st section)",
+      "limit": 3,
+      "settings": [
+        { "type": "select", "id": "time", "label": "Scene", "default": "morning",
+          "options": [
+            { "value": "morning", "label": "Morning" },
+            { "value": "midday", "label": "Noon" },
+            { "value": "evening", "label": "Evening" }
+          ] },
+        { "type": "text", "id": "label", "label": "Button label", "default": "Morning" },
+        { "type": "text", "id": "title", "label": "Title", "default": "A slow, easy start" },
+        { "type": "text", "id": "wear", "label": "Wear it to", "default": "morning coffee, the commute, an early meeting." },
+        { "type": "text", "id": "style", "label": "Style it with", "default": "flats and a simple canvas bag." }
+      ]
+    },
+    {
+      "type": "hour_alt",
+      "name": "Time of day (2nd section)",
       "limit": 3,
       "settings": [
         { "type": "select", "id": "time", "label": "Scene", "default": "morning",
@@ -357,7 +498,10 @@
 
         { "type": "hour", "settings": { "time": "morning", "label": "Morning", "title": "A slow, easy start", "wear": "morning coffee, the commute, an early meeting.", "style": "flats and a simple canvas bag." } },
         { "type": "hour", "settings": { "time": "midday", "label": "Noon", "title": "Easy, bright hours", "wear": "long lunches, errands, a busy workday.", "style": "rolled sleeves, a light belt and sunglasses." } },
-        { "type": "hour", "settings": { "time": "evening", "label": "Evening", "title": "Golden hour, dressed up", "wear": "dinner with family, a gathering, an evening out.", "style": "statement earrings and a soft shawl." } }
+        { "type": "hour", "settings": { "time": "evening", "label": "Evening", "title": "Golden hour, dressed up", "wear": "dinner with family, a gathering, an evening out.", "style": "statement earrings and a soft shawl." } },
+        { "type": "hour_alt", "settings": { "time": "morning", "label": "Morning", "title": "A slow, easy start", "wear": "morning coffee, the commute, an early meeting.", "style": "flats and a simple canvas bag." } },
+        { "type": "hour_alt", "settings": { "time": "midday", "label": "Noon", "title": "Easy, bright hours", "wear": "long lunches, errands, a busy workday.", "style": "rolled sleeves, a light belt and sunglasses." } },
+        { "type": "hour_alt", "settings": { "time": "evening", "label": "Evening", "title": "Golden hour, dressed up", "wear": "dinner with family, a gathering, an evening out.", "style": "statement earrings and a soft shawl." } }
       ]
     }
   ]
