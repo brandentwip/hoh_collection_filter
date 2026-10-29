@@ -56,9 +56,285 @@
         "padding-block-start": 60,
         "padding-block-end": 60
       }
+    },
+    "our_craft_testing_ApyUG9": {
+      "type": "our-craft-testing",
+      "blocks": {
+        "row_n466KD": {
+          "type": "row",
+          "settings": {
+            "image_position": "left",
+            "number": "01 — The Stitch",
+            "heading": "Stitched like it\nneeds to last.",
+            "body": "<p>Machine-made clothes are sewn fast. Ours are sewn right. Every seam is finished by hand, every stitch checked before a piece leaves the workshop. You'll feel the difference the first time you wear it — and still feel it three years later.</p>"
+          }
+        },
+        "row_UPHygV": {
+          "type": "row",
+          "settings": {
+            "image_position": "right",
+            "number": "02 — The Fabric",
+            "heading": "Handloom cotton.\nNothing else.",
+            "body": "<p>We source directly from small handloom clusters — fabrics that breathe, that soften with every wash, that hold their colour without compromise. The kind of cloth that mass production simply cannot replicate.</p>"
+          }
+        },
+        "row_Q3XtcD": {
+          "type": "row",
+          "settings": {
+            "image_position": "left",
+            "number": "03 — The Batch",
+            "heading": "Small batches.\nOn purpose.",
+            "body": "<p>We make limited runs — not because we can't scale, but because we won't. Smaller batches mean more attention per piece, less waste, and something that not everyone else will be wearing.</p>"
+          }
+        },
+        "ethos_iWqmcm": {
+          "type": "ethos",
+          "settings": {
+            "icon": "rings",
+            "title": "Small batch",
+            "text": "We make in limited numbers, never in thousands. Fewer pieces means more attention in each one, and nothing made to sit unloved on a shelf."
+          }
+        },
+        "ethos_WRaPDA": {
+          "type": "ethos",
+          "settings": {
+            "icon": "cross",
+            "title": "Made around you",
+            "text": "Length, sleeve, neckline, fit. Your garment can be adjusted to your body and your taste, because you are not a standard size."
+          }
+        },
+        "ethos_cEgAyR": {
+          "type": "ethos",
+          "settings": {
+            "icon": "leaf",
+            "title": "Breathable cloth",
+            "text": "Light, soft, easy fabrics chosen to move with you through long days and warm evenings, comfort that you forget you are wearing."
+          }
+        },
+        "ethos_wqdNrp": {
+          "type": "ethos",
+          "settings": {
+            "icon": "star",
+            "title": "Details that count",
+            "text": "A hand-finished hem, a considered button, a seam that lies flat. The small things are the ones you notice and keep noticing."
+          }
+        },
+        "detail_gqGBqM": {
+          "type": "detail",
+          "settings": {
+            "illustration": "weave",
+            "caption": "Light, breathable weave"
+          }
+        },
+        "detail_aVf3Tk": {
+          "type": "detail",
+          "settings": {
+            "illustration": "hem",
+            "caption": "Hand-finished hem"
+          }
+        },
+        "detail_nUXzyA": {
+          "type": "detail",
+          "settings": {
+            "illustration": "button",
+            "caption": "A considered button"
+          }
+        },
+        "step_ULUHnP": {
+          "type": "step",
+          "settings": {
+            "title": "We source the fabric",
+            "text": "Every piece starts with handloom cotton sourced directly from artisan clusters. We feel, wash, and test before a single yard is cut."
+          }
+        },
+        "step_JkhNKJ": {
+          "type": "step",
+          "settings": {
+            "title": "We cut with intention",
+            "text": "Cutting is done by hand, piece by piece — no bulk cutting, no waste. Each pattern is measured for the size it will become."
+          }
+        },
+        "step_cKmgD6": {
+          "type": "step",
+          "settings": {
+            "title": "We stitch with care",
+            "text": "Our craftswomen stitch at their own pace — not against a clock. Every seam is flat-finished, every hem hand-turned before the next step begins."
+          }
+        },
+        "step_iVeA3D": {
+          "type": "step",
+          "settings": {
+            "title": "We check before we ship",
+            "text": "A final quality check happens on every single piece — stitching, sizing, finish, and feel — before it's folded and packed for you."
+          }
+        },
+        "benefit_AKhajq": {
+          "type": "benefit",
+          "settings": {
+            "title": "A fit that is truly yours",
+            "text": "Made to your measurements and preferences, so you stop settling for “almost right”."
+          }
+        },
+        "benefit_NF8XLK": {
+          "type": "benefit",
+          "settings": {
+            "title": "Comfort from the first wear",
+            "text": "Light, breathable fabrics that stay easy through long days and warm weather."
+          }
+        },
+        "benefit_MpighH": {
+          "type": "benefit",
+          "settings": {
+            "title": "Pieces that last",
+            "text": "Careful hand finishing means seams and details that hold up wear after wear."
+          }
+        },
+        "benefit_zfnpiM": {
+          "type": "benefit",
+          "settings": {
+            "title": "Never one of a crowd",
+            "text": "Small batches and personal choices mean you are unlikely to meet your outfit on someone else."
+          }
+        },
+        "benefit_6rmiNt": {
+          "type": "benefit",
+          "settings": {
+            "title": "A maker you can talk to",
+            "text": "Tell us what you need directly. A real person listens and makes it."
+          }
+        },
+        "hour_mKH7EJ": {
+          "type": "hour",
+          "settings": {
+            "time": "morning",
+            "label": "Morning",
+            "title": "A slow, easy start",
+            "wear": "morning coffee, the commute, an early meeting.",
+            "style": "flats and a simple canvas bag."
+          }
+        },
+        "hour_Y9bCie": {
+          "type": "hour",
+          "settings": {
+            "time": "midday",
+            "label": "Midday",
+            "title": "Easy, bright hours",
+            "wear": "long lunches, errands, a busy workday.",
+            "style": "rolled sleeves, a light belt and sunglasses."
+          }
+        },
+        "hour_nkd4RC": {
+          "type": "hour",
+          "settings": {
+            "time": "evening",
+            "label": "Evening",
+            "title": "Golden hour, dressed up",
+            "wear": "dinner with family, a gathering, an evening out.",
+            "style": "statement earrings and a soft shawl."
+          }
+        },
+        "hour_a3Qjcf": {
+          "type": "hour",
+          "settings": {
+            "time": "night",
+            "label": "Night",
+            "title": "A calm, comfortable close",
+            "wear": "a quiet night in, a late stroll, time with loved ones.",
+            "style": "nothing extra. The cloth stays soft and light."
+          }
+        },
+        "trust_jyRgNn": {
+          "type": "trust",
+          "settings": {
+            "icon": "returns",
+            "text": "Easy Returns"
+          }
+        },
+        "trust_jgqYW8": {
+          "type": "trust",
+          "settings": {
+            "icon": "delivery",
+            "text": "Cash on Delivery"
+          }
+        },
+        "trust_7N4y43": {
+          "type": "trust",
+          "settings": {
+            "icon": "shipping",
+            "text": "Free Shipping"
+          }
+        },
+        "trust_6TnCQY": {
+          "type": "trust",
+          "settings": {
+            "icon": "secure",
+            "text": "Secure Checkout"
+          }
+        }
+      },
+      "block_order": [
+        "row_n466KD",
+        "row_UPHygV",
+        "row_Q3XtcD",
+        "ethos_iWqmcm",
+        "ethos_WRaPDA",
+        "ethos_cEgAyR",
+        "ethos_wqdNrp",
+        "detail_gqGBqM",
+        "detail_aVf3Tk",
+        "detail_nUXzyA",
+        "step_ULUHnP",
+        "step_JkhNKJ",
+        "step_cKmgD6",
+        "step_iVeA3D",
+        "benefit_AKhajq",
+        "benefit_NF8XLK",
+        "benefit_MpighH",
+        "benefit_zfnpiM",
+        "benefit_6rmiNt",
+        "hour_mKH7EJ",
+        "hour_Y9bCie",
+        "hour_nkd4RC",
+        "hour_a3Qjcf",
+        "trust_jyRgNn",
+        "trust_jgqYW8",
+        "trust_7N4y43",
+        "trust_6TnCQY"
+      ],
+      "name": "ourcrafttest",
+      "settings": {
+        "hero_opacity": 72,
+        "hero_height": 90,
+        "hero_eyebrow": "Our Craft",
+        "hero_heading": "Four hours of someone's day,\nin every shirt.",
+        "hero_sub": "Every piece we make carries the hands, the time, and the care of the craftswomen behind it.",
+        "divider": "❋",
+        "intro": "<p>We don't make clothes on a conveyor belt. Every shirt, every co-ord, every kurta begins with a woman who knows her craft — and ends with a piece that shows it.</p>",
+        "accent_color": "#A8553A",
+        "ethos_eyebrow": "Our Ethos",
+        "ethos_heading": "Four quiet",
+        "ethos_heading_em": "promises",
+        "details_eyebrow": "Up Close",
+        "details_heading": "The",
+        "details_heading_em": "details you feel",
+        "quote_opacity": 30,
+        "quote": "When something is made well, you don't have to explain it. You just wear it.",
+        "process_label": "How we make it",
+        "why_eyebrow": "Why It Matters",
+        "why_heading": "What this means",
+        "why_heading_em": "for you",
+        "hours_eyebrow": "Versatility",
+        "hours_heading": "One piece,",
+        "hours_heading_em": "every hour",
+        "hours_sub": "The same garment, from the first coffee to the last light. Choose a time of day and see how it moves with you.",
+        "show_shop": true,
+        "shop_label": "Shop the craft",
+        "products": []
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "our_craft_testing_ApyUG9"
   ]
 }
