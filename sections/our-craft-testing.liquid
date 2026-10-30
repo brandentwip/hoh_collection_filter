@@ -178,6 +178,7 @@
       {%- assign layout = 'oc-hours--stack' -%}
     {%- else -%}
       {%- assign items = hour_alt_items -%}
+      {%- if items.size == 0 -%}{%- assign items = hour_items -%}{%- endif -%}
       {%- assign p = 'hours2' -%}
       {%- assign layout = 'oc-hours--side' -%}
     {%- endif -%}
@@ -185,8 +186,11 @@
     {%- assign k_heading = p | append: '_heading' -%}
     {%- assign k_heading_em = p | append: '_heading_em' -%}
     {%- assign k_sub = p | append: '_sub' -%}
-    {%- if items.size > 0 -%}
-      {%- assign first_hour = items | first -%}
+    {%- assign first_hour = blank -%}
+    {%- for b in items -%}
+      {%- if b.settings.time != 'night' and first_hour == blank -%}{%- assign first_hour = b -%}{%- endif -%}
+    {%- endfor -%}
+    {%- if first_hour != blank -%}
       <section class="oc-white oc-hours {{ layout }}" id="oc-hours-{{ section.id }}-{{ variant }}">
         <div class="oc-wrap oc-wrap--wide">
           <p class="oc-eyebrow">{{ section.settings[k_eyebrow] | escape }}</p>
@@ -210,7 +214,9 @@
             <div class="oc-hours__side">
               <div class="oc-times" data-times>
                 {%- for block in items -%}
-                  <button type="button" class="oc-opt" data-t="{{ block.settings.time }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</button>
+                  {%- unless block.settings.time == 'night' -%}
+                    <button type="button" class="oc-opt" data-t="{{ block.settings.time }}" aria-pressed="{% if block.id == first_hour.id %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</button>
+                  {%- endunless -%}
                 {%- endfor -%}
               </div>
 
@@ -224,8 +230,12 @@
 
           <script type="application/json" data-hours>
             {
+              {%- assign sep = '' -%}
               {%- for block in items -%}
-                {{ block.settings.time | json }}: [{{ block.settings.title | json }}, {{ block.settings.wear | json }}, {{ block.settings.style | json }}]{% unless forloop.last %},{% endunless %}
+                {%- unless block.settings.time == 'night' -%}
+                  {{ sep }}{{ block.settings.time | json }}: [{{ block.settings.title | json }}, {{ block.settings.wear | json }}, {{ block.settings.style | json }}]
+                  {%- assign sep = ',' -%}
+                {%- endunless -%}
               {%- endfor -%}
             }
           </script>
@@ -264,7 +274,7 @@
   .oc, .oc *, .oc *::before, .oc *::after { box-sizing: border-box; }
   .oc { --oc-accent: #A8553A; background: #fff; color: var(--oc-dark); font-family: var(--oc-sans); font-weight: 300; }
   .oc img, .oc svg.placeholder { display: block; width: 100%; }
-  .oc h2, .oc h3, .oc p { margin: 0; }
+  .oc h2, .oc h3, .oc p { margin: 0; text-transform: none; font-family: var(--oc-serif); }
 
   .oc h1 { margin: 0; }
   .oc-hero { position: relative; width: 100%; height: calc(var(--oc-hero-h, 90) * 1vh); min-height: 560px; overflow: hidden; background: #2a2520; }
