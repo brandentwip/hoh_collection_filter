@@ -14,7 +14,7 @@
 {%- assign hour_items = section.blocks | where: 'type', 'hour' -%}
 {%- assign hour_alt_items = section.blocks | where: 'type', 'hour_alt' -%}
 
-<div class="oc" style="--oc-hero-h: {{ section.settings.hero_height }}; --oc-hero-opacity: {{ section.settings.hero_opacity | divided_by: 100.0 }}; --oc-accent: {{ section.settings.accent_color | default: '#A8553A' }};">
+<div class="oc" style="--oc-gutter: {{ section.settings.side_padding | default: 50 }}px; --oc-hero-h: {{ section.settings.hero_height }}; --oc-hero-opacity: {{ section.settings.hero_opacity | divided_by: 100.0 }}; --oc-accent: {{ section.settings.accent_color | default: '#A8553A' }};">
 
   {%- comment -%} HERO / TOP BANNER {%- endcomment -%}
   <section class="oc-hero">
@@ -271,7 +271,6 @@
 
 {% stylesheet %}
   :root { --oc-bg:#FAF8F5; --oc-dark:#1A1A18; --oc-mid:#6B6560; --oc-line:rgba(26,26,24,0.1); --oc-serif:'Inter',system-ui,sans-serif; --oc-sans:'Inter',system-ui,sans-serif; }
-  .oc { --oc-gutter: 0px; }
   .oc, .oc *, .oc *::before, .oc *::after { box-sizing: border-box; }
   .oc { --oc-accent: #A8553A; background: #fff; color: var(--oc-dark); font-family: var(--oc-sans); font-weight: 300; }
   .oc img, .oc svg.placeholder { display: block; width: 100%; }
@@ -288,7 +287,7 @@
   .oc-hero__heading { font-family: var(--oc-serif); font-size: clamp(42px, 7vw, 88px); font-weight: 300; font-style: italic; color: #fff; line-height: 1.1; letter-spacing: -0.02em; max-width: 820px; }
   .oc-hero__sub { margin-top: 24px; font-size: 13px; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); max-width: 400px; line-height: 1.8; }
 
-  .oc-white { background: #fff; padding: 96px var(--oc-gutter, 0px); border-top: 1px solid var(--oc-line); }
+  .oc-white { background: #fff; padding: 96px var(--oc-gutter, 50px); border-top: 1px solid var(--oc-line); }
   .oc-wrap { max-width: none; width: 100%; margin: 0; }
   .oc-wrap--wide { max-width: none; }
   .oc-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oc-accent); margin-bottom: 18px; }
@@ -358,7 +357,7 @@
     .oc-hero { height: 85vh; }
     .oc-hero__media .oc-hero__video--desktop { display: none; }
     .oc-hero__media .oc-hero__video--mobile { display: block; }
-    .oc-white { padding: 64px var(--oc-gutter, 0px); }
+    .oc-white { padding: 64px min(var(--oc-gutter, 20px), 20px); }
     .oc-ethos__grid { grid-template-columns: 1fr; }
     .oc-details__gallery { grid-template-columns: 1fr; }
     .oc-hours--side .oc-hours__layout { grid-template-columns: 1fr; }
@@ -382,6 +381,9 @@
     { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Our Craft" },
     { "type": "textarea", "id": "hero_heading", "label": "Heading", "info": "Line breaks are preserved.", "default": "Four hours of someone's day,\nin every shirt." },
     { "type": "textarea", "id": "hero_sub", "label": "Subheading", "default": "Every piece we make carries the hands, the time, and the care of the craftswomen behind it." },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "side_padding", "label": "Left / right padding (sections below hero)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 50, "info": "Reduced to 20px max on mobile." },
 
     { "type": "header", "content": "Accent colour" },
     { "type": "color", "id": "accent_color", "label": "Accent colour", "default": "#A8553A" },
