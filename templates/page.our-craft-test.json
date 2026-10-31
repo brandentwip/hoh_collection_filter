@@ -97,6 +97,7 @@
           "type": "detail",
           "settings": {
             "illustration": "hem",
+            "image": "shopify://shop_images/8_bcc8c7ce-76c0-4789-9efb-6f86e8e6ff82.png",
             "caption": "Hand embroidery",
             "subcaption": "Intricate work, done by hand"
           }
@@ -105,6 +106,7 @@
           "type": "detail",
           "settings": {
             "illustration": "weave",
+            "image": "shopify://shop_images/55.png",
             "caption": "Fabric detailing",
             "subcaption": "Thoughtful textures and layers"
           }
@@ -113,6 +115,7 @@
           "type": "detail",
           "settings": {
             "illustration": "button",
+            "image": "shopify://shop_images/66.png",
             "caption": "Hand-finished construction",
             "subcaption": "Every seam and edge, carefully finished"
           }
@@ -235,7 +238,7 @@
         "hero_heading": "Four hours of someone's day,\nin every shirt.",
         "hero_sub": "Every piece we make carries the hands, the time, and the care of the craftswomen behind it.",
         "side_padding": 50,
-        "accent_color": "#A8553A",
+        "accent_color": "#a8553a",
         "ethos_eyebrow": "Our Ethos",
         "ethos_heading": "The thought behind",
         "ethos_heading_em": "every piece",
