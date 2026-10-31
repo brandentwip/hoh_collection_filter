@@ -14,7 +14,7 @@
 {%- assign hour_items = section.blocks | where: 'type', 'hour' -%}
 {%- assign fit_items = section.blocks | where: 'type', 'fit' -%}
 
-<div class="oc" style="--oc-gutter: {{ section.settings.side_padding | default: 50 }}px; --oc-hero-h: {{ section.settings.hero_height }}; --oc-hero-opacity: {{ section.settings.hero_opacity | divided_by: 100.0 }}; --oc-accent: {{ section.settings.accent_color | default: '#A8553A' }};">
+<div class="oc" style="--oc-gutter: {{ section.settings.side_padding | default: 50 }}px; --oc-hero-h: {{ section.settings.hero_height }}; --oc-hero-opacity: {{ section.settings.hero_opacity | divided_by: 100.0 }}; --oc-accent: {{ section.settings.accent_color | default: '#5C5C5C' }};">
 
   {%- comment -%} HERO / TOP BANNER {%- endcomment -%}
   <section class="oc-hero">
@@ -368,12 +368,12 @@
 {% stylesheet %}
   :root { --oc-bg:#FAF8F5; --oc-dark:#1A1A18; --oc-mid:#6B6560; --oc-line:rgba(26,26,24,0.1); --oc-serif:'Inter',system-ui,sans-serif; --oc-sans:'Inter',system-ui,sans-serif; }
   .oc, .oc *, .oc *::before, .oc *::after { box-sizing: border-box; }
-  .oc { --oc-accent: #A8553A; background: #fff; color: var(--oc-dark); font-family: var(--oc-sans); font-weight: 300; }
+  .oc { --oc-accent: #5C5C5C; background: #fff; color: var(--oc-dark); font-family: var(--oc-sans); font-weight: 300; }
   .oc img, .oc svg.placeholder { display: block; width: 100%; }
   .oc h2, .oc h3, .oc p { margin: 0; text-transform: none; font-family: var(--oc-serif); }
 
   .oc h1 { margin: 0; }
-  .oc-hero { position: relative; width: 100%; height: calc(var(--oc-hero-h, 90) * 1vh); min-height: 560px; overflow: hidden; background: #2a2520; }
+  .oc-hero { position: relative; width: 100%; height: calc(var(--oc-hero-h, 90) * 1vh); min-height: 560px; overflow: hidden; background: #262626; }
   .oc-hero__media, .oc-hero__media img, .oc-hero__media svg, .oc-hero__media video { width: 100%; height: 100%; object-fit: cover; }
   .oc-hero__media video { display: block; }
   .oc-hero__media .oc-hero__video--mobile { display: none; }
@@ -511,7 +511,7 @@
     { "type": "range", "id": "side_padding", "label": "Left / right padding (sections below hero)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 50, "info": "Reduced to 20px max on mobile." },
 
     { "type": "header", "content": "Accent colour" },
-    { "type": "color", "id": "accent_color", "label": "Accent colour", "default": "#A8553A" },
+    { "type": "color", "id": "accent_color", "label": "Accent colour", "default": "#5C5C5C" },
 
     { "type": "header", "content": "Our ethos" },
     { "type": "text", "id": "ethos_eyebrow", "label": "Eyebrow", "default": "Our Ethos" },
