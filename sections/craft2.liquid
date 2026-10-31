@@ -1,7 +1,7 @@
 {%- comment -%}
   ourcrafttest — single-file section for Haus of Handmade.
   Upload to: sections/ourcrafttest.liquid
-  Includes: Hero banner, Ethos, Details you feel, Why it matters, One piece every hour (3 times of day).
+  Includes: Hero banner, Ethos, Details you feel, Why it matters, One piece every hour (3 times of day, each with optional photo), Fit & Form.
 {%- endcomment -%}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -119,6 +119,13 @@
         <div class="oc-details__gallery">
           {%- for block in detail_items -%}
             <figure class="oc-frame" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <div class="oc-frame__img">
+                  {{ block.settings.image | image_url: width: 1200 | image_tag:
+                    widths: '600, 900, 1200', sizes: '(min-width: 769px) 33vw, 100vw',
+                    loading: 'lazy', alt: block.settings.caption }}
+                </div>
+              {%- else -%}
               {%- case block.settings.illustration -%}
                 {%- when 'weave' -%}
                   <svg viewBox="0 0 300 340" role="img" aria-label="Woven fabric texture">
@@ -141,6 +148,7 @@
                     <path class="oc-stroke" d="M132 152L168 188M168 152L132 188" stroke-width="2.5" fill="none" stroke-linecap="round"/>
                   </svg>
               {%- endcase -%}
+              {%- endif -%}
               <figcaption>
                 <span class="oc-frame__title">{{ block.settings.caption | escape }}</span>
                 {%- if block.settings.subcaption != blank -%}
@@ -199,6 +207,24 @@
               <path class="g" d="M70 30 Q100 56 130 30" fill="none" stroke-width="1.5"/>
               <path d="M62 190H138" fill="none" stroke="#fff" stroke-width="1.8" stroke-dasharray="5 5"/>
             </svg>
+
+            {%- comment -%} Optional photo per time of day. Covers the illustration when set. {%- endcomment -%}
+            {%- for block in hour_items -%}
+              {%- unless block.settings.time == 'night' -%}
+                {%- assign pic_d = block.settings.image | default: block.settings.image_mobile -%}
+                {%- assign pic_m = block.settings.image_mobile | default: block.settings.image -%}
+                {%- if pic_d != blank -%}
+                  <div class="oc-hours__pane{% if block.id == first_hour.id %} on{% endif %}" data-pane="{{ block.settings.time }}">
+                    <picture>
+                      <source media="(max-width: 768px)" sizes="100vw" srcset="{{ pic_m | image_url: width: 540 }} 540w, {{ pic_m | image_url: width: 810 }} 810w, {{ pic_m | image_url: width: 1080 }} 1080w">
+                      {{ pic_d | image_url: width: 2400 | image_tag:
+                        widths: '800, 1200, 1600, 2000, 2400', sizes: '100vw',
+                        loading: 'lazy', alt: block.settings.label }}
+                    </picture>
+                  </div>
+                {%- endif -%}
+              {%- endunless -%}
+            {%- endfor -%}
           </div>
 
           <div class="oc-hours__side">
@@ -237,6 +263,7 @@
             var box = root.querySelector('[data-times]');
             var info = root.querySelector('[data-info]');
             var skies = scene.querySelectorAll('.oc-sky');
+            var panes = scene.querySelectorAll('.oc-hours__pane');
             var data = {};
             try { data = JSON.parse(root.querySelector('[data-hours]').textContent); } catch (e) {}
             function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
@@ -248,6 +275,7 @@
               b.setAttribute('aria-pressed', 'true');
               scene.className = 'oc-scene ' + t;
               [].forEach.call(skies, function (x) { x.classList.toggle('on', x.classList.contains(t)); });
+              [].forEach.call(panes, function (x) { x.classList.toggle('on', x.getAttribute('data-pane') === t); });
               var d = data[t];
               info.innerHTML = (d[0] ? '<h3>' + esc(d[0]) + '</h3>' : '') + '<p><b>Wear it to:</b> ' + esc(d[1]) + '</p><p><b>Pair it with:</b> ' + esc(d[2]) + '</p>';
             });
@@ -271,8 +299,13 @@
             <div class="oc-ground"></div>
             {%- for block in fit_items -%}
               <div class="oc-fit__pane {{ block.settings.size }}{% if block.id == first_fit.id %} on{% endif %}" data-pane="{{ block.id }}">
-                {%- if block.settings.image != blank -%}
-                  {{ block.settings.image | image_url: width: 1400 | image_tag: widths: '600, 900, 1200, 1400', sizes: '(min-width: 769px) 50vw, 100vw', loading: 'lazy', alt: block.settings.label }}
+                {%- assign fpic_d = block.settings.image | default: block.settings.image_mobile -%}
+                {%- assign fpic_m = block.settings.image_mobile | default: block.settings.image -%}
+                {%- if fpic_d != blank -%}
+                  <picture>
+                    <source media="(max-width: 768px)" sizes="100vw" srcset="{{ fpic_m | image_url: width: 540 }} 540w, {{ fpic_m | image_url: width: 810 }} 810w, {{ fpic_m | image_url: width: 1080 }} 1080w">
+                    {{ fpic_d | image_url: width: 1600 | image_tag: widths: '800, 1200, 1600', sizes: '(min-width: 769px) 58vw, 100vw', loading: 'lazy', alt: block.settings.label }}
+                  </picture>
                 {%- else -%}
                   <svg viewBox="0 0 200 240" role="img" aria-label="{{ block.settings.label | escape }}">
                     <path class="g oc-fill" d="M70 30 Q100 50 130 30 L172 52 L156 88 L138 76 L138 200 L62 200 L62 76 L44 88 L28 52 Z" stroke-width="1.5" stroke-linejoin="round"/>
@@ -407,6 +440,12 @@
   .oc-hours--stack .oc-opt { font: inherit; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 20px; border: 1px solid var(--oc-line); background: #fff; color: var(--oc-dark); border-radius: 2px; cursor: pointer; }
   .oc-hours--stack .oc-opt[aria-pressed="true"] { outline: 2px solid var(--oc-accent); outline-offset: 2px; }
 
+  /* Time-of-day photos: fixed ratio, one pane per button, cross-fade */
+  .oc-hours--stack .oc-scene { height: auto; aspect-ratio: 21 / 9; }
+  .oc-hours__pane { position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease; z-index: 2; }
+  .oc-hours__pane.on { opacity: 1; }
+  .oc-hours__pane img { width: 100%; height: 100%; object-fit: cover; }
+
   /* Version B: scene left, buttons + info on the right */
   .oc-hours--side .oc-hours__layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: stretch; }
   .oc-hours--side .oc-scene { height: auto; min-height: 380px; }
@@ -435,11 +474,22 @@
     .oc-white { padding: 64px min(var(--oc-gutter, 20px), 20px); }
     .oc-ethos__grid { grid-template-columns: 1fr; }
     .oc-details__gallery { grid-template-columns: 1fr; }
+    .oc-hours--stack .oc-scene { aspect-ratio: 4 / 5; }
     .oc-hours--side .oc-hours__layout { grid-template-columns: 1fr; }
     .oc-hours--side .oc-scene { min-height: 320px; }
     .oc-hours--side .oc-hours__side { margin-top: 0; }
     .oc-hours--side .oc-times { flex-direction: row; flex-wrap: wrap; }
     .oc-hours--side .oc-opt { flex: 1 1 auto; text-align: center; padding: 14px 16px; }
+  }
+
+  /* Up Close: photos crop to the same ratio as the illustrations */
+  .oc-frame__img { aspect-ratio: 300 / 340; overflow: hidden; }
+  .oc-frame__img img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Fit & Form: fixed photo ratio (desktop 4:3, mobile 4:5) */
+  .oc-fit .oc-scene--fit { min-height: 0; aspect-ratio: 4 / 3; }
+  @media (max-width: 768px) {
+    .oc-fit .oc-scene--fit { min-height: 0; aspect-ratio: 4 / 5; }
   }
 {% endstylesheet %}
 
@@ -478,11 +528,11 @@
     { "type": "text", "id": "why_heading", "label": "Heading", "default": "What this means" },
     { "type": "text", "id": "why_heading_em", "label": "Heading (accent word)", "default": "for you" },
 
-    { "type": "header", "content": "One piece, different bodies" },
+    { "type": "header", "content": "One piece, many ways (time of day)" },
     { "type": "text", "id": "hours_eyebrow", "label": "Eyebrow", "default": "Versatility" },
     { "type": "text", "id": "hours_heading", "label": "Heading", "default": "One piece," },
     { "type": "text", "id": "hours_heading_em", "label": "Heading (accent word)", "default": "many ways" },
-    { "type": "textarea", "id": "hours_sub", "label": "Subtext", "default": "The same garment, worn by different women. See how the fit, fall and silhouette come together on different body shapes." },
+    { "type": "textarea", "id": "hours_sub", "label": "Subtext", "default": "From slow mornings to evening plans, see how one piece fits into different parts of your day." },
 
     { "type": "header", "content": "Fit & Form (last section)" },
     { "type": "text", "id": "fit_eyebrow", "label": "Eyebrow", "default": "Fit & Form" },
@@ -518,6 +568,7 @@
             { "value": "hem", "label": "Hand-finished hem" },
             { "value": "button", "label": "Sewn button" }
           ] },
+        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Optional. Recommended: 1200 × 1360 px (300:340). Same photo is used on desktop and mobile. Shown instead of the illustration." },
         { "type": "text", "id": "caption", "label": "Caption", "default": "Fabric detailing" },
         { "type": "text", "id": "subcaption", "label": "Sub-caption", "default": "Thoughtful textures and layers" }
       ]
@@ -542,6 +593,8 @@
             { "value": "midday", "label": "Midday" },
             { "value": "evening", "label": "Evening" }
           ] },
+        { "type": "image_picker", "id": "image", "label": "Photo (desktop)", "info": "Optional. Recommended: 2400 × 1030 px (21:9). Shown instead of the illustration. Used on mobile too if no mobile photo is set." },
+        { "type": "image_picker", "id": "image_mobile", "label": "Photo (mobile)", "info": "Optional. Recommended: 1080 × 1350 px (4:5, portrait). Shown on screens 768px and narrower." },
         { "type": "text", "id": "label", "label": "Button label", "default": "Morning" },
         { "type": "text", "id": "title", "label": "Title (optional)", "info": "Leave empty to hide the title." },
         { "type": "text", "id": "wear", "label": "Wear it to", "default": "morning coffee, running errands or heading to work." },
@@ -559,7 +612,8 @@
             { "value": "mid", "label": "Mid-size" },
             { "value": "plus", "label": "Plus-size" }
           ] },
-        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Optional. Shown instead of the illustration." },
+        { "type": "image_picker", "id": "image", "label": "Photo (desktop)", "info": "Optional. Recommended: 1600 × 1200 px (4:3). Shown instead of the illustration. Used on mobile too if no mobile photo is set." },
+        { "type": "image_picker", "id": "image_mobile", "label": "Photo (mobile)", "info": "Optional. Recommended: 1080 × 1350 px (4:5, portrait). Shown on screens 768px and narrower." },
         { "type": "text", "id": "label", "label": "Button label", "default": "Mid-size" },
         { "type": "textarea", "id": "text", "label": "The fit", "default": "See how the same garment looks on a mid-size frame, with its natural shape and drape." }
       ]
