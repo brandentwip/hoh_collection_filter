@@ -169,6 +169,7 @@
           "type": "hour",
           "settings": {
             "time": "midday",
+            "image": "shopify://shop_images/HOH.png",
             "label": "Midday",
             "title": "",
             "wear": "lunch plans, a day at work or a little running around.",
