@@ -141,7 +141,12 @@
                     <path class="oc-stroke" d="M132 152L168 188M168 152L132 188" stroke-width="2.5" fill="none" stroke-linecap="round"/>
                   </svg>
               {%- endcase -%}
-              <figcaption>{{ block.settings.caption | escape }}</figcaption>
+              <figcaption>
+                <span class="oc-frame__title">{{ block.settings.caption | escape }}</span>
+                {%- if block.settings.subcaption != blank -%}
+                  <span class="oc-frame__sub">{{ block.settings.subcaption | escape }}</span>
+                {%- endif -%}
+              </figcaption>
             </figure>
           {%- endfor -%}
         </div>
@@ -170,7 +175,7 @@
     </section>
   {%- endif -%}
 
-  {%- comment -%} ONE PIECE, EVERY HOUR — two versions. A: buttons below the scene. B: buttons on the right. {%- endcomment -%}
+  {%- comment -%} ONE PIECE, MANY WAYS — two versions. A: buttons below the scene. B: buttons on the right. {%- endcomment -%}
   {%- for variant in (1..2) -%}
     {%- if variant == 1 -%}
       {%- assign items = hour_items -%}
@@ -221,9 +226,9 @@
               </div>
 
               <div class="oc-tinfo" data-info aria-live="polite">
-                <h3>{{ first_hour.settings.title | escape }}</h3>
+                {%- if first_hour.settings.title != blank -%}<h3>{{ first_hour.settings.title | escape }}</h3>{%- endif -%}
                 <p><b>Wear it to:</b> {{ first_hour.settings.wear | escape }}</p>
-                <p><b>Style it with:</b> {{ first_hour.settings.style | escape }}</p>
+                <p><b>Pair it with:</b> {{ first_hour.settings.style | escape }}</p>
               </div>
             </div>
           </div>
@@ -249,7 +254,7 @@
               var skies = scene.querySelectorAll('.oc-sky');
               var data = {};
               try { data = JSON.parse(root.querySelector('[data-hours]').textContent); } catch (e) {}
-              function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+              function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
               box.addEventListener('click', function (e) {
                 var b = e.target.closest('button');
                 if (!b || !data[b.dataset.t]) return;
@@ -259,7 +264,7 @@
                 scene.className = 'oc-scene ' + t;
                 [].forEach.call(skies, function (x) { x.classList.toggle('on', x.classList.contains(t)); });
                 var d = data[t];
-                info.innerHTML = '<h3>' + esc(d[0]) + '</h3><p><b>Wear it to:</b> ' + esc(d[1]) + '</p><p><b>Style it with:</b> ' + esc(d[2]) + '</p>';
+                info.innerHTML = (d[0] ? '<h3>' + esc(d[0]) + '</h3>' : '') + '<p><b>Wear it to:</b> ' + esc(d[1]) + '</p><p><b>Pair it with:</b> ' + esc(d[2]) + '</p>';
               });
             })();
           </script>
@@ -304,7 +309,9 @@
   .oc-details__gallery { display: grid; gap: 18px; margin-top: 32px; grid-template-columns: repeat(3, 1fr); }
   .oc-frame { background: var(--oc-bg); border: 1px solid var(--oc-line); border-radius: 4px; overflow: hidden; margin: 0; }
   .oc-frame svg { display: block; width: 100%; height: auto; }
-  .oc-frame figcaption { padding: 14px 18px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oc-mid); border-top: 1px solid var(--oc-line); background: #fff; }
+  .oc-frame figcaption { display: flex; flex-direction: column; gap: 6px; padding: 14px 18px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oc-mid); border-top: 1px solid var(--oc-line); background: #fff; }
+  .oc-frame__title { color: var(--oc-dark); font-weight: 500; }
+  .oc-frame__sub { font-size: 13px; letter-spacing: 0; text-transform: none; line-height: 1.6; }
   .oc-stroke { stroke: var(--oc-accent); }
   .oc-fill { fill: var(--oc-accent); }
   .oc-stitch { stroke: var(--oc-accent); stroke-width: 2; fill: none; stroke-dasharray: 7 9; stroke-linecap: round; animation: oc-run 5s linear infinite; }
@@ -317,7 +324,7 @@
   .oc-benefits b { display: block; font-family: var(--oc-serif); font-weight: 500; font-size: 20px; line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 4px; }
   .oc-benefits li > div > span { color: var(--oc-mid); font-size: 14px; line-height: 1.75; display: block; }
 
-  /* One piece, every hour */
+  /* One piece, many ways */
   .oc-hours__sub { color: var(--oc-mid); max-width: 560px; font-size: 14px; line-height: 1.8; }
   .oc-hours__layout { margin-top: 30px; }
   .oc-scene { position: relative; height: 320px; border-radius: 4px; overflow: hidden; border: 1px solid var(--oc-line); --gs: #1A1A18; }
@@ -390,8 +397,8 @@
 
     { "type": "header", "content": "Our ethos" },
     { "type": "text", "id": "ethos_eyebrow", "label": "Eyebrow", "default": "Our Ethos" },
-    { "type": "text", "id": "ethos_heading", "label": "Heading", "default": "Four quiet" },
-    { "type": "text", "id": "ethos_heading_em", "label": "Heading (accent word)", "default": "promises" },
+    { "type": "text", "id": "ethos_heading", "label": "Heading", "default": "The thought behind" },
+    { "type": "text", "id": "ethos_heading_em", "label": "Heading (accent word)", "default": "every piece" },
 
     { "type": "header", "content": "The details you feel" },
     { "type": "text", "id": "details_eyebrow", "label": "Eyebrow", "default": "Up Close" },
@@ -403,17 +410,17 @@
     { "type": "text", "id": "why_heading", "label": "Heading", "default": "What this means" },
     { "type": "text", "id": "why_heading_em", "label": "Heading (accent word)", "default": "for you" },
 
-    { "type": "header", "content": "One piece, every hour (1st)" },
+    { "type": "header", "content": "One piece, many ways (1st)" },
     { "type": "text", "id": "hours_eyebrow", "label": "Eyebrow", "default": "Versatility" },
     { "type": "text", "id": "hours_heading", "label": "Heading", "default": "One piece," },
-    { "type": "text", "id": "hours_heading_em", "label": "Heading (accent word)", "default": "every hour" },
-    { "type": "textarea", "id": "hours_sub", "label": "Subtext", "default": "The same garment, from the first coffee to the last light. Choose a time of day and see how it moves with you." },
+    { "type": "text", "id": "hours_heading_em", "label": "Heading (accent word)", "default": "many ways" },
+    { "type": "textarea", "id": "hours_sub", "label": "Subtext", "default": "From slow mornings to evening plans, see how one piece fits into different parts of your day." },
 
-    { "type": "header", "content": "One piece, every hour (2nd)" },
+    { "type": "header", "content": "One piece, many ways (2nd)" },
     { "type": "text", "id": "hours2_eyebrow", "label": "Eyebrow", "default": "Versatility" },
     { "type": "text", "id": "hours2_heading", "label": "Heading", "default": "One piece," },
-    { "type": "text", "id": "hours2_heading_em", "label": "Heading (accent word)", "default": "every hour" },
-    { "type": "textarea", "id": "hours2_sub", "label": "Subtext", "default": "The same garment, from the first coffee to the last light. Choose a time of day and see how it moves with you." }
+    { "type": "text", "id": "hours2_heading_em", "label": "Heading (accent word)", "default": "many ways" },
+    { "type": "textarea", "id": "hours2_sub", "label": "Subtext", "default": "From slow mornings to evening plans, see how one piece fits into different parts of your day." }
   ],
   "blocks": [
     {
@@ -428,7 +435,7 @@
             { "value": "leaf", "label": "Leaf" },
             { "value": "star", "label": "Star" }
           ] },
-        { "type": "text", "id": "title", "label": "Title", "default": "Small batch" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Made in small batches" },
         { "type": "textarea", "id": "text", "label": "Text", "default": "Describe this promise." }
       ]
     },
@@ -443,7 +450,8 @@
             { "value": "hem", "label": "Hand-finished hem" },
             { "value": "button", "label": "Sewn button" }
           ] },
-        { "type": "text", "id": "caption", "label": "Caption", "default": "Light, breathable weave" }
+        { "type": "text", "id": "caption", "label": "Caption", "default": "Fabric detailing" },
+        { "type": "text", "id": "subcaption", "label": "Sub-caption", "default": "Thoughtful textures and layers" }
       ]
     },
     {
@@ -463,13 +471,13 @@
         { "type": "select", "id": "time", "label": "Scene", "default": "morning",
           "options": [
             { "value": "morning", "label": "Morning" },
-            { "value": "midday", "label": "Noon" },
+            { "value": "midday", "label": "Midday" },
             { "value": "evening", "label": "Evening" }
           ] },
         { "type": "text", "id": "label", "label": "Button label", "default": "Morning" },
-        { "type": "text", "id": "title", "label": "Title", "default": "A slow, easy start" },
-        { "type": "text", "id": "wear", "label": "Wear it to", "default": "morning coffee, the commute, an early meeting." },
-        { "type": "text", "id": "style", "label": "Style it with", "default": "flats and a simple canvas bag." }
+        { "type": "text", "id": "title", "label": "Title (optional)", "info": "Leave empty to hide the title." },
+        { "type": "text", "id": "wear", "label": "Wear it to", "default": "morning coffee, running errands or heading to work." },
+        { "type": "text", "id": "style", "label": "Pair it with", "default": "comfortable flats and an everyday tote." }
       ]
     },
     {
@@ -480,13 +488,13 @@
         { "type": "select", "id": "time", "label": "Scene", "default": "morning",
           "options": [
             { "value": "morning", "label": "Morning" },
-            { "value": "midday", "label": "Noon" },
+            { "value": "midday", "label": "Midday" },
             { "value": "evening", "label": "Evening" }
           ] },
         { "type": "text", "id": "label", "label": "Button label", "default": "Morning" },
-        { "type": "text", "id": "title", "label": "Title", "default": "A slow, easy start" },
-        { "type": "text", "id": "wear", "label": "Wear it to", "default": "morning coffee, the commute, an early meeting." },
-        { "type": "text", "id": "style", "label": "Style it with", "default": "flats and a simple canvas bag." }
+        { "type": "text", "id": "title", "label": "Title (optional)", "info": "Leave empty to hide the title." },
+        { "type": "text", "id": "wear", "label": "Wear it to", "default": "morning coffee, running errands or heading to work." },
+        { "type": "text", "id": "style", "label": "Pair it with", "default": "comfortable flats and an everyday tote." }
       ]
     }
   ],
@@ -494,27 +502,27 @@
     {
       "name": "ourcrafttest",
       "blocks": [
-        { "type": "ethos", "settings": { "icon": "rings", "title": "Small batch", "text": "We make in limited numbers, never in thousands. Fewer pieces means more attention in each one, and nothing made to sit unloved on a shelf." } },
-        { "type": "ethos", "settings": { "icon": "cross", "title": "Made around you", "text": "Length, sleeve, neckline, fit. Your garment can be adjusted to your body and your taste, because you are not a standard size." } },
-        { "type": "ethos", "settings": { "icon": "leaf", "title": "Breathable cloth", "text": "Light, soft, easy fabrics chosen to move with you through long days and warm evenings, comfort that you forget you are wearing." } },
-        { "type": "ethos", "settings": { "icon": "star", "title": "Details that count", "text": "A hand-finished hem, a considered button, a seam that lies flat. The small things are the ones you notice and keep noticing." } },
+        { "type": "ethos", "settings": { "icon": "rings", "title": "Made in small batches", "text": "We don't make hundreds of the same piece. Each style is made in limited numbers, giving us more time to focus on the little things and make every piece with care." } },
+        { "type": "ethos", "settings": { "icon": "cross", "title": "Made to fit you", "text": "Whether it's the length, sleeves, neckline or fit, we can make small changes to suit you. After all, clothes should fit you, not the other way around." } },
+        { "type": "ethos", "settings": { "icon": "leaf", "title": "Fabrics you'll love wearing", "text": "We choose fabrics that feel soft, light and comfortable against the skin. The kind you can wear all day and feel good in, even on warmer days." } },
+        { "type": "ethos", "settings": { "icon": "star", "title": "It's all in the details", "text": "From the way a hem is finished to the buttons we choose, we pay attention to the little things. They may seem small, but they make all the difference." } },
 
-        { "type": "detail", "settings": { "illustration": "weave", "caption": "Light, breathable weave" } },
-        { "type": "detail", "settings": { "illustration": "hem", "caption": "Hand-finished hem" } },
-        { "type": "detail", "settings": { "illustration": "button", "caption": "A considered button" } },
+        { "type": "detail", "settings": { "illustration": "hem", "caption": "Hand embroidery", "subcaption": "Intricate work, done by hand" } },
+        { "type": "detail", "settings": { "illustration": "weave", "caption": "Fabric detailing", "subcaption": "Thoughtful textures and layers" } },
+        { "type": "detail", "settings": { "illustration": "button", "caption": "Hand-finished construction", "subcaption": "Every seam and edge, carefully finished" } },
 
-        { "type": "benefit", "settings": { "title": "A fit that is truly yours", "text": "Made to your measurements and preferences, so you stop settling for “almost right”." } },
-        { "type": "benefit", "settings": { "title": "Comfort from the first wear", "text": "Light, breathable fabrics that stay easy through long days and warm weather." } },
-        { "type": "benefit", "settings": { "title": "Pieces that last", "text": "Careful hand finishing means seams and details that hold up wear after wear." } },
-        { "type": "benefit", "settings": { "title": "Never one of a crowd", "text": "Small batches and personal choices mean you are unlikely to meet your outfit on someone else." } },
-        { "type": "benefit", "settings": { "title": "A maker you can talk to", "text": "Tell us what you need directly. A real person listens and makes it." } },
+        { "type": "benefit", "settings": { "title": "A fit that feels right", "text": "Your measurements and preferences are taken into account, so the final piece feels like it was made for you." } },
+        { "type": "benefit", "settings": { "title": "Comfort you can count on", "text": "Easy, breathable fabrics that feel good on the skin and are comfortable enough to wear all day." } },
+        { "type": "benefit", "settings": { "title": "Made to be worn again and again", "text": "Thoughtful construction and careful finishing help your clothes hold up, wear after wear." } },
+        { "type": "benefit", "settings": { "title": "Something a little more personal", "text": "With limited pieces and the option to make changes, your outfit feels less like something picked off a rack." } },
+        { "type": "benefit", "settings": { "title": "A more personal experience", "text": "You can speak directly with the people making your clothes, share what you have in mind and be part of the process." } },
 
-        { "type": "hour", "settings": { "time": "morning", "label": "Morning", "title": "A slow, easy start", "wear": "morning coffee, the commute, an early meeting.", "style": "flats and a simple canvas bag." } },
-        { "type": "hour", "settings": { "time": "midday", "label": "Noon", "title": "Easy, bright hours", "wear": "long lunches, errands, a busy workday.", "style": "rolled sleeves, a light belt and sunglasses." } },
-        { "type": "hour", "settings": { "time": "evening", "label": "Evening", "title": "Golden hour, dressed up", "wear": "dinner with family, a gathering, an evening out.", "style": "statement earrings and a soft shawl." } },
-        { "type": "hour_alt", "settings": { "time": "morning", "label": "Morning", "title": "A slow, easy start", "wear": "morning coffee, the commute, an early meeting.", "style": "flats and a simple canvas bag." } },
-        { "type": "hour_alt", "settings": { "time": "midday", "label": "Noon", "title": "Easy, bright hours", "wear": "long lunches, errands, a busy workday.", "style": "rolled sleeves, a light belt and sunglasses." } },
-        { "type": "hour_alt", "settings": { "time": "evening", "label": "Evening", "title": "Golden hour, dressed up", "wear": "dinner with family, a gathering, an evening out.", "style": "statement earrings and a soft shawl." } }
+        { "type": "hour", "settings": { "time": "morning", "label": "Morning", "wear": "morning coffee, running errands or heading to work.", "style": "comfortable flats and an everyday tote." } },
+        { "type": "hour", "settings": { "time": "midday", "label": "Midday", "wear": "lunch plans, a day at work or a little running around.", "style": "rolled-up sleeves, a simple belt and your favourite sunglasses." } },
+        { "type": "hour", "settings": { "time": "evening", "label": "Evening", "wear": "dinner with family, get-togethers or an evening out.", "style": "statement earrings and comfortable heels." } },
+        { "type": "hour_alt", "settings": { "time": "morning", "label": "Morning", "wear": "morning coffee, running errands or heading to work.", "style": "comfortable flats and an everyday tote." } },
+        { "type": "hour_alt", "settings": { "time": "midday", "label": "Midday", "wear": "lunch plans, a day at work or a little running around.", "style": "rolled-up sleeves, a simple belt and your favourite sunglasses." } },
+        { "type": "hour_alt", "settings": { "time": "evening", "label": "Evening", "wear": "dinner with family, get-togethers or an evening out.", "style": "statement earrings and comfortable heels." } }
       ]
     }
   ]
