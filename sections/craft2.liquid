@@ -12,7 +12,7 @@
 {%- assign detail_items = section.blocks | where: 'type', 'detail' -%}
 {%- assign benefit_items = section.blocks | where: 'type', 'benefit' -%}
 {%- assign hour_items = section.blocks | where: 'type', 'hour' -%}
-{%- assign hour_alt_items = section.blocks | where: 'type', 'hour_alt' -%}
+{%- assign fit_items = section.blocks | where: 'type', 'fit' -%}
 
 <div class="oc" style="--oc-gutter: {{ section.settings.side_padding | default: 50 }}px; --oc-hero-h: {{ section.settings.hero_height }}; --oc-hero-opacity: {{ section.settings.hero_opacity | divided_by: 100.0 }}; --oc-accent: {{ section.settings.accent_color | default: '#A8553A' }};">
 
@@ -175,103 +175,161 @@
     </section>
   {%- endif -%}
 
-  {%- comment -%} ONE PIECE, MANY WAYS — two versions. A: buttons below the scene. B: buttons on the right. {%- endcomment -%}
-  {%- for variant in (1..2) -%}
-    {%- if variant == 1 -%}
-      {%- assign items = hour_items -%}
-      {%- assign p = 'hours' -%}
-      {%- assign layout = 'oc-hours--stack' -%}
-    {%- else -%}
-      {%- assign items = hour_alt_items -%}
-      {%- if items.size == 0 -%}{%- assign items = hour_items -%}{%- endif -%}
-      {%- assign p = 'hours2' -%}
-      {%- assign layout = 'oc-hours--side' -%}
-    {%- endif -%}
-    {%- assign k_eyebrow = p | append: '_eyebrow' -%}
-    {%- assign k_heading = p | append: '_heading' -%}
-    {%- assign k_heading_em = p | append: '_heading_em' -%}
-    {%- assign k_sub = p | append: '_sub' -%}
-    {%- assign first_hour = blank -%}
-    {%- for b in items -%}
-      {%- if b.settings.time != 'night' and first_hour == blank -%}{%- assign first_hour = b -%}{%- endif -%}
-    {%- endfor -%}
-    {%- if first_hour != blank -%}
-      <section class="oc-white oc-hours {{ layout }}" id="oc-hours-{{ section.id }}-{{ variant }}">
-        <div class="oc-wrap oc-wrap--wide">
-          <p class="oc-eyebrow">{{ section.settings[k_eyebrow] | escape }}</p>
-          <h2 class="oc-h2">{{ section.settings[k_heading] | escape }} <em>{{ section.settings[k_heading_em] | escape }}</em></h2>
-          {%- if section.settings[k_sub] != blank -%}<p class="oc-hours__sub">{{ section.settings[k_sub] | escape }}</p>{%- endif -%}
+  {%- comment -%} ONE PIECE, MANY WAYS {%- endcomment -%}
+  {%- assign first_hour = blank -%}
+  {%- for b in hour_items -%}
+    {%- if b.settings.time != 'night' and first_hour == blank -%}{%- assign first_hour = b -%}{%- endif -%}
+  {%- endfor -%}
+  {%- if first_hour != blank -%}
+    <section class="oc-white oc-hours oc-hours--stack" id="oc-hours-{{ section.id }}">
+      <div class="oc-wrap oc-wrap--wide">
+        <p class="oc-eyebrow">{{ section.settings.hours_eyebrow | escape }}</p>
+        <h2 class="oc-h2">{{ section.settings.hours_heading | escape }} <em>{{ section.settings.hours_heading_em | escape }}</em></h2>
+        {%- if section.settings.hours_sub != blank -%}<p class="oc-hours__sub">{{ section.settings.hours_sub | escape }}</p>{%- endif -%}
 
-          <div class="oc-hours__layout">
-            <div class="oc-scene {{ first_hour.settings.time }}" data-scene>
-              <div class="oc-sky morning{% if first_hour.settings.time == 'morning' %} on{% endif %}"></div>
-              <div class="oc-sky midday{% if first_hour.settings.time == 'midday' %} on{% endif %}"></div>
-              <div class="oc-sky evening{% if first_hour.settings.time == 'evening' %} on{% endif %}"></div>
-              <div class="oc-orb"></div>
-              <div class="oc-ground"></div>
-              <svg viewBox="0 0 200 240" role="img" aria-label="The same garment shown through the day">
-                <path class="g oc-fill" d="M70 30 Q100 50 130 30 L172 52 L156 88 L138 76 L138 200 L62 200 L62 76 L44 88 L28 52 Z" stroke-width="1.5" stroke-linejoin="round"/>
-                <path class="g" d="M70 30 Q100 56 130 30" fill="none" stroke-width="1.5"/>
-                <path d="M62 190H138" fill="none" stroke="#fff" stroke-width="1.8" stroke-dasharray="5 5"/>
-              </svg>
-            </div>
-
-            <div class="oc-hours__side">
-              <div class="oc-times" data-times>
-                {%- for block in items -%}
-                  {%- unless block.settings.time == 'night' -%}
-                    <button type="button" class="oc-opt" data-t="{{ block.settings.time }}" aria-pressed="{% if block.id == first_hour.id %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</button>
-                  {%- endunless -%}
-                {%- endfor -%}
-              </div>
-
-              <div class="oc-tinfo" data-info aria-live="polite">
-                {%- if first_hour.settings.title != blank -%}<h3>{{ first_hour.settings.title | escape }}</h3>{%- endif -%}
-                <p><b>Wear it to:</b> {{ first_hour.settings.wear | escape }}</p>
-                <p><b>Pair it with:</b> {{ first_hour.settings.style | escape }}</p>
-              </div>
-            </div>
+        <div class="oc-hours__layout">
+          <div class="oc-scene {{ first_hour.settings.time }}" data-scene>
+            <div class="oc-sky morning{% if first_hour.settings.time == 'morning' %} on{% endif %}"></div>
+            <div class="oc-sky midday{% if first_hour.settings.time == 'midday' %} on{% endif %}"></div>
+            <div class="oc-sky evening{% if first_hour.settings.time == 'evening' %} on{% endif %}"></div>
+            <div class="oc-orb"></div>
+            <div class="oc-ground"></div>
+            <svg viewBox="0 0 200 240" role="img" aria-label="The same garment shown through the day">
+              <path class="g oc-fill" d="M70 30 Q100 50 130 30 L172 52 L156 88 L138 76 L138 200 L62 200 L62 76 L44 88 L28 52 Z" stroke-width="1.5" stroke-linejoin="round"/>
+              <path class="g" d="M70 30 Q100 56 130 30" fill="none" stroke-width="1.5"/>
+              <path d="M62 190H138" fill="none" stroke="#fff" stroke-width="1.8" stroke-dasharray="5 5"/>
+            </svg>
           </div>
 
-          <script type="application/json" data-hours>
-            {
-              {%- assign sep = '' -%}
-              {%- for block in items -%}
+          <div class="oc-hours__side">
+            <div class="oc-times" data-times>
+              {%- for block in hour_items -%}
                 {%- unless block.settings.time == 'night' -%}
-                  {{ sep }}{{ block.settings.time | json }}: [{{ block.settings.title | json }}, {{ block.settings.wear | json }}, {{ block.settings.style | json }}]
-                  {%- assign sep = ',' -%}
+                  <button type="button" class="oc-opt" data-t="{{ block.settings.time }}" aria-pressed="{% if block.id == first_hour.id %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</button>
                 {%- endunless -%}
               {%- endfor -%}
-            }
-          </script>
-          <script>
-            (function () {
-              var root = document.getElementById('oc-hours-{{ section.id }}-{{ variant }}');
-              if (!root) return;
-              var scene = root.querySelector('[data-scene]');
-              var box = root.querySelector('[data-times]');
-              var info = root.querySelector('[data-info]');
-              var skies = scene.querySelectorAll('.oc-sky');
-              var data = {};
-              try { data = JSON.parse(root.querySelector('[data-hours]').textContent); } catch (e) {}
-              function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
-              box.addEventListener('click', function (e) {
-                var b = e.target.closest('button');
-                if (!b || !data[b.dataset.t]) return;
-                var t = b.dataset.t;
-                [].forEach.call(box.children, function (x) { x.setAttribute('aria-pressed', 'false'); });
-                b.setAttribute('aria-pressed', 'true');
-                scene.className = 'oc-scene ' + t;
-                [].forEach.call(skies, function (x) { x.classList.toggle('on', x.classList.contains(t)); });
-                var d = data[t];
-                info.innerHTML = (d[0] ? '<h3>' + esc(d[0]) + '</h3>' : '') + '<p><b>Wear it to:</b> ' + esc(d[1]) + '</p><p><b>Pair it with:</b> ' + esc(d[2]) + '</p>';
-              });
-            })();
-          </script>
+            </div>
+
+            <div class="oc-tinfo" data-info aria-live="polite">
+              {%- if first_hour.settings.title != blank -%}<h3>{{ first_hour.settings.title | escape }}</h3>{%- endif -%}
+              <p><b>Wear it to:</b> {{ first_hour.settings.wear | escape }}</p>
+              <p><b>Pair it with:</b> {{ first_hour.settings.style | escape }}</p>
+            </div>
+          </div>
         </div>
-      </section>
-    {%- endif -%}
-  {%- endfor -%}
+
+        <script type="application/json" data-hours>
+          {
+            {%- assign sep = '' -%}
+            {%- for block in hour_items -%}
+              {%- unless block.settings.time == 'night' -%}
+                {{ sep }}{{ block.settings.time | json }}: [{{ block.settings.title | json }}, {{ block.settings.wear | json }}, {{ block.settings.style | json }}]
+                {%- assign sep = ',' -%}
+              {%- endunless -%}
+            {%- endfor -%}
+          }
+        </script>
+        <script>
+          (function () {
+            var root = document.getElementById('oc-hours-{{ section.id }}');
+            if (!root) return;
+            var scene = root.querySelector('[data-scene]');
+            var box = root.querySelector('[data-times]');
+            var info = root.querySelector('[data-info]');
+            var skies = scene.querySelectorAll('.oc-sky');
+            var data = {};
+            try { data = JSON.parse(root.querySelector('[data-hours]').textContent); } catch (e) {}
+            function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+            box.addEventListener('click', function (e) {
+              var b = e.target.closest('button');
+              if (!b || !data[b.dataset.t]) return;
+              var t = b.dataset.t;
+              [].forEach.call(box.children, function (x) { x.setAttribute('aria-pressed', 'false'); });
+              b.setAttribute('aria-pressed', 'true');
+              scene.className = 'oc-scene ' + t;
+              [].forEach.call(skies, function (x) { x.classList.toggle('on', x.classList.contains(t)); });
+              var d = data[t];
+              info.innerHTML = (d[0] ? '<h3>' + esc(d[0]) + '</h3>' : '') + '<p><b>Wear it to:</b> ' + esc(d[1]) + '</p><p><b>Pair it with:</b> ' + esc(d[2]) + '</p>';
+            });
+          })();
+        </script>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} FIT & FORM — ONE PIECE, DIFFERENT BODIES {%- endcomment -%}
+  {%- if fit_items.size > 0 -%}
+    {%- assign first_fit = fit_items | first -%}
+    <section class="oc-white oc-hours oc-hours--side oc-fit" id="oc-fit-{{ section.id }}">
+      <div class="oc-wrap oc-wrap--wide">
+        <p class="oc-eyebrow">{{ section.settings.fit_eyebrow | escape }}</p>
+        <h2 class="oc-h2">{{ section.settings.fit_heading | escape }} <em>{{ section.settings.fit_heading_em | escape }}</em></h2>
+        {%- if section.settings.fit_sub != blank -%}<p class="oc-hours__sub">{{ section.settings.fit_sub | escape }}</p>{%- endif -%}
+
+        <div class="oc-hours__layout">
+          <div class="oc-scene oc-scene--fit">
+            <div class="oc-ground"></div>
+            {%- for block in fit_items -%}
+              <div class="oc-fit__pane {{ block.settings.size }}{% if block.id == first_fit.id %} on{% endif %}" data-pane="{{ block.id }}">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1400 | image_tag: widths: '600, 900, 1200, 1400', sizes: '(min-width: 769px) 50vw, 100vw', loading: 'lazy', alt: block.settings.label }}
+                {%- else -%}
+                  <svg viewBox="0 0 200 240" role="img" aria-label="{{ block.settings.label | escape }}">
+                    <path class="g oc-fill" d="M70 30 Q100 50 130 30 L172 52 L156 88 L138 76 L138 200 L62 200 L62 76 L44 88 L28 52 Z" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path class="g" d="M70 30 Q100 56 130 30" fill="none" stroke-width="1.5"/>
+                    <path d="M62 190H138" fill="none" stroke="#fff" stroke-width="1.8" stroke-dasharray="5 5"/>
+                  </svg>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div class="oc-hours__side">
+            <div class="oc-times" data-times>
+              {%- for block in fit_items -%}
+                <button type="button" class="oc-opt" data-t="{{ block.id }}" aria-pressed="{% if block.id == first_fit.id %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</button>
+              {%- endfor -%}
+            </div>
+
+            <div class="oc-tinfo" data-info aria-live="polite">
+              <p><b>The fit:</b> {{ first_fit.settings.text | escape }}</p>
+            </div>
+          </div>
+        </div>
+
+        <script type="application/json" data-fit>
+          {
+            {%- assign sep = '' -%}
+            {%- for block in fit_items -%}
+              {{ sep }}{{ block.id | json }}: {{ block.settings.text | json }}
+              {%- assign sep = ',' -%}
+            {%- endfor -%}
+          }
+        </script>
+        <script>
+          (function () {
+            var root = document.getElementById('oc-fit-{{ section.id }}');
+            if (!root) return;
+            var box = root.querySelector('[data-times]');
+            var info = root.querySelector('[data-info]');
+            var panes = root.querySelectorAll('.oc-fit__pane');
+            var data = {};
+            try { data = JSON.parse(root.querySelector('[data-fit]').textContent); } catch (e) {}
+            function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+            box.addEventListener('click', function (e) {
+              var b = e.target.closest('button');
+              if (!b || !(b.dataset.t in data)) return;
+              var t = b.dataset.t;
+              [].forEach.call(box.children, function (x) { x.setAttribute('aria-pressed', 'false'); });
+              b.setAttribute('aria-pressed', 'true');
+              [].forEach.call(panes, function (x) { x.classList.toggle('on', x.getAttribute('data-pane') === t); });
+              info.innerHTML = '<p><b>The fit:</b> ' + esc(data[t]) + '</p>';
+            });
+          })();
+        </script>
+      </div>
+    </section>
+  {%- endif -%}
 </div>
 
 {% stylesheet %}
@@ -360,6 +418,16 @@
   .oc-hours--side .oc-opt[aria-pressed="true"] { background: var(--oc-accent); border-color: var(--oc-accent); color: #fff; }
   .oc-hours--side .oc-tinfo { flex: 1; }
 
+  /* Fit & Form: one pane per body type (photo or garment silhouette) */
+  .oc-scene--fit { background: var(--oc-bg); }
+  .oc-fit__pane { position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease; }
+  .oc-fit__pane.on { opacity: 1; }
+  .oc-fit__pane img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .oc-fit__pane svg { transform-origin: 50% 100%; transition: transform .6s ease; }
+  .oc-fit__pane.slim svg { transform: translateX(-50%) scaleX(.82); }
+  .oc-fit__pane.mid svg { transform: translateX(-50%) scaleX(1); }
+  .oc-fit__pane.plus svg { transform: translateX(-50%) scaleX(1.22); }
+
   @media (max-width: 768px) {
     .oc-hero { height: 85vh; }
     .oc-hero__media .oc-hero__video--desktop { display: none; }
@@ -410,17 +478,17 @@
     { "type": "text", "id": "why_heading", "label": "Heading", "default": "What this means" },
     { "type": "text", "id": "why_heading_em", "label": "Heading (accent word)", "default": "for you" },
 
-    { "type": "header", "content": "One piece, many ways (1st)" },
+    { "type": "header", "content": "One piece, many ways" },
     { "type": "text", "id": "hours_eyebrow", "label": "Eyebrow", "default": "Versatility" },
     { "type": "text", "id": "hours_heading", "label": "Heading", "default": "One piece," },
     { "type": "text", "id": "hours_heading_em", "label": "Heading (accent word)", "default": "many ways" },
     { "type": "textarea", "id": "hours_sub", "label": "Subtext", "default": "From slow mornings to evening plans, see how one piece fits into different parts of your day." },
 
-    { "type": "header", "content": "One piece, many ways (2nd)" },
-    { "type": "text", "id": "hours2_eyebrow", "label": "Eyebrow", "default": "Versatility" },
-    { "type": "text", "id": "hours2_heading", "label": "Heading", "default": "One piece," },
-    { "type": "text", "id": "hours2_heading_em", "label": "Heading (accent word)", "default": "many ways" },
-    { "type": "textarea", "id": "hours2_sub", "label": "Subtext", "default": "From slow mornings to evening plans, see how one piece fits into different parts of your day." }
+    { "type": "header", "content": "Fit & Form (last section)" },
+    { "type": "text", "id": "fit_eyebrow", "label": "Eyebrow", "default": "Fit & Form" },
+    { "type": "text", "id": "fit_heading", "label": "Heading", "default": "One piece," },
+    { "type": "text", "id": "fit_heading_em", "label": "Heading (accent word)", "default": "different bodies" },
+    { "type": "textarea", "id": "fit_sub", "label": "Subtext", "default": "The same garment, worn by different women. See how the fit, fall and silhouette come together on different body shapes." }
   ],
   "blocks": [
     {
@@ -465,7 +533,7 @@
     },
     {
       "type": "hour",
-      "name": "Time of day (1st section)",
+      "name": "Time of day",
       "limit": 3,
       "settings": [
         { "type": "select", "id": "time", "label": "Scene", "default": "morning",
@@ -481,20 +549,19 @@
       ]
     },
     {
-      "type": "hour_alt",
-      "name": "Time of day (2nd section)",
+      "type": "fit",
+      "name": "Body type (Fit & Form)",
       "limit": 3,
       "settings": [
-        { "type": "select", "id": "time", "label": "Scene", "default": "morning",
+        { "type": "select", "id": "size", "label": "Garment silhouette (used when no photo is set)", "default": "mid",
           "options": [
-            { "value": "morning", "label": "Morning" },
-            { "value": "midday", "label": "Midday" },
-            { "value": "evening", "label": "Evening" }
+            { "value": "slim", "label": "Slim" },
+            { "value": "mid", "label": "Mid-size" },
+            { "value": "plus", "label": "Plus-size" }
           ] },
-        { "type": "text", "id": "label", "label": "Button label", "default": "Morning" },
-        { "type": "text", "id": "title", "label": "Title (optional)", "info": "Leave empty to hide the title." },
-        { "type": "text", "id": "wear", "label": "Wear it to", "default": "morning coffee, running errands or heading to work." },
-        { "type": "text", "id": "style", "label": "Pair it with", "default": "comfortable flats and an everyday tote." }
+        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Optional. Shown instead of the illustration." },
+        { "type": "text", "id": "label", "label": "Button label", "default": "Mid-size" },
+        { "type": "textarea", "id": "text", "label": "The fit", "default": "See how the same garment looks on a mid-size frame, with its natural shape and drape." }
       ]
     }
   ],
@@ -520,9 +587,9 @@
         { "type": "hour", "settings": { "time": "morning", "label": "Morning", "wear": "morning coffee, running errands or heading to work.", "style": "comfortable flats and an everyday tote." } },
         { "type": "hour", "settings": { "time": "midday", "label": "Midday", "wear": "lunch plans, a day at work or a little running around.", "style": "rolled-up sleeves, a simple belt and your favourite sunglasses." } },
         { "type": "hour", "settings": { "time": "evening", "label": "Evening", "wear": "dinner with family, get-togethers or an evening out.", "style": "statement earrings and comfortable heels." } },
-        { "type": "hour_alt", "settings": { "time": "morning", "label": "Morning", "wear": "morning coffee, running errands or heading to work.", "style": "comfortable flats and an everyday tote." } },
-        { "type": "hour_alt", "settings": { "time": "midday", "label": "Midday", "wear": "lunch plans, a day at work or a little running around.", "style": "rolled-up sleeves, a simple belt and your favourite sunglasses." } },
-        { "type": "hour_alt", "settings": { "time": "evening", "label": "Evening", "wear": "dinner with family, get-togethers or an evening out.", "style": "statement earrings and comfortable heels." } }
+        { "type": "fit", "settings": { "size": "slim", "label": "Slim", "text": "See how the garment falls and sits on a leaner frame." } },
+        { "type": "fit", "settings": { "size": "mid", "label": "Mid-size", "text": "See how the same garment looks on a mid-size frame, with its natural shape and drape." } },
+        { "type": "fit", "settings": { "size": "plus", "label": "Plus-size", "text": "See how the garment fits and moves on a fuller frame, without compromising on comfort." } }
       ]
     }
   ]
