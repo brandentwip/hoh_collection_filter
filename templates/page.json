@@ -1,1 +1,262 @@
-{"sections":{"main":{"type":"main-page","blocks":{"heading":{"type":"text","name":"Title","disabled":true,"settings":{"text":"<h1>{{ closest.page.title }}<\/h1>","width":"100%","max_width":"normal","alignment":"left","type_preset":"h2","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","color":"var(--color-foreground)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"page-content":{"type":"page-content","settings":{},"blocks":{}}},"block_order":["heading","page-content"],"settings":{"content_direction":"column","gap":32,"color_scheme":"","padding-block-start":60,"padding-block-end":60}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "disabled": true,
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "craft2_7icUfg": {
+      "type": "craft2",
+      "blocks": {
+        "ethos_iYA6Nj": {
+          "type": "ethos",
+          "settings": {
+            "icon": "rings",
+            "title": "Made in small batches",
+            "text": "We don't make hundreds of the same piece. Each style is made in limited numbers, giving us more time to focus on the little things and make every piece with care."
+          }
+        },
+        "ethos_ckUBMg": {
+          "type": "ethos",
+          "settings": {
+            "icon": "cross",
+            "title": "Made to fit you",
+            "text": "Whether it's the length, sleeves, neckline or fit, we can make small changes to suit you. After all, clothes should fit you, not the other way around."
+          }
+        },
+        "ethos_a4UxXP": {
+          "type": "ethos",
+          "settings": {
+            "icon": "leaf",
+            "title": "Fabrics you'll love wearing",
+            "text": "We choose fabrics that feel soft, light and comfortable against the skin. The kind you can wear all day and feel good in, even on warmer days."
+          }
+        },
+        "ethos_rLYPqH": {
+          "type": "ethos",
+          "settings": {
+            "icon": "star",
+            "title": "It's all in the details",
+            "text": "From the way a hem is finished to the buttons we choose, we pay attention to the little things. They may seem small, but they make all the difference."
+          }
+        },
+        "detail_MDFt4M": {
+          "type": "detail",
+          "settings": {
+            "illustration": "hem",
+            "caption": "Hand embroidery",
+            "subcaption": "Intricate work, done by hand"
+          }
+        },
+        "detail_qKYRT6": {
+          "type": "detail",
+          "settings": {
+            "illustration": "weave",
+            "caption": "Fabric detailing",
+            "subcaption": "Thoughtful textures and layers"
+          }
+        },
+        "detail_zyqJEG": {
+          "type": "detail",
+          "settings": {
+            "illustration": "button",
+            "caption": "Hand-finished construction",
+            "subcaption": "Every seam and edge, carefully finished"
+          }
+        },
+        "benefit_DDWL6A": {
+          "type": "benefit",
+          "settings": {
+            "title": "A fit that feels right",
+            "text": "Your measurements and preferences are taken into account, so the final piece feels like it was made for you."
+          }
+        },
+        "benefit_kfNTGB": {
+          "type": "benefit",
+          "settings": {
+            "title": "Comfort you can count on",
+            "text": "Easy, breathable fabrics that feel good on the skin and are comfortable enough to wear all day."
+          }
+        },
+        "benefit_djxfVd": {
+          "type": "benefit",
+          "settings": {
+            "title": "Made to be worn again and again",
+            "text": "Thoughtful construction and careful finishing help your clothes hold up, wear after wear."
+          }
+        },
+        "benefit_EemLbU": {
+          "type": "benefit",
+          "settings": {
+            "title": "Something a little more personal",
+            "text": "With limited pieces and the option to make changes, your outfit feels less like something picked off a rack."
+          }
+        },
+        "benefit_JXCpgB": {
+          "type": "benefit",
+          "settings": {
+            "title": "A more personal experience",
+            "text": "You can speak directly with the people making your clothes, share what you have in mind and be part of the process."
+          }
+        },
+        "hour_Pag9bJ": {
+          "type": "hour",
+          "settings": {
+            "time": "morning",
+            "label": "Morning",
+            "title": "",
+            "wear": "morning coffee, running errands or heading to work.",
+            "style": "comfortable flats and an everyday tote."
+          }
+        },
+        "hour_HEBcFM": {
+          "type": "hour",
+          "settings": {
+            "time": "midday",
+            "label": "Midday",
+            "title": "",
+            "wear": "lunch plans, a day at work or a little running around.",
+            "style": "rolled-up sleeves, a simple belt and your favourite sunglasses."
+          }
+        },
+        "hour_KxDfbd": {
+          "type": "hour",
+          "settings": {
+            "time": "evening",
+            "label": "Evening",
+            "title": "",
+            "wear": "dinner with family, get-togethers or an evening out.",
+            "style": "statement earrings and comfortable heels."
+          }
+        },
+        "fit_r3bwyK": {
+          "type": "fit",
+          "settings": {
+            "size": "slim",
+            "label": "Slim",
+            "text": "See how the garment falls and sits on a leaner frame."
+          }
+        },
+        "fit_B7nzDq": {
+          "type": "fit",
+          "settings": {
+            "size": "mid",
+            "label": "Mid-size",
+            "text": "See how the same garment looks on a mid-size frame, with its natural shape and drape."
+          }
+        },
+        "fit_J9zyfG": {
+          "type": "fit",
+          "settings": {
+            "size": "plus",
+            "label": "Plus-size",
+            "text": "See how the garment fits and moves on a fuller frame, without compromising on comfort."
+          }
+        }
+      },
+      "block_order": [
+        "ethos_iYA6Nj",
+        "ethos_ckUBMg",
+        "ethos_a4UxXP",
+        "ethos_rLYPqH",
+        "detail_MDFt4M",
+        "detail_qKYRT6",
+        "detail_zyqJEG",
+        "benefit_DDWL6A",
+        "benefit_kfNTGB",
+        "benefit_djxfVd",
+        "benefit_EemLbU",
+        "benefit_JXCpgB",
+        "hour_Pag9bJ",
+        "hour_HEBcFM",
+        "hour_KxDfbd",
+        "fit_r3bwyK",
+        "fit_B7nzDq",
+        "fit_J9zyfG"
+      ],
+      "name": "ourcrafttest",
+      "settings": {
+        "hero_opacity": 72,
+        "hero_height": 90,
+        "hero_eyebrow": "Our Craft",
+        "hero_heading": "Four hours of someone's day,\nin every shirt.",
+        "hero_sub": "Every piece we make carries the hands, the time, and the care of the craftswomen behind it.",
+        "side_padding": 50,
+        "accent_grey": "#5C5C5C",
+        "ethos_eyebrow": "Our Ethos",
+        "ethos_heading": "The thought behind",
+        "ethos_heading_em": "every piece",
+        "details_eyebrow": "Up Close",
+        "details_heading": "The",
+        "details_heading_em": "details you feel",
+        "why_eyebrow": "Why It Matters",
+        "why_heading": "What this means",
+        "why_heading_em": "for you",
+        "hours_eyebrow": "Versatility",
+        "hours_heading": "One piece,",
+        "hours_heading_em": "many ways",
+        "hours_sub": "From slow mornings to evening plans, see how one piece fits into different parts of your day.",
+        "fit_eyebrow": "Fit & Form",
+        "fit_heading": "One piece,",
+        "fit_heading_em": "different bodies",
+        "fit_sub": "The same garment, worn by different women. See how the fit, fall and silhouette come together on different body shapes."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "craft2_7icUfg"
+  ]
+}
