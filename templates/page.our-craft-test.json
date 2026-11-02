@@ -171,7 +171,8 @@
           "type": "hour",
           "settings": {
             "time": "midday",
-            "image": "shopify://shop_images/HOH.png",
+            "image": "shopify://shop_images/SAME_IMAGE_EXACT_d824d795_2K_jpg_7d830587-cd7e-4bcc-8e01-fdf2ba9cf957.jpg",
+            "image_mobile": "shopify://shop_images/Generate_exact_replica_image_9e486251_2K_jpg_14c2c6ba-04de-4c07-aea9-765823ca89d5.jpg",
             "label": "Midday",
             "title": "",
             "wear": "lunch plans, a day at work or a little running around.",
@@ -182,6 +183,8 @@
           "type": "hour",
           "settings": {
             "time": "evening",
+            "image": "shopify://shop_images/EXACT_SAME_IMAGE_NO_CHANGES_710d5e1c_2K_jpg.jpg",
+            "image_mobile": "shopify://shop_images/Woman_dining_at_restaurant_fb9f96dc_2K_jpg.jpg",
             "label": "Evening",
             "title": "",
             "wear": "dinner with family, get-togethers or an evening out.",
