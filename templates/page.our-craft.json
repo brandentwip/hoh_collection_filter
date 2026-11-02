@@ -161,6 +161,9 @@
         "trust_kWXrfk",
         "trust_7Jdgim"
       ],
+      "custom_css": [
+        "@media (max-width: 768px) {.oc-hero {height: 65vh; }}"
+      ],
       "name": "Our Craft",
       "settings": {
         "hero_video": "shopify://files/videos/HOH Web Banner_54f06912-9765-4e62-96c8-7076af0db11d.mp4",
