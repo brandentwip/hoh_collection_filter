@@ -159,6 +159,8 @@
           "type": "hour",
           "settings": {
             "time": "morning",
+            "image": "shopify://shop_images/Woman_working_on_office_laptop_4413dba3_2K.jpg_1.jpg",
+            "image_mobile": "shopify://shop_images/Need_in_new_size_5ace5100_2K_jpg_c904f721-c8c3-4896-95ee-017a73739271.jpg",
             "label": "Morning",
             "title": "",
             "wear": "morning coffee, running errands or heading to work.",
