@@ -183,7 +183,8 @@
           "type": "hour",
           "settings": {
             "time": "evening",
-            "image": "shopify://shop_images/EXACT_SAME_IMAGE_NO_CHANGES_710d5e1c_2K_jpg.jpg",
+            "image": "shopify://shop_images/EXACT_SAME_IMAGE_NO_CHANGES_710d5e1c_2K.jpg",
+            "image_mobile": "shopify://shop_images/Woman_dining_at_restaurant_fb9f96dc_2K.jpg",
             "label": "Evening",
             "title": "",
             "wear": "dinner with family, get-togethers or an evening out.",
@@ -194,6 +195,8 @@
           "type": "fit",
           "settings": {
             "size": "slim",
+            "image": "shopify://shop_images/HausofHandmade-00979_1.jpg",
+            "image_mobile": "shopify://shop_images/HausofHandmade-00979_1_023eddad-ca94-4be7-927c-9e1249888152.jpg",
             "label": "Slim",
             "text": "See how the garment falls and sits on a leaner frame."
           }
@@ -202,6 +205,8 @@
           "type": "fit",
           "settings": {
             "size": "mid",
+            "image": "shopify://shop_images/SAME_IMAGE_NEEDED_bfc0cc58_2K.jpg",
+            "image_mobile": "shopify://shop_images/Screenshot_2026-11-02_at_3.44.39_PM.png_fead78ff_2K.jpg",
             "label": "Mid-size",
             "text": "See how the same garment looks on a mid-size frame, with its natural shape and drape."
           }
@@ -210,6 +215,8 @@
           "type": "fit",
           "settings": {
             "size": "plus",
+            "image": "shopify://shop_images/SAME_IMAGE_NEEDED_6fa72750_2K.jpg",
+            "image_mobile": "shopify://shop_images/Woman_wearing_outfit_in_studio_a56e8f76_2K.jpg",
             "label": "Plus-size",
             "text": "See how the garment fits and moves on a fuller frame, without compromising on comfort."
           }
