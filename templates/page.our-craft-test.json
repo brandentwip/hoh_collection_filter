@@ -191,14 +191,14 @@
             "style": "statement earrings and comfortable heels."
           }
         },
-        "fit_tqPhR8": {
+        "fit_B4KzdQ": {
           "type": "fit",
           "settings": {
-            "size": "slim",
-            "image": "shopify://shop_images/HausofHandmade-00979_1.jpg",
-            "image_mobile": "shopify://shop_images/HausofHandmade-00979_1_023eddad-ca94-4be7-927c-9e1249888152.jpg",
-            "label": "Slim",
-            "text": "See how the garment falls and sits on a leaner frame."
+            "size": "plus",
+            "image": "shopify://shop_images/SAME_IMAGE_NEEDED_6fa72750_2K.jpg",
+            "image_mobile": "shopify://shop_images/Woman_wearing_outfit_in_studio_a56e8f76_2K.jpg",
+            "label": "Plus-size",
+            "text": "See how the garment fits and moves on a fuller frame, without compromising on comfort."
           }
         },
         "fit_QYzJUM": {
@@ -211,14 +211,14 @@
             "text": "See how the same garment looks on a mid-size frame, with its natural shape and drape."
           }
         },
-        "fit_B4KzdQ": {
+        "fit_tqPhR8": {
           "type": "fit",
           "settings": {
-            "size": "plus",
-            "image": "shopify://shop_images/SAME_IMAGE_NEEDED_6fa72750_2K.jpg",
-            "image_mobile": "shopify://shop_images/Woman_wearing_outfit_in_studio_a56e8f76_2K.jpg",
-            "label": "Plus-size",
-            "text": "See how the garment fits and moves on a fuller frame, without compromising on comfort."
+            "size": "slim",
+            "image": "shopify://shop_images/HausofHandmade-00979_1.jpg",
+            "image_mobile": "shopify://shop_images/HausofHandmade-00979_1_023eddad-ca94-4be7-927c-9e1249888152.jpg",
+            "label": "Slim",
+            "text": "See how the garment falls and sits on a leaner frame."
           }
         }
       },
@@ -238,9 +238,9 @@
         "hour_7dnTr6",
         "hour_xVxVX6",
         "hour_4X8Lcd",
-        "fit_tqPhR8",
+        "fit_B4KzdQ",
         "fit_QYzJUM",
-        "fit_B4KzdQ"
+        "fit_tqPhR8"
       ],
       "custom_css": [
         "@media (max-width: 768px) {.oc-hero {height: 65vh; }}"
