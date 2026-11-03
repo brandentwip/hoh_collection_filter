@@ -96,19 +96,20 @@
   .ocw-icon { width:54px; height:54px; margin-bottom:14px; display:block; }
   .ocw-icon * { stroke:var(--ocw-accent); stroke-width:1.6; fill:none; stroke-linecap:round; stroke-linejoin:round; }
   .ocw-card__title { font-weight:500; font-size:22px; letter-spacing:-.01em; margin-bottom:8px; }
-  .ocw-card__text { color:var(--ocw-mid); font-size:14px; line-height:1.8; margin-bottom:24px; flex:1; }
+  .ocw .ocw-card__text { color:var(--ocw-mid); font-size:14px; line-height:1.75; margin:0 0 28px; flex:1; }
 
   .ocw-single { margin-top:32px; }
-  .ocw-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; align-self:flex-start; font:inherit; font-size:12px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; padding:16px 26px; background:var(--ocw-btn); color:#fff; border:1px solid var(--ocw-btn); border-radius:2px; cursor:pointer; transition:opacity .2s, transform .2s; }
-  .ocw-btn:hover { opacity:.9; transform:translateY(-1px); }
-  .ocw-btn:focus-visible { outline:2px solid var(--ocw-btn); outline-offset:3px; }
-  .ocw-btn svg { width:20px; height:20px; flex:none; }
-  .ocw-note { margin-top:28px; color:var(--ocw-mid); font-size:12px; letter-spacing:.04em; }
+  .ocw .ocw-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; align-self:flex-start; width:auto; min-height:0; font:inherit; font-size:11px; font-weight:500; line-height:1; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; padding:11px 18px; background:transparent; color:var(--ocw-btn); border:1px solid var(--ocw-btn); border-radius:2px; cursor:pointer; transition:background .2s, color .2s; }
+  .ocw .ocw-btn:hover { background:var(--ocw-btn); color:#fff; }
+  .ocw .ocw-btn:focus-visible { outline:2px solid var(--ocw-btn); outline-offset:3px; }
+  .ocw .ocw-btn svg { width:15px; height:15px; flex:none; }
+  .ocw .ocw-btn span { display:block; }
+  .ocw .ocw-note { margin-top:32px; color:var(--ocw-mid); font-size:12px; letter-spacing:.04em; }
 
   @media (max-width:768px) {
     .ocw-section { padding:64px min(var(--ocw-gutter, 20px), 20px); }
     .ocw-grid--2, .ocw-grid--3 { grid-template-columns:1fr; }
-    .ocw-btn { width:100%; align-self:stretch; }
+    .ocw .ocw-btn { width:100%; align-self:stretch; padding:13px 18px; }
   }
 {% endstylesheet %}
 
