@@ -242,6 +242,9 @@
         "fit_QYzJUM",
         "fit_B4KzdQ"
       ],
+      "custom_css": [
+        "@media (max-width: 768px) {.oc-hero {height: 65vh; }}"
+      ],
       "name": "ourcrafttest",
       "settings": {
         "hero_video": "shopify://files/videos/HOH Web Banner_1f6c05a4-2452-41cb-9f51-2589cd8fdc67.mp4",
@@ -312,8 +315,8 @@
         "sub": "Want a piece made just for you, or have a question about our clothes? Message our product team on WhatsApp and we'll help you directly.",
         "note": "We usually reply within a few hours, Monday to Saturday.",
         "side_padding": 50,
-        "accent": "#5C5C5C",
-        "button_color": "#128C7E"
+        "accent": "#5c5c5c",
+        "button_color": "#128c7e"
       }
     },
     "product_list_B73UPz": {
