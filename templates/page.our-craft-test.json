@@ -272,6 +272,50 @@
         "fit_sub": "The same garment, worn by different women. See how the fit, fall and silhouette come together on different body shapes."
       }
     },
+    "wp_link_HHdexn": {
+      "type": "wp-link",
+      "blocks": {
+        "option_GzxXkd": {
+          "type": "option",
+          "settings": {
+            "icon": "needle",
+            "title": "Customise a piece",
+            "text": "Want a different length, sleeve, neckline or fit? Tell us what you have in mind and we'll make it work.",
+            "button_label": "Customise on WhatsApp",
+            "message": "Hi! I'd like to customise a piece from Haus of Handmade."
+          }
+        },
+        "option_8xeqYn": {
+          "type": "option",
+          "settings": {
+            "icon": "chat",
+            "title": "Ask us anything",
+            "text": "Questions about fabric, sizing, delivery or an order? Our product team is happy to help.",
+            "button_label": "Send an enquiry",
+            "message": "Hi! I have an enquiry about Haus of Handmade."
+          }
+        }
+      },
+      "block_order": [
+        "option_GzxXkd",
+        "option_8xeqYn"
+      ],
+      "name": "ourcraft-whatsapp",
+      "settings": {
+        "whatsapp_number": "918800103552",
+        "default_message": "Hi! I'd like to know more about customising a piece.",
+        "button_label": "Chat on WhatsApp",
+        "include_page_link": true,
+        "eyebrow": "Talk to Us",
+        "heading": "Have something in mind?",
+        "heading_em": "Let's talk",
+        "sub": "Want a piece made just for you, or have a question about our clothes? Message our product team on WhatsApp and we'll help you directly.",
+        "note": "We usually reply within a few hours, Monday to Saturday.",
+        "side_padding": 50,
+        "accent": "#5C5C5C",
+        "button_color": "#128C7E"
+      }
+    },
     "product_list_B73UPz": {
       "type": "product-list",
       "blocks": {
@@ -470,6 +514,7 @@
   "order": [
     "main",
     "craft2_Acy6EK",
+    "wp_link_HHdexn",
     "product_list_B73UPz"
   ]
 }
