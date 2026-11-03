@@ -159,8 +159,8 @@
           "type": "hour",
           "settings": {
             "time": "morning",
-            "image": "shopify://shop_images/Woman_working_on_office_laptop_4413dba3_2K.jpg_1.jpg",
-            "image_mobile": "shopify://shop_images/Need_in_new_size_5ace5100_2K_jpg_c904f721-c8c3-4896-95ee-017a73739271.jpg",
+            "image": "shopify://shop_images/Woman_working_on_office_laptop_4413dba3_2K.jpg",
+            "image_mobile": "shopify://shop_images/Need_in_new_size_5ace5100_2K.jpg",
             "label": "Morning",
             "title": "",
             "wear": "morning coffee, running errands or heading to work.",
@@ -171,8 +171,8 @@
           "type": "hour",
           "settings": {
             "time": "midday",
-            "image": "shopify://shop_images/SAME_IMAGE_EXACT_d824d795_2K_jpg_7d830587-cd7e-4bcc-8e01-fdf2ba9cf957.jpg",
-            "image_mobile": "shopify://shop_images/Generate_exact_replica_image_9e486251_2K_jpg_14c2c6ba-04de-4c07-aea9-765823ca89d5.jpg",
+            "image": "shopify://shop_images/SAME_IMAGE_EXACT_d824d795_2K.jpg",
+            "image_mobile": "shopify://shop_images/Generate_exact_replica_image_9e486251_2K.jpg",
             "label": "Midday",
             "title": "",
             "wear": "lunch plans, a day at work or a little running around.",
@@ -237,7 +237,7 @@
       ],
       "name": "ourcrafttest",
       "settings": {
-        "hero_video": "shopify://files/videos/HOH Web Banner_54f06912-9765-4e62-96c8-7076af0db11d.mp4",
+        "hero_video": "shopify://files/videos/HOH Web Banner_1f6c05a4-2452-41cb-9f51-2589cd8fdc67.mp4",
         "hero_video_mobile": "shopify://files/videos/HOH Banner Mobile.mp4",
         "hero_opacity": 100,
         "hero_height": 90,
