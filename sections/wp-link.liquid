@@ -1,0 +1,167 @@
+{%- comment -%}
+  ourcraft-whatsapp — "Talk to our team" WhatsApp contact section for Haus of Handmade.
+  Upload to: sections/ourcraft-whatsapp.liquid
+  Matches the look of the ourcrafttest section (Inter, accent colour, same gutters).
+  Each block is a card (e.g. Customisation, Enquiry) with its own pre-filled WhatsApp message.
+{%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+
+{%- assign wa_number = section.settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' | strip -%}
+{%- assign option_items = section.blocks | where: 'type', 'option' -%}
+
+<div class="ocw" style="--ocw-gutter: {{ section.settings.side_padding | default: 50 }}px; --ocw-accent: {{ section.settings.accent | default: '#5C5C5C' }}; --ocw-btn: {{ section.settings.button_color | default: '#128C7E' }};">
+  <section class="ocw-section" id="ocw-{{ section.id }}" data-append-link="{{ section.settings.include_page_link }}">
+    <div class="ocw-wrap">
+      {%- if section.settings.eyebrow != blank -%}<p class="ocw-eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 class="ocw-h2">{{ section.settings.heading | escape }} <em>{{ section.settings.heading_em | escape }}</em></h2>
+      {%- if section.settings.sub != blank -%}<p class="ocw-sub">{{ section.settings.sub | escape }}</p>{%- endif -%}
+
+      {%- if wa_number == blank -%}
+        {%- if request.design_mode -%}
+          <p class="ocw-warn">Add your WhatsApp number in the section settings (with country code, e.g. 919876543210).</p>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if option_items.size > 0 -%}
+        <div class="ocw-grid ocw-grid--{{ option_items.size }}">
+          {%- for block in option_items -%}
+            <div class="ocw-card" {{ block.shopify_attributes }}>
+              <svg class="ocw-icon" viewBox="0 0 54 54" aria-hidden="true">
+                {%- case block.settings.icon -%}
+                  {%- when 'needle' -%}<path d="M14 42 L40 12"/><ellipse cx="38" cy="15" rx="2" ry="4" transform="rotate(38 38 15)"/><path d="M14 42 C 8 36, 18 30, 12 24" stroke-dasharray="2 4"/>
+                  {%- when 'chat' -%}<path d="M10 14 H44 V36 H26 L16 45 V36 H10 Z"/><path d="M18 22 H36 M18 29 H30"/>
+                  {%- when 'ruler' -%}<rect x="8" y="20" width="38" height="14" rx="2"/><path d="M15 20 V27 M22 20 V25 M29 20 V27 M36 20 V25 M43 20 V27"/>
+                  {%- when 'gift' -%}<rect x="10" y="22" width="34" height="22"/><path d="M8 16 H46 V22 H8Z"/><path d="M27 16 V44"/><path d="M27 16 C 20 6, 12 12, 27 16 C 42 12, 34 6, 27 16"/>
+                {%- endcase -%}
+              </svg>
+              <h3 class="ocw-card__title">{{ block.settings.title | escape }}</h3>
+              <p class="ocw-card__text">{{ block.settings.text | escape }}</p>
+              {%- if wa_number != blank -%}
+                <a class="ocw-btn" data-wa href="https://wa.me/{{ wa_number }}?text={{ block.settings.message | url_encode }}" data-msg="{{ block.settings.message | escape }}" data-number="{{ wa_number }}" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4C9.4 4 4 9.3 4 15.9c0 2.2.6 4.2 1.7 6L4 28l6.3-1.6c1.7.9 3.6 1.4 5.7 1.4 6.6 0 12-5.3 12-11.9S22.6 4 16 4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10.5c.4-.4 1.2-.3 1.5.2l1 2.2c.2.4.1.8-.2 1.1l-.7.8c.9 1.7 2.3 3 4 3.9l.9-.9c.3-.3.7-.4 1.1-.2l2.2 1c.5.3.6 1 .2 1.5-.9 1.2-2.4 1.8-3.9 1.3-4-1.3-7.2-4.5-8.3-8.4-.2-1.2.3-2.1 1-2.5Z" fill="currentColor"/></svg>
+                  <span>{{ block.settings.button_label | escape }}</span>
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        {%- if wa_number != blank -%}
+          <div class="ocw-single">
+            <a class="ocw-btn" data-wa href="https://wa.me/{{ wa_number }}?text={{ section.settings.default_message | url_encode }}" data-msg="{{ section.settings.default_message | escape }}" data-number="{{ wa_number }}" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4C9.4 4 4 9.3 4 15.9c0 2.2.6 4.2 1.7 6L4 28l6.3-1.6c1.7.9 3.6 1.4 5.7 1.4 6.6 0 12-5.3 12-11.9S22.6 4 16 4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10.5c.4-.4 1.2-.3 1.5.2l1 2.2c.2.4.1.8-.2 1.1l-.7.8c.9 1.7 2.3 3 4 3.9l.9-.9c.3-.3.7-.4 1.1-.2l2.2 1c.5.3.6 1 .2 1.5-.9 1.2-2.4 1.8-3.9 1.3-4-1.3-7.2-4.5-8.3-8.4-.2-1.2.3-2.1 1-2.5Z" fill="currentColor"/></svg>
+              <span>{{ section.settings.button_label | escape }}</span>
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if section.settings.note != blank -%}<p class="ocw-note">{{ section.settings.note | escape }}</p>{%- endif -%}
+    </div>
+
+    <script>
+      (function () {
+        var root = document.getElementById('ocw-{{ section.id }}');
+        if (!root || root.getAttribute('data-append-link') !== 'true') return;
+        [].forEach.call(root.querySelectorAll('[data-wa]'), function (a) {
+          var msg = a.getAttribute('data-msg') || '';
+          var num = a.getAttribute('data-number') || '';
+          a.href = 'https://wa.me/' + num + '?text=' + encodeURIComponent(msg + '\n' + window.location.href);
+        });
+      })();
+    </script>
+  </section>
+</div>
+
+{% stylesheet %}
+  .ocw, .ocw *, .ocw *::before, .ocw *::after { box-sizing: border-box; }
+  .ocw { --ocw-bg:#FAF8F5; --ocw-dark:#1A1A18; --ocw-mid:#6B6560; --ocw-line:rgba(26,26,24,0.1); background:#fff; color:var(--ocw-dark); font-family:'Inter',system-ui,sans-serif; font-weight:300; }
+  .ocw h2, .ocw h3, .ocw p { margin:0; text-transform:none; font-family:'Inter',system-ui,sans-serif; }
+  .ocw-section { padding:96px var(--ocw-gutter, 50px); border-top:1px solid var(--ocw-line); }
+  .ocw-wrap { width:100%; }
+  .ocw-eyebrow { font-size:11px; font-weight:500; letter-spacing:.25em; text-transform:uppercase; color:var(--ocw-accent); margin-bottom:18px; }
+  .ocw-h2 { font-size:clamp(30px,5vw,46px); font-weight:400; line-height:1.15; letter-spacing:-.02em; margin-bottom:24px; }
+  .ocw-h2 em { font-style:italic; color:var(--ocw-accent); }
+  .ocw-sub { color:var(--ocw-mid); max-width:560px; font-size:14px; line-height:1.8; }
+  .ocw-warn { margin-top:24px; padding:14px 18px; border:1px dashed #c0392b; color:#c0392b; font-size:13px; border-radius:4px; }
+
+  .ocw-grid { display:grid; gap:20px; margin-top:36px; }
+  .ocw-grid--1 { grid-template-columns:1fr; max-width:520px; }
+  .ocw-grid--2 { grid-template-columns:repeat(2,1fr); }
+  .ocw-grid--3 { grid-template-columns:repeat(3,1fr); }
+  .ocw-card { display:flex; flex-direction:column; background:var(--ocw-bg); padding:30px 26px; border:1px solid var(--ocw-line); border-radius:4px; }
+  .ocw-icon { width:54px; height:54px; margin-bottom:14px; display:block; }
+  .ocw-icon * { stroke:var(--ocw-accent); stroke-width:1.6; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .ocw-card__title { font-weight:500; font-size:22px; letter-spacing:-.01em; margin-bottom:8px; }
+  .ocw-card__text { color:var(--ocw-mid); font-size:14px; line-height:1.8; margin-bottom:24px; flex:1; }
+
+  .ocw-single { margin-top:32px; }
+  .ocw-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; align-self:flex-start; font:inherit; font-size:12px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; padding:16px 26px; background:var(--ocw-btn); color:#fff; border:1px solid var(--ocw-btn); border-radius:2px; cursor:pointer; transition:opacity .2s, transform .2s; }
+  .ocw-btn:hover { opacity:.9; transform:translateY(-1px); }
+  .ocw-btn:focus-visible { outline:2px solid var(--ocw-btn); outline-offset:3px; }
+  .ocw-btn svg { width:20px; height:20px; flex:none; }
+  .ocw-note { margin-top:28px; color:var(--ocw-mid); font-size:12px; letter-spacing:.04em; }
+
+  @media (max-width:768px) {
+    .ocw-section { padding:64px min(var(--ocw-gutter, 20px), 20px); }
+    .ocw-grid--2, .ocw-grid--3 { grid-template-columns:1fr; }
+    .ocw-btn { width:100%; align-self:stretch; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "ourcraft-whatsapp",
+  "settings": [
+    { "type": "header", "content": "WhatsApp" },
+    { "type": "text", "id": "whatsapp_number", "label": "WhatsApp number", "info": "Include country code, digits only (e.g. 919876543210 for India). +, spaces and dashes are removed automatically." },
+    { "type": "textarea", "id": "default_message", "label": "Default message (used when there are no cards)", "default": "Hi! I'd like to know more about customising a piece." },
+    { "type": "text", "id": "button_label", "label": "Button label (used when there are no cards)", "default": "Chat on WhatsApp" },
+    { "type": "checkbox", "id": "include_page_link", "label": "Add the current page link to the message", "default": true, "info": "Helps the team see which product you were looking at." },
+
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Talk to Us" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Have something in mind?" },
+    { "type": "text", "id": "heading_em", "label": "Heading (accent word)", "default": "Let's talk" },
+    { "type": "textarea", "id": "sub", "label": "Subtext", "default": "Want a piece made just for you, or have a question about our clothes? Message our product team on WhatsApp and we'll help you directly." },
+    { "type": "text", "id": "note", "label": "Small note (optional)", "default": "We usually reply within a few hours, Monday to Saturday." },
+
+    { "type": "header", "content": "Layout & colours" },
+    { "type": "range", "id": "side_padding", "label": "Left / right padding", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 50, "info": "Reduced to 20px max on mobile." },
+    { "type": "color", "id": "accent", "label": "Accent colour", "default": "#5C5C5C" },
+    { "type": "color", "id": "button_color", "label": "Button colour", "default": "#128C7E" }
+  ],
+  "blocks": [
+    {
+      "type": "option",
+      "name": "Contact card",
+      "limit": 3,
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "needle",
+          "options": [
+            { "value": "needle", "label": "Needle" },
+            { "value": "chat", "label": "Chat" },
+            { "value": "ruler", "label": "Measuring tape" },
+            { "value": "gift", "label": "Gift" }
+          ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Customise a piece" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Tell us what you'd like changed." },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Chat on WhatsApp" },
+        { "type": "textarea", "id": "message", "label": "Pre-filled WhatsApp message", "default": "Hi! I'd like to know more about this." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "ourcraft-whatsapp",
+      "blocks": [
+        { "type": "option", "settings": { "icon": "needle", "title": "Customise a piece", "text": "Want a different length, sleeve, neckline or fit? Tell us what you have in mind and we'll make it work.", "button_label": "Customise on WhatsApp", "message": "Hi! I'd like to customise a piece from Haus of Handmade." } },
+        { "type": "option", "settings": { "icon": "chat", "title": "Ask us anything", "text": "Questions about fabric, sizing, delivery or an order? Our product team is happy to help.", "button_label": "Send an enquiry", "message": "Hi! I have an enquiry about Haus of Handmade." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
