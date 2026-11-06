@@ -475,6 +475,11 @@
     .oc-ethos__grid { grid-template-columns: 1fr; }
     .oc-details__gallery { grid-template-columns: 1fr; }
     .oc-hours--stack .oc-scene { aspect-ratio: 4 / 5; }
+
+    /* Time of day: keep all 3 buttons on one line on mobile */
+    .oc-hours--stack .oc-times { flex-wrap: nowrap; gap: 8px; }
+    .oc-hours--stack .oc-opt { flex: 1 1 0; min-width: 0; padding: 12px 6px; font-size: 11px; letter-spacing: 0.06em; text-align: center; }
+
     .oc-hours--side .oc-hours__layout { grid-template-columns: 1fr; }
     .oc-hours--side .oc-scene { min-height: 320px; }
     .oc-hours--side .oc-hours__side { margin-top: 0; }
