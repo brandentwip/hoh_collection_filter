@@ -230,7 +230,7 @@
               ]
             },
             "kiwi_size_chart_recommender_kiwi_sizing_fBLyAG": {
-              "type": "shopify://apps/kiwi-size-chart-recommender/blocks/kiwiSizing/b7369922-bf15-44ce-a121-a22a8fcbc4b0",
+              "type": "shopify://apps/kiwi-size-chart/blocks/kiwiSizing/b7369922-bf15-44ce-a121-a22a8fcbc4b0",
               "settings": {
                 "fallbackToBlockPosition": true,
                 "waitForElementSelector": "",
@@ -244,9 +244,9 @@
                 "heading": "Clearance item",
                 "message": "No returns, exchanges, or customisation apply to clearance items.",
                 "desktop_width_percent": 100,
-                "background_color": "#F2E9E4",
-                "text_color": "#3D2922",
-                "border_color": "#8A6253"
+                "background_color": "#f2e9e4",
+                "text_color": "#3d2922",
+                "border_color": "#8a6253"
               },
               "blocks": {}
             },
@@ -786,12 +786,12 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/Aplus1.png",
+        "image_1": "shopify://shop_images/32.jpg",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/Aplus2.png",
+        "image_1_mobile": "shopify://shop_images/12.jpg",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
